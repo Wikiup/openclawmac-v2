@@ -1,17 +1,6 @@
 /**
- * FAQ ACCORDION SYSTEM
+ * FAQ ACCORDION SYSTEM (Auto-scroll disabled)
  * Premium interactive Q&A with smooth animations
- * Inspired by: Stripe, Linear, Notion, Anthropic (2026)
- * 
- * Features:
- * - Smooth expand/collapse animations
- * - Icon rotation on toggle
- * - Keyboard navigation (Tab, Enter, Space, Arrow keys)
- * - ARIA attributes for accessibility
- * - Auto-close other items (accordion mode)
- * - URL hash support (#faq-1, #faq-2, etc.)
- * - Reduced motion support
- * - Mobile-optimized touch interactions
  */
 
 class FAQAccordion {
@@ -41,11 +30,11 @@ class FAQAccordion {
       this.setupItem(item, index);
     });
 
-    // Handle URL hash on load
-    this.handleUrlHash();
+    // Handle URL hash on load (DISABLED auto-scroll for hash)
+    // this.handleUrlHash();
 
     // Listen for hash changes
-    window.addEventListener('hashchange', () => this.handleUrlHash());
+    // window.addEventListener('hashchange', () => this.handleUrlHash());
 
     // Add keyboard navigation
     this.setupKeyboardNavigation();
@@ -128,11 +117,11 @@ class FAQAccordion {
         });
       }
 
-      this.openItem(item);
+      this.openItem(item, false); // Explicitly disable scroll
     }
   }
 
-  openItem(item, shouldScroll = true) {
+  openItem(item, shouldScroll = false) { // Default scroll to FALSE
     const question = item.querySelector('.faq-question');
     const answer = item.querySelector('.faq-answer');
     const content = answer.querySelector('.faq-answer-content');
@@ -152,16 +141,16 @@ class FAQAccordion {
     // Animate max-height
     answer.style.maxHeight = contentHeight + 'px';
 
-    // Optional smooth scroll to item
+    // Optional smooth scroll to item (DISABLED by default)
     if (shouldScroll) {
       setTimeout(() => {
         const itemTop = item.getBoundingClientRect().top + window.pageYOffset;
         const scrollTo = itemTop - this.options.scrollOffset;
 
-        window.scrollTo({
+        /* window.scrollTo({
           top: scrollTo,
           behavior: 'smooth'
-        });
+        }); */
       }, 100);
     }
 
@@ -194,21 +183,7 @@ class FAQAccordion {
   }
 
   handleUrlHash() {
-    const hash = window.location.hash;
-
-    if (!hash) return;
-
-    const targetItem = this.container.querySelector(hash);
-
-    if (targetItem && targetItem.classList.contains('faq-item')) {
-      // Close all others if accordion mode
-      if (this.options.accordionMode) {
-        this.items.forEach(item => this.closeItem(item));
-      }
-
-      // Open target
-      this.openItem(targetItem, true);
-    }
+    // Disabled to prevent jump
   }
 
   setupKeyboardNavigation() {
