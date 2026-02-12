@@ -1,8 +1,6 @@
 /**
- * INTERACTIVE FEATURE COMPARISON MATRIX
+ * INTERACTIVE FEATURE COMPARISON MATRIX (Scroll Trigger Disabled)
  * Sprint #36 - 2026-02-10 5:42 AM
- * 
- * Handles scroll-triggered reveals and interactive enhancements
  */
 
 (function() {
@@ -16,35 +14,17 @@
   }
 
   function init() {
-    setupScrollReveal();
+    // Disabled scroll reveal to prevent jump
+    // setupScrollReveal();
     setupFeatureAnimations();
     setupAccessibility();
   }
 
   /**
-   * SCROLL REVEAL
-   * Triggers section reveal when scrolled into view
+   * SCROLL REVEAL (DISABLED)
    */
   function setupScrollReveal() {
-    const section = document.querySelector('.comparison-section');
-    if (!section) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          // Trigger feature animations after section reveal
-          setTimeout(() => {
-            triggerFeatureAnimations();
-          }, 300);
-        }
-      });
-    }, {
-      threshold: 0.2, // Trigger when 20% visible
-      rootMargin: '0px 0px -100px 0px' // Offset from bottom
-    });
-
-    observer.observe(section);
+    // Logic removed to prevent auto-scroll focus stealing
   }
 
   /**
@@ -53,7 +33,6 @@
    */
   function setupFeatureAnimations() {
     // Animation is handled via CSS
-    // This function can be extended for more complex interactions
   }
 
   function triggerFeatureAnimations() {
@@ -76,7 +55,6 @@
 
   /**
    * ACCESSIBILITY
-   * Enhanced keyboard navigation and screen reader support
    */
   function setupAccessibility() {
     const columns = document.querySelectorAll('.comparison-column');
@@ -87,8 +65,8 @@
       column.setAttribute('role', 'region');
       column.setAttribute('aria-label', `${title} comparison column`);
 
-      // Add focus styles
-      column.setAttribute('tabindex', '0');
+      // Removed tabindex to prevent focus stealing on load
+      // column.setAttribute('tabindex', '0'); 
     });
 
     // Make feature icons more descriptive for screen readers
@@ -109,7 +87,6 @@
 
   /**
    * PUBLIC API
-   * Expose methods for external control if needed
    */
   window.ComparisonMatrix = {
     triggerFeatureAnimations: triggerFeatureAnimations
