@@ -1,156 +1,78 @@
-  <!-- ═══════════════════════════════════════ ROI CALCULATOR ═══════════════════════════════════════ -->
-  <section class="roi-calculator-section reveal" id="roi-calculator">
-    <div class="roi-calculator-container">
+  <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+  <section class="hero hero-section" id="hero">
+    <!-- Animated Mesh Gradient Background (2026 Premium Trend) -->
+    <div class="animated-gradient-bg" aria-hidden="true">
+      <!-- Multi-layered gradient orbs with independent motion -->
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="gradient-orb orb-4"></div>
       
-      <!-- Header -->
-      <div class="roi-header">
-        <div class="roi-badge">Calculate Your AI Savings</div>
-        <h2>Humans vs. AI Agents</h2>
-        <p>Compare the cost of hiring a traditional team vs. running an automated AI agency with OpenClaw.</p>
-      </div>
-
-      <!-- Calculator Grid -->
-      <div class="roi-calculator-grid">
-        
-        <!-- Inputs Section -->
-        <div class="roi-inputs">
-          
-          <!-- Human Staff Count -->
-          <div class="roi-input-group">
-            <div class="roi-input-label">
-              <span>Staff replaced/augmented</span>
-              <span class="roi-input-value" id="roi-hours-value">2</span>
-            </div>
-            <div class="roi-slider-container">
-              <input 
-                type="range" 
-                id="roi-hours-slider" 
-                class="roi-slider" 
-                min="1" 
-                max="10" 
-                value="2" 
-                step="1"
-                aria-label="Staff count"
-              >
-              <div class="roi-slider-markers">
-                <span class="roi-slider-marker">1 person</span>
-                <span class="roi-slider-marker">5 people</span>
-                <span class="roi-slider-marker">10 people</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Avg Salary -->
-          <div class="roi-input-group">
-            <div class="roi-input-label">
-              <span>Avg. Annual Salary per Role</span>
-              <span class="roi-input-value" id="roi-rate-value">$60,000</span>
-            </div>
-            <div class="roi-slider-container">
-              <input 
-                type="range" 
-                id="roi-rate-slider" 
-                class="roi-slider" 
-                min="30000" 
-                max="150000" 
-                value="60000" 
-                step="5000"
-                aria-label="Annual Salary"
-              >
-              <div class="roi-slider-markers">
-                <span class="roi-slider-marker">$30k</span>
-                <span class="roi-slider-marker">$90k</span>
-                <span class="roi-slider-marker">$150k</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Results Section -->
-        <div class="roi-results">
-          
-          <!-- Human Cost -->
-          <div class="roi-result-card">
-            <div class="roi-result-label">Traditional Team Cost</div>
-            <div class="roi-result-value negative">
-              <span id="roi-yearly-loss" data-value="0">$120,000</span>
-              <span class="roi-result-suffix">/year</span>
-            </div>
-            <div class="roi-result-description">Salaries, benefits, taxes, overhead</div>
-          </div>
-
-          <!-- AI Cost -->
-          <div class="roi-result-card">
-            <div class="roi-result-label">OpenClaw Running Cost</div>
-            <div class="roi-result-value">
-              <span id="roi-monthly-loss" data-value="0">$1,200</span>
-              <span class="roi-result-suffix">/year</span>
-            </div>
-            <div class="roi-result-description">API fees & hosting (approx.)</div>
-          </div>
-
-          <!-- Setup Investment -->
-          <div class="roi-result-card highlight">
-            <div class="roi-result-label">Setup Investment</div>
-            <div class="roi-result-value positive">
-              <span>$299</span>
-            </div>
-            <div class="roi-result-description">One-time Pro Setup fee</div>
-            <div class="roi-result-badge">✓ One-time</div>
-          </div>
-
-          <!-- Net Savings -->
-          <div class="roi-result-card highlight">
-            <div class="roi-result-label">Annual Profit Retained</div>
-            <div class="roi-result-value positive">
-              <span id="roi-net-savings" data-value="0">$118,501</span>
-              <span class="roi-result-suffix">/year</span>
-            </div>
-            <div class="roi-result-description">Money staying in your pocket</div>
-            <div class="roi-result-badge">✓ 99% Savings</div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Visual Chart -->
-      <div class="roi-visual-chart">
-        <div class="roi-chart-title">Annual Cost Comparison</div>
-        <div class="roi-bar-chart">
-          
-          <div class="roi-bar">
-            <div class="roi-bar-fill" id="roi-bar-manual-cost" style="height: 150px;">
-              <div class="roi-bar-value" id="roi-bar-manual-value">-$120k</div>
-            </div>
-            <div class="roi-bar-label">Human<br>Team</div>
-          </div>
-
-          <div class="roi-bar">
-            <div class="roi-bar-fill" id="roi-bar-service-cost" style="height: 10px;">
-              <div class="roi-bar-value" id="roi-bar-service-value">-$1.5k</div>
-            </div>
-            <div class="roi-bar-label">AI Agency<br>(Total)</div>
-          </div>
-
-          <div class="roi-bar">
-            <div class="roi-bar-fill positive" id="roi-bar-savings" style="height: 140px;">
-              <div class="roi-bar-value" id="roi-bar-savings-value">+$118k</div>
-            </div>
-            <div class="roi-bar-label">Profit<br>Retained</div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="roi-cta">
-        <p class="roi-cta-text">
-          Stop burning cash on headcount. Build an AI workforce for a fraction of the cost.
-        </p>
-        <a href="#booking" class="roi-cta-button">Build My AI Team</a>
-      </div>
-
+      <!-- Radial glow overlay -->
+      <div class="gradient-radial"></div>
+      
+      <!-- Mesh grid texture -->
+      <div class="gradient-mesh"></div>
+      
+      <!-- Organic noise texture -->
+      <div class="gradient-noise"></div>
     </div>
-  </section>
+    
+    <div class="container">
+      <div class="hero__content">
+        <span class="hero__eyebrow">Install + Setup + Support</span>
+        
+        <!-- Updated Headline with Typing Animation -->
+        <h1 class="hero__headline aurora-enhanced">
+          Get OpenClaw installed and tuned on your Mac — <span id="typewriter" class="text-gradient-flow">in one visit.</span><span class="cursor"></span>
+        </h1>
+        
+        <p class="hero__sub">Skip the terminal rabbit-hole. Replace an entire team with one AI assistant. We install, configure, and tailor OpenClaw to your workflow.</p>
+
+        <div class="hero__badges">
+          <div class="badge aurora-badge">
+            <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+            Privacy-first setup
+          </div>
+          <div class="badge aurora-badge">
+            <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            60–90 min typical
+          </div>
+          <div class="badge aurora-badge">
+            <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            30-day support included
+          </div>
+        </div>
+
+        <div class="hero__ctas">
+          <a href="#book" class="btn-aurora">Book an install (Austin)</a>
+          <a href="#whats-included" class="btn btn--secondary btn--lg">See what you get</a>
+        </div>
+
+        <div class="hero__specs">
+          <div class="spec">
+            <span class="spec__label">Install + dependencies</span>
+            <span class="spec__value">Done-for-you</span>
+          </div>
+          <div class="spec">
+            <span class="spec__label">Model setup</span>
+            <span class="spec__value">Local or cloud (your choice)</span>
+          </div>
+          <div class="spec">
+            <span class="spec__label">Workflow pack</span>
+            <span class="spec__value">Prompts + templates included</span>
+          </div>
+          <div class="spec">
+            <span class="spec__label">Security hardening</span>
+            <span class="spec__value">Permissions + safe folders</span>
+          </div>
+        </div>
+      </div>
