@@ -1,33 +1,27 @@
-/* ═══════════════════════════════════════════════════════════════
-   FORM MICRO-INTERACTIONS CONTROLLER
-   Premium 2026 SaaS-tier input animations
-   Handles: floating labels, validation states, character counters,
-   submit button loading, autofill detection
-   ═══════════════════════════════════════════════════════════════ */
+/**
+ * FORM INTERACTIONS - Premium 2026 SaaS-tier input animations
+ * Features: Floating labels, validation, shake error, success checkmark
+ */
 
 (function() {
   'use strict';
 
-  // Configuration
+  // CONFIG
   const CONFIG = {
-    floatingLabelSelector: '.form-group',
+    groupSelector: '.form-group',
     inputSelector: 'input:not([type="radio"]):not([type="checkbox"]), textarea',
-    textareaMaxChars: 500,
-    emailPattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    phonePattern: /^[\d\s\-\(\)]+$/,
-    submitButtonSelector: 'button[type="submit"]',
-    validationDelay: 500 // ms after typing stops
+    errorClass: 'is-error',
+    successClass: 'is-valid',
+    filledClass: 'is-filled',
+    focusedClass: 'is-focused'
   };
 
-  // State
-  let validationTimers = new Map();
+  // STATE
+  let validationTimers = new WeakMap();
 
-  /* ═══════════════════════════════════════════════════════════════
-     FLOATING LABELS
-     ═══════════════════════════════════════════════════════════════ */
-
-  function initFloatingLabels() {
-    const formGroups = document.querySelectorAll(CONFIG.floatingLabelSelector);
+  // INIT
+  function init() {
+    const formGroups = document.querySelectorAll(CONFIG.groupSelector);
     
     formGroups.forEach(group => {
       const input = group.querySelector(CONFIG.inputSelector);
@@ -35,16 +29,13 @@
       
       if (!input || !label) return;
       
-      // Add floating-label class
-      group.classList.add('floating-label');
-      
-      // Mark textarea groups
+      // Auto-resize textareas
       if (input.tagName === 'TEXTAREA') {
-        group.classList.add('has-textarea');
+        autoResizeTextarea(input);
       }
       
       // Check initial state (autofill, pre-filled)
-      checkFloatingState(group, input);
+      // checkFloatingState(group, input); // DISABLED: Prevents potential layout shift/focus
       
       // Focus events
       input.addEventListener('focus', () => {
@@ -56,31 +47,33 @@
         group.classList.remove('is-focused');
         checkFloatingState(group, input);
         
-        // Trigger validation on blur
+        // Validate on blur
         if (input.hasAttribute('required')) {
           scheduleValidation(group, input);
         }
       });
       
-      // Input events (for real-time state updates)
+      // Input events
       input.addEventListener('input', () => {
         checkFloatingState(group, input);
         
-        // Clear error state when user starts typing
-        if (group.classList.contains('is-error')) {
-          group.classList.remove('is-error');
-          removeErrorMessage(group);
-        }
-        
-        // Schedule validation
         if (input.hasAttribute('required')) {
           scheduleValidation(group, input);
         }
       });
       
-      // Autofill detection
-      detectAutofill(group, input);
+      // Autofill detection (DISABLED to prevent scroll jump)
+      // detectAutofill(group, input);
     });
+    
+    // Add shake animation style
+    addShakeStyle();
+
+    // Setup form submission handling
+    setupFormSubmission();
+    
+    // Setup character counters
+    setupCharCounters();
   }
 
   function checkFloatingState(group, input) {
@@ -92,47 +85,21 @@
     }
   }
 
+  /* 
   function detectAutofill(group, input) {
-    // Check periodically for autofill
-    const checkAutofill = () => {
-      try {
-        // Chrome autofill detection
-        if (input.matches(':-webkit-autofill')) {
-          group.classList.add('is-filled');
-        }
-        
-        // Firefox/Safari fallback
-        if (input.value && !group.classList.contains('is-focused')) {
-          group.classList.add('is-filled');
-        }
-      } catch (e) {
-        // Fallback for browsers that don't support :-webkit-autofill
-        if (input.value) {
-          group.classList.add('is-filled');
-        }
-      }
-    };
-    
-    // Check on load and periodically
-    checkAutofill();
-    setTimeout(checkAutofill, 100);
-    setTimeout(checkAutofill, 500);
+     // DISABLED: Autofill detection can sometimes cause focus jumps
   }
-
-  /* ═══════════════════════════════════════════════════════════════
-     VALIDATION
-     ═══════════════════════════════════════════════════════════════ */
+  */
 
   function scheduleValidation(group, input) {
-    // Clear existing timer
+    // Debounce validation
     if (validationTimers.has(input)) {
       clearTimeout(validationTimers.get(input));
     }
     
-    // Schedule new validation
     const timer = setTimeout(() => {
       validateInput(group, input);
-    }, CONFIG.validationDelay);
+    }, 800);
     
     validationTimers.set(input, timer);
   }
@@ -141,311 +108,184 @@
     const value = input.value.trim();
     const type = input.type;
     const isRequired = input.hasAttribute('required');
-    
-    // Skip validation if empty and not required
-    if (!value && !isRequired) {
-      group.classList.remove('is-valid', 'is-error');
-      removeErrorMessage(group);
-      return true;
-    }
-    
     let isValid = true;
-    let errorMsg = '';
-    
-    // Required field check
-    if (isRequired && !value) {
+    let errorMessage = '';
+
+    // Basic required check
+    if (isRequired && value === '') {
       isValid = false;
-      errorMsg = 'This field is required';
+      errorMessage = 'This field is required';
     }
-    
-    // Email validation
-    else if (type === 'email' && value) {
-      if (!CONFIG.emailPattern.test(value)) {
+
+    // Email check
+    if (isValid && type === 'email' && value !== '') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
         isValid = false;
-        errorMsg = 'Please enter a valid email address';
+        errorMessage = 'Please enter a valid email';
       }
     }
-    
-    // Phone validation (basic)
-    else if (type === 'tel' && value) {
-      if (!CONFIG.phonePattern.test(value) || value.length < 10) {
+
+    // Phone check (basic)
+    if (isValid && type === 'tel' && value !== '') {
+      const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+      if (!phoneRegex.test(value)) {
         isValid = false;
-        errorMsg = 'Please enter a valid phone number';
+        errorMessage = 'Please enter a valid phone number';
       }
     }
-    
+
     // Min length check
-    if (input.hasAttribute('minlength')) {
+    if (isValid && input.hasAttribute('minlength')) {
       const minLength = parseInt(input.getAttribute('minlength'));
       if (value.length < minLength) {
         isValid = false;
-        errorMsg = `Minimum ${minLength} characters required`;
+        errorMessage = `Minimum ${minLength} characters required`;
       }
     }
-    
+
     // Update UI
-    if (isValid && value) {
-      group.classList.add('is-valid');
-      group.classList.remove('is-error');
-      removeErrorMessage(group);
-    } else if (!isValid) {
+    const errorDisplay = group.querySelector('.form-error-message');
+    
+    if (!isValid) {
       group.classList.add('is-error');
       group.classList.remove('is-valid');
-      showErrorMessage(group, errorMsg);
+      if (errorDisplay) errorDisplay.textContent = errorMessage;
+    } else {
+      group.classList.remove('is-error');
+      if (value !== '') {
+        group.classList.add('is-valid');
+      }
+      if (errorDisplay) errorDisplay.textContent = '';
     }
-    
+
     return isValid;
   }
 
-  function showErrorMessage(group, message) {
-    // Remove existing error message
-    removeErrorMessage(group);
+  function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
     
-    // Create and insert error message
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'form-error-message';
-    errorDiv.textContent = message;
-    
-    const input = group.querySelector(CONFIG.inputSelector);
-    if (input) {
-      input.parentNode.insertBefore(errorDiv, input.nextSibling);
-    }
-  }
-
-  function removeErrorMessage(group) {
-    const existingError = group.querySelector('.form-error-message');
-    if (existingError) {
-      existingError.remove();
-    }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     CHARACTER COUNTER
-     ═══════════════════════════════════════════════════════════════ */
-
-  function initCharacterCounters() {
-    const textareas = document.querySelectorAll('textarea');
-    
-    textareas.forEach(textarea => {
-      const maxChars = parseInt(textarea.getAttribute('maxlength')) || CONFIG.textareaMaxChars;
-      
-      // Create counter element
-      const counter = document.createElement('div');
-      counter.className = 'form-counter';
-      counter.textContent = `0 / ${maxChars}`;
-      
-      // Insert after textarea
-      const formGroup = textarea.closest('.form-group');
-      if (formGroup) {
-        formGroup.appendChild(counter);
-      }
-      
-      // Update counter on input
-      textarea.addEventListener('input', () => {
-        const currentLength = textarea.value.length;
-        counter.textContent = `${currentLength} / ${maxChars}`;
-        
-        // Warning state (80% reached)
-        if (currentLength >= maxChars * 0.8 && currentLength < maxChars) {
-          counter.classList.add('counter-warning');
-          counter.classList.remove('counter-danger');
-        }
-        // Danger state (at limit)
-        else if (currentLength >= maxChars) {
-          counter.classList.add('counter-danger');
-          counter.classList.remove('counter-warning');
-        }
-        // Normal state
-        else {
-          counter.classList.remove('counter-warning', 'counter-danger');
-        }
-      });
-      
-      // Set maxlength attribute if not present
-      if (!textarea.hasAttribute('maxlength')) {
-        textarea.setAttribute('maxlength', maxChars);
-      }
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
     });
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SUBMIT BUTTON LOADING STATE
-     ═══════════════════════════════════════════════════════════════ */
-
-  function initSubmitButton() {
+  function setupFormSubmission() {
     const forms = document.querySelectorAll('form');
     
     forms.forEach(form => {
-      const submitButton = form.querySelector(CONFIG.submitButtonSelector);
-      if (!submitButton) return;
-      
-      form.addEventListener('submit', async (e) => {
-        // Don't prevent default - let the actual form submission happen
-        // Just add visual feedback
+      form.addEventListener('submit', (e) => {
+        let isFormValid = true;
         
-        // Validate all required fields first
-        const formGroups = form.querySelectorAll('.form-group');
-        let hasErrors = false;
-        
-        formGroups.forEach(group => {
+        // Validate all fields
+        const groups = form.querySelectorAll(CONFIG.groupSelector);
+        groups.forEach(group => {
           const input = group.querySelector(CONFIG.inputSelector);
           if (input && input.hasAttribute('required')) {
             if (!validateInput(group, input)) {
-              hasErrors = true;
+              isFormValid = false;
+              // Add shake animation
+              group.style.animation = 'none';
+              group.offsetHeight; /* trigger reflow */
+              group.style.animation = 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both';
             }
           }
         });
-        
-        // If there are errors, prevent submission
-        if (hasErrors) {
+
+        if (!isFormValid) {
           e.preventDefault();
           
-          // Scroll to first error
+          // Scroll to first error (DISABLED to prevent jump on load, only on explicit submit)
+          /*
           const firstError = form.querySelector('.is-error');
           if (firstError) {
             firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
+          */
           
           return;
         }
-        
-        // Add loading state
-        submitButton.classList.add('is-loading');
-        submitButton.disabled = true;
-        
-        // Store original text
-        const originalText = submitButton.textContent;
-        
-        // Note: The actual form submission will continue
-        // The loading state will be cleared by page navigation
-        // If using AJAX, you'd handle the response here
       });
     });
   }
-
-  /* ═══════════════════════════════════════════════════════════════
-     SELECTION CARD ANIMATIONS
-     ═══════════════════════════════════════════════════════════════ */
-
-  function initSelectionCards() {
-    const selectionCards = document.querySelectorAll('.selection-card');
+  
+  function setupCharCounters() {
+    const inputs = document.querySelectorAll('[data-char-count]');
     
-    selectionCards.forEach(card => {
-      const input = card.querySelector('input[type="radio"], input[type="checkbox"]');
-      if (!input) return;
+    inputs.forEach(input => {
+      const limit = parseInt(input.getAttribute('maxlength')) || 0;
+      if (!limit) return;
       
-      // Add ripple effect on click
-      card.addEventListener('click', (e) => {
-        // Create ripple element
-        const ripple = document.createElement('span');
-        ripple.className = 'selection-ripple';
+      const counter = document.createElement('div');
+      counter.className = 'char-counter';
+      counter.textContent = `0/${limit}`;
+      
+      input.parentNode.appendChild(counter);
+      
+      input.addEventListener('input', () => {
+        const current = input.value.length;
+        counter.textContent = `${current}/${limit}`;
         
-        // Position ripple at click point
-        const rect = card.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          left: ${x}px;
-          top: ${y}px;
-          background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
-          border-radius: 50%;
-          pointer-events: none;
-          animation: rippleEffect 0.6s ease-out;
-          z-index: 0;
-        `;
-        
-        card.appendChild(ripple);
-        
-        // Remove ripple after animation
-        setTimeout(() => {
-          ripple.remove();
-        }, 600);
-      });
-    });
-    
-    // Add ripple animation to stylesheet (if not exists)
-    if (!document.querySelector('#ripple-animation')) {
-      const style = document.createElement('style');
-      style.id = 'ripple-animation';
-      style.textContent = `
-        @keyframes rippleEffect {
-          from {
-            transform: scale(0);
-            opacity: 1;
-          }
-          to {
-            transform: scale(1);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     ACCESSIBILITY ENHANCEMENTS
-     ═══════════════════════════════════════════════════════════════ */
-
-  function initAccessibility() {
-    // Add aria-invalid to error inputs
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const formGroup = mutation.target;
-          const input = formGroup.querySelector(CONFIG.inputSelector);
-          
-          if (!input) return;
-          
-          if (formGroup.classList.contains('is-error')) {
-            input.setAttribute('aria-invalid', 'true');
-          } else {
-            input.removeAttribute('aria-invalid');
-          }
+        if (current >= limit) {
+          counter.classList.add('is-limit');
+        } else {
+          counter.classList.remove('is-limit');
         }
       });
     });
-    
-    // Observe all form groups
-    document.querySelectorAll('.form-group').forEach(group => {
-      observer.observe(group, { attributes: true, attributeFilter: ['class'] });
-    });
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     INITIALIZATION
-     ═══════════════════════════════════════════════════════════════ */
-
-  function init() {
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-      return;
-    }
-    
-    // Initialize all features
-    initFloatingLabels();
-    initCharacterCounters();
-    initSubmitButton();
-    initSelectionCards();
-    initAccessibility();
-    
-    console.log('✨ Form Micro-interactions initialized');
+  function addShakeStyle() {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        10%, 90% { transform: translate3d(-1px, 0, 0); }
+        20%, 80% { transform: translate3d(2px, 0, 0); }
+        30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+        40%, 60% { transform: translate3d(4px, 0, 0); }
+      }
+      
+      .form-group.is-error label { color: #ef4444; }
+      .form-group.is-error input, 
+      .form-group.is-error textarea { 
+        border-color: #ef4444; 
+        box-shadow: 0 0 0 1px #ef4444;
+      }
+      
+      .form-group.is-valid input, 
+      .form-group.is-valid textarea { 
+        border-color: #10b981; 
+      }
+      
+      .form-error-message {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+        min-height: 1.2em;
+        transition: all 0.3s ease;
+      }
+      
+      .char-counter {
+        text-align: right;
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        margin-top: 0.25rem;
+      }
+      
+      .char-counter.is-limit {
+        color: #ef4444;
+      }
+    `;
+    document.head.appendChild(style);
   }
 
-  // Auto-initialize
-  init();
-
-  // Expose API for manual control (if needed)
-  window.FormInteractions = {
-    validateInput,
-    showErrorMessage,
-    removeErrorMessage
-  };
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();
