@@ -1,141 +1,107 @@
 /**
- * ROI Calculator (Auto-focus Disabled)
- * Removes focus-stealing behavior on initialization.
+ * ROI Calculator - AI Agency vs Human Team
+ * Updated: 2026-02-12
+ * 
+ * Calculates annual savings of replacing/augmenting human staff with AI agents.
  */
 
 class ROICalculator {
   constructor() {
-    this.hoursSlider = document.getElementById('roi-hours-slider');
-    this.rateSlider = document.getElementById('roi-rate-slider');
-    this.hoursValue = document.getElementById('roi-hours-value');
-    this.rateValue = document.getElementById('roi-rate-value');
+    this.staffSlider = document.getElementById('roi-hours-slider'); // Reused ID for staff count
+    this.salarySlider = document.getElementById('roi-rate-slider'); // Reused ID for salary
+    this.staffValue = document.getElementById('roi-hours-value');
+    this.salaryValue = document.getElementById('roi-rate-value');
     
     // Result elements
-    this.monthlyLossEl = document.getElementById('roi-monthly-loss');
-    this.yearlyLossEl = document.getElementById('roi-yearly-loss');
-    this.breakEvenEl = document.getElementById('roi-breakeven');
+    this.humanCostEl = document.getElementById('roi-yearly-loss'); // Human Team Cost
+    this.aiCostEl = document.getElementById('roi-monthly-loss'); // AI Running Cost (misnamed in HTML but used for AI cost)
     this.netSavingsEl = document.getElementById('roi-net-savings');
-    this.ctaSavingsEl = document.getElementById('roi-cta-savings');
     
     // Chart elements
-    this.manualCostBar = document.getElementById('roi-bar-manual-cost');
-    this.serviceCostBar = document.getElementById('roi-bar-service-cost');
+    this.humanCostBar = document.getElementById('roi-bar-manual-cost');
+    this.aiCostBar = document.getElementById('roi-bar-service-cost');
     this.savingsBar = document.getElementById('roi-bar-savings');
-    this.manualCostValue = document.getElementById('roi-bar-manual-value');
-    this.serviceCostValue = document.getElementById('roi-bar-service-value');
-    this.savingsValue = document.getElementById('roi-bar-savings-value');
+    this.humanCostBarValue = document.getElementById('roi-bar-manual-value');
+    this.aiCostBarValue = document.getElementById('roi-bar-service-value');
+    this.savingsBarValue = document.getElementById('roi-bar-savings-value');
     
-    // Service pricing (configurable)
-    this.serviceCost = 149; // OpenClaw Mac base service cost
+    // Constants
+    this.SETUP_FEE = 299; // One-time setup
+    this.MONTHLY_AI_COST = 50; // Est. API costs per agent/month
     
     this.init();
   }
   
   init() {
-    // Set initial values
-    this.updateDisplay();
-    
     // Add event listeners
-    if (this.hoursSlider && this.rateSlider) {
-        this.hoursSlider.addEventListener('input', () => this.updateDisplay());
-        this.rateSlider.addEventListener('input', () => this.updateDisplay());
+    if (this.staffSlider && this.salarySlider) {
+        this.staffSlider.addEventListener('input', () => this.updateDisplay());
+        this.salarySlider.addEventListener('input', () => this.updateDisplay());
     }
     
-    // Trigger initial animation
-    setTimeout(() => this.animateChart(), 500);
+    // Initial calculation
+    this.updateDisplay();
   }
   
   updateDisplay() {
-    if (!this.hoursSlider || !this.rateSlider) return;
+    if (!this.staffSlider || !this.salarySlider) return;
 
-    const hours = parseFloat(this.hoursSlider.value);
-    const rate = parseFloat(this.rateSlider.value);
+    const staffCount = parseInt(this.staffSlider.value);
+    const avgSalary = parseInt(this.salarySlider.value);
     
-    // Update slider value displays
-    if (this.hoursValue) this.hoursValue.textContent = hours;
-    if (this.rateValue) this.rateValue.textContent = `$${rate}`;
+    // Update labels
+    if (this.staffValue) this.staffValue.textContent = staffCount === 1 ? '1 person' : `${staffCount} people`;
+    if (this.salaryValue) this.salaryValue.textContent = `$${avgSalary.toLocaleString()}`;
     
-    // Calculate costs
-    const monthlyLoss = hours * rate;
-    const yearlyLoss = monthlyLoss * 12;
-    const breakEvenMonths = Math.ceil(this.serviceCost / monthlyLoss);
-    const netSavingsYear = yearlyLoss - this.serviceCost;
+    // Calculate Costs
+    const annualHumanCost = staffCount * avgSalary;
     
-    // Update result displays with animation
-    this.animateValue(this.monthlyLossEl, monthlyLoss, '$', '/month');
-    this.animateValue(this.yearlyLossEl, yearlyLoss, '$', '/year');
-    this.animateValue(this.breakEvenEl, breakEvenMonths, '', breakEvenMonths === 1 ? ' month' : ' months');
-    this.animateValue(this.netSavingsEl, netSavingsYear, '$', '/year');
-    this.animateValue(this.ctaSavingsEl, netSavingsYear, '$', '');
+    // AI Cost: Setup + (Monthly API * 12 * Agent Count)
+    // Assuming 1 AI agent replaces/augments 1 human role for this model
+    const annualAiCost = this.SETUP_FEE + (this.MONTHLY_AI_COST * 12 * staffCount);
     
-    // Update chart
-    this.updateChart(monthlyLoss, netSavingsYear);
+    const annualSavings = annualHumanCost - annualAiCost;
+    
+    // Update Text Results
+    this.animateValue(this.humanCostEl, annualHumanCost, '$', '/year');
+    this.animateValue(this.aiCostEl, annualAiCost, '$', '/year');
+    this.animateValue(this.netSavingsEl, annualSavings, '$', '/year');
+    
+    // Update Chart
+    this.updateChart(annualHumanCost, annualAiCost, annualSavings);
   }
   
   animateValue(element, targetValue, prefix = '', suffix = '') {
     if (!element) return;
-    const currentValue = parseFloat(element.getAttribute('data-value') || '0');
-    const duration = 800;
-    const steps = 30;
-    const increment = (targetValue - currentValue) / steps;
-    const stepDuration = duration / steps;
-    
-    let currentStep = 0;
-    
-    const animate = () => {
-      if (currentStep < steps) {
-        currentStep++;
-        const newValue = currentValue + (increment * currentStep);
-        element.textContent = `${prefix}${Math.round(newValue).toLocaleString()}${suffix}`;
-        requestAnimationFrame(animate);
-      } else {
-        element.textContent = `${prefix}${Math.round(targetValue).toLocaleString()}${suffix}`;
-        element.setAttribute('data-value', targetValue);
-      }
-    };
-    
-    animate();
+    // Simple update for now to avoid complexity/glitches
+    element.textContent = `${prefix}${Math.round(targetValue).toLocaleString()}${suffix}`;
   }
   
-  updateChart(monthlyLoss, netSavings) {
-    if (!this.manualCostBar) return;
+  updateChart(humanCost, aiCost, savings) {
+    if (!this.humanCostBar) return;
 
-    // Calculate yearly values for chart
-    const manualYearlyCost = monthlyLoss * 12;
-    const serviceCost = this.serviceCost;
-    const savings = netSavings;
+    // Normalize heights (max 150px for chart)
+    const maxValue = Math.max(humanCost, aiCost, savings);
     
-    // Normalize heights (max 200px)
-    const maxValue = Math.max(manualYearlyCost, serviceCost, savings);
-    const manualHeight = (manualYearlyCost / maxValue) * 180;
-    const serviceHeight = (serviceCost / maxValue) * 180;
-    const savingsHeight = (savings / maxValue) * 180;
+    const humanHeight = (humanCost / maxValue) * 150;
+    const aiHeight = Math.max(10, (aiCost / maxValue) * 150); // Min height for visibility
+    const savingsHeight = (savings / maxValue) * 150;
     
-    // Update bar heights
-    this.manualCostBar.style.height = `${manualHeight}px`;
-    this.serviceCostBar.style.height = `${serviceHeight}px`;
-    this.savingsBar.style.height = `${Math.max(0, savingsHeight)}px`;
+    // Update Heights
+    this.humanCostBar.style.height = `${humanHeight}px`;
+    this.aiCostBar.style.height = `${aiHeight}px`;
+    this.savingsBar.style.height = `${savingsHeight}px`;
     
-    // Update bar values
-    this.manualCostValue.textContent = `-$${Math.round(manualYearlyCost).toLocaleString()}`;
-    this.serviceCostValue.textContent = `-$${serviceCost}`;
-    this.savingsValue.textContent = `+$${Math.round(Math.max(0, savings)).toLocaleString()}`;
-  }
-  
-  animateChart() {
-    // Trigger initial chart animation by updating display
-    this.updateDisplay();
+    // Update Labels
+    this.humanCostBarValue.textContent = `-$${(humanCost/1000).toFixed(0)}k`;
+    this.aiCostBarValue.textContent = `-$${(aiCost/1000).toFixed(1)}k`;
+    this.savingsBarValue.textContent = `+$${(savings/1000).toFixed(0)}k`;
   }
 }
 
-// Initialize on DOM ready
+// Initialize
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new ROICalculator();
-  });
+  document.addEventListener('DOMContentLoaded', () => new ROICalculator());
 } else {
   new ROICalculator();
 }
-
-// Export for external access
-window.ROICalculator = ROICalculator;
