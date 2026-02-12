@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed — OpenClaw Mac</title>
+  <meta name="description" content="Thanks for booking your OpenClaw installation. Next steps and preparation guide.">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/css/hotfix-ui.css">
+  <style>
+    /* Inline styles for speed, will be moved to CSS later */
+    .thank-you-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 60%);
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary, #d1d5db);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .next-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      width: 100%;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    .step-number {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #a855f7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="thank-you-hero">
+    <div class="success-icon">🎉</div>
+    <h1>You're Booked!</h1>
+    <p class="subtitle">
+      Thanks for scheduling your OpenClaw installation. A calendar invite has been sent to your email.
+      Here's what happens next.
+    </p>
+
+    <div class="next-steps">
+      <div class="step-card">
+        <span class="step-number">Step 1</span>
+        <h3 class="step-title">Check Your Email</h3>
+        <p class="step-desc">Look for the calendar invite from Calendly. It contains the Zoom link (for remote) or location details.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">Step 2</span>
+        <h3 class="step-title">Prepare Your Mac</h3>
+        <p class="step-desc">Ensure you're on macOS Sonoma (14.0+) or later. Have your admin password ready for installation.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">Step 3</span>
+        <h3 class="step-title">List Your Tasks</h3>
+        <p class="step-desc">Think of 3 repetitive tasks you want to automate. We'll build them together during the session.</p>
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="/" class="btn btn--primary">Return Home</a>
+      <a href="mailto:hello@openclawmac.com" class="btn btn--secondary">Contact Support</a>
+    </div>
+  </div>
+
+  <script src="/js/scroll-fix.js"></script>
+  <script>
+    // Fire conversion pixel if needed
+    console.log('Conversion: Booking Confirmed');
+  </script>
+</body>
+</html>
