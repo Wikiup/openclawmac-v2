@@ -1,0 +1,394 @@
+/*━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * ANIMATED MESH GRADIENT BACKGROUND SYSTEM
+ * Inspired by: Stripe, Apple, Anthropic, Linear (2026)
+ * Premium animated gradient backgrounds for hero/key sections
+ *━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE GRADIENT CONTAINER
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.animated-gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure parent sections are positioned */
+.hero-section,
+.section.has-animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keep content above gradient */
+.hero-section > *:not(.animated-gradient-bg),
+.section.has-animated-bg > *:not(.animated-gradient-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GRADIENT ORBS (Multi-layered animated blobs)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+/* Primary Orb (Purple) - Large slow movement */
+.gradient-orb.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.8) 0%,
+    rgba(139, 92, 246, 0.4) 40%,
+    rgba(139, 92, 246, 0) 70%
+  );
+  top: -10%;
+  left: -10%;
+  animation: float-orb-1 25s ease-in-out infinite;
+}
+
+/* Secondary Orb (Pink) - Medium diagonal drift */
+.gradient-orb.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.7) 0%,
+    rgba(139, 92, 246, 0.35) 40%,
+    rgba(139, 92, 246, 0) 70%
+  );
+  top: 20%;
+  right: -5%;
+  animation: float-orb-2 20s ease-in-out infinite;
+}
+
+/* Tertiary Orb (Blue) - Fast circular motion */
+.gradient-orb.orb-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.6) 0%,
+    rgba(59, 130, 246, 0.3) 40%,
+    rgba(59, 130, 246, 0) 70%
+  );
+  bottom: 10%;
+  left: 30%;
+  animation: float-orb-3 30s ease-in-out infinite;
+}
+
+/* Accent Orb (Cyan) - Small rapid pulse */
+.gradient-orb.orb-4 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+    circle at center,
+    rgba(34, 211, 238, 0.5) 0%,
+    rgba(34, 211, 238, 0.25) 40%,
+    rgba(34, 211, 238, 0) 70%
+  );
+  bottom: -5%;
+  right: 25%;
+  animation: float-orb-4 18s ease-in-out infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MESH GRADIENT OVERLAY (Grain texture)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.gradient-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 3px
+    );
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Animated noise texture for organic feel */
+.gradient-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+  animation: noise-shift 8s steps(10) infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RADIAL GLOW (Center focus effect)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.gradient-radial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(139, 92, 246, 0.1) 30%,
+    transparent 70%
+  );
+  animation: pulse-glow 10s ease-in-out infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIMATIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Orb 1: Slow diagonal drift with scale pulse */
+@keyframes float-orb-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(15%, 10%) scale(1.1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(10%, 20%) scale(1.05);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(-5%, 15%) scale(0.95);
+    opacity: 0.55;
+  }
+}
+
+/* Orb 2: Figure-8 motion */
+@keyframes float-orb-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translate(-20%, 15%) scale(1.08);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-10%, -10%) scale(1.15);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translate(5%, 5%) scale(0.92);
+    opacity: 0.65;
+  }
+}
+
+/* Orb 3: Circular orbit with rotation */
+@keyframes float-orb-3 {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(-15%, -10%) rotate(90deg) scale(1.12);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-25%, 0%) rotate(180deg) scale(1.05);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(-10%, 10%) rotate(270deg) scale(0.98);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    opacity: 0.6;
+  }
+}
+
+/* Orb 4: Rapid vertical bounce */
+@keyframes float-orb-4 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(10%, -20%) scale(1.2);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-5%, -5%) scale(0.9);
+    opacity: 0.45;
+  }
+}
+
+/* Radial pulse animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+/* Noise shift for organic texture */
+@keyframes noise-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-15%, 0%); }
+  50% { transform: translate(0, 10%); }
+  60% { transform: translate(10%, -5%); }
+  70% { transform: translate(-5%, 15%); }
+  80% { transform: translate(5%, 5%); }
+  90% { transform: translate(-10%, -10%); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE ADJUSTMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (max-width: 768px) {
+  /* Reduce orb sizes on mobile */
+  .gradient-orb.orb-1 {
+    width: 400px;
+    height: 400px;
+    filter: blur(60px);
+  }
+  
+  .gradient-orb.orb-2 {
+    width: 350px;
+    height: 350px;
+    filter: blur(50px);
+  }
+  
+  .gradient-orb.orb-3 {
+    width: 300px;
+    height: 300px;
+    filter: blur(45px);
+  }
+  
+  .gradient-orb.orb-4 {
+    width: 250px;
+    height: 250px;
+    filter: blur(40px);
+  }
+
+  /* Simplify animations for performance */
+  .gradient-orb {
+    animation-duration: calc(1.5 * var(--duration, 20s)) !important;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACCESSIBILITY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb,
+  .gradient-radial,
+  .gradient-noise {
+    animation: none !important;
+    opacity: 0.5 !important;
+  }
+  
+  .gradient-orb {
+    transform: none !important;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VARIANT: SUBTLE MODE (For secondary sections)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.animated-gradient-bg.subtle .gradient-orb {
+  opacity: 0.3;
+  filter: blur(100px);
+}
+
+.animated-gradient-bg.subtle .gradient-radial {
+  opacity: 0.5;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DARK MODE ADJUSTMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (prefers-color-scheme: dark) {
+  .gradient-orb {
+    opacity: 0.4;
+  }
+  
+  .gradient-mesh {
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 3px
+      );
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PERFORMANCE OPTIMIZATIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* GPU acceleration */
+.gradient-orb,
+.gradient-radial,
+.gradient-noise {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Contain paint for better compositing */
+.animated-gradient-bg {
+  contain: layout style paint;
+  will-change: transform;
+}

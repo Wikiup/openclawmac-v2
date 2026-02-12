@@ -1,0 +1,121 @@
+/**
+ * Magnetic Cursor Effect Styles
+ * Smooth transitions for magnetic elements
+ * 2026 Premium Interaction Pattern
+ */
+
+/* Base magnetic element styles */
+.cta-button,
+.primary-button,
+.btn-primary,
+.pricing-card,
+.feature-card,
+.feature-item,
+nav a,
+.nav-link,
+.social-icon,
+.icon-link {
+  /* Ensure elements can be transformed */
+  transform-origin: center center;
+  will-change: transform;
+  
+  /* Smooth spring-like transition for non-JS fallback */
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ensure magnetic elements are positioned for transform */
+.pricing-card,
+.feature-card,
+.feature-item {
+  position: relative;
+}
+
+/* Enhanced cursor for magnetic zones (visual feedback) */
+@media (hover: hover) {
+  .cta-button:hover,
+  .primary-button:hover,
+  .btn-primary:hover {
+    cursor: pointer;
+  }
+  
+  .pricing-card:hover,
+  .feature-card:hover {
+    cursor: grab;
+  }
+}
+
+/* Disable magnetic effects for touch devices */
+@media (hover: none) {
+  .cta-button,
+  .primary-button,
+  .btn-primary,
+  .pricing-card,
+  .feature-card,
+  .feature-item,
+  nav a,
+  .nav-link,
+  .social-icon,
+  .icon-link {
+    transform: none !important;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .cta-button,
+  .primary-button,
+  .btn-primary,
+  .pricing-card,
+  .feature-card,
+  .feature-item,
+  nav a,
+  .nav-link,
+  .social-icon,
+  .icon-link {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Performance optimization - GPU acceleration */
+.cta-button,
+.primary-button,
+.btn-primary,
+.pricing-card,
+.feature-card,
+.feature-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visual polish - ensure smooth edges during transform */
+.pricing-card,
+.feature-card,
+.feature-item {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Magnetic glow effect on active elements */
+@media (hover: hover) {
+  .cta-button:hover::before,
+  .primary-button:hover::before,
+  .btn-primary:hover::before {
+    opacity: 0.8;
+  }
+}
+
+/* Debug mode - uncomment to visualize magnetic zones */
+/*
+.cta-button::after,
+.pricing-card::after,
+.feature-card::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border: 2px dashed rgba(255, 0, 255, 0.3);
+  pointer-events: none;
+  z-index: 9999;
+}
+*/

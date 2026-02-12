@@ -1,0 +1,488 @@
+/* ═══════════════════════════════════════════════════════════════
+   FORM MICRO-INTERACTIONS
+   Premium 2026 SaaS-tier input animations
+   Inspired by Stripe, Linear, Notion, Anthropic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   FLOATING LABEL SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group {
+  position: relative;
+}
+
+.form-group.floating-label label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: rgba(170, 182, 211, 0.6);
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: transparent;
+  padding: 0 4px;
+  z-index: 1;
+}
+
+/* Textarea floating label needs different positioning */
+.form-group.floating-label.has-textarea label {
+  top: 20px;
+  transform: translateY(0);
+}
+
+/* Floated state (when focused or filled) */
+.form-group.floating-label.is-focused label,
+.form-group.floating-label.is-filled label {
+  top: -8px;
+  transform: translateY(0);
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--bg);
+  font-weight: 600;
+}
+
+/* Success state */
+.form-group.floating-label.is-valid label {
+  color: #10b981;
+}
+
+/* Error state */
+.form-group.floating-label.is-error label {
+  color: #ef4444;
+}
+
+/* Hide required/optional spans when floated */
+.form-group.floating-label label .required,
+.form-group.floating-label label .optional {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.form-group.floating-label.is-focused label .required,
+.form-group.floating-label.is-focused label .optional,
+.form-group.floating-label.is-filled label .required,
+.form-group.floating-label.is-filled label .optional {
+  opacity: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INPUT ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group input,
+.form-group textarea {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced focus state with animated border */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 
+    0 0 0 3px var(--accent-glow),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Animated focus ring */
+.form-group::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-sm) + 2px);
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.form-group.is-focused::before {
+  opacity: 0.15;
+  animation: focusRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes focusRingPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.25;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VALIDATION STATES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Success state */
+.form-group.is-valid input,
+.form-group.is-valid textarea {
+  border-color: #10b981;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  animation: successPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-group.is-valid input:focus,
+.form-group.is-valid textarea:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Error state */
+.form-group.is-error input,
+.form-group.is-error textarea {
+  border-color: #ef4444;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  animation: shakeError 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.form-group.is-error input:focus,
+.form-group.is-error textarea:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+@keyframes shakeError {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+/* Error message */
+.form-error-message {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: slideDown 0.3s ease;
+}
+
+.form-error-message::before {
+  content: '⚠';
+  font-size: 0.9rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success message */
+.form-success-message {
+  font-size: 0.75rem;
+  color: #10b981;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: slideDown 0.3s ease;
+}
+
+.form-success-message::before {
+  content: '✓';
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHARACTER COUNTER
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-counter {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 4px;
+  text-align: right;
+  transition: color 0.2s ease;
+}
+
+.form-counter.counter-warning {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.form-counter.counter-danger {
+  color: #ef4444;
+  font-weight: 700;
+  animation: counterPulse 1s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SUBMIT BUTTON LOADING STATES
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn.is-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: buttonSpinner 0.6s linear infinite;
+}
+
+@keyframes buttonSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success state for submit button */
+.btn.is-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  animation: buttonSuccess 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn.is-success::before {
+  content: '✓';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  animation: checkmarkPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s;
+}
+
+@keyframes buttonSuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes checkmarkPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INPUT HOVER EFFECTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group input:hover:not(:focus),
+.form-group textarea:hover:not(:focus) {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTOFILL STYLING
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+  -webkit-text-fill-color: var(--text);
+  border-color: var(--accent);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SELECTION CARDS (Radio/Checkbox) ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.selection-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.selection-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.selection-card:hover::before {
+  opacity: 0.05;
+}
+
+.selection-card input:checked ~ .selection-content {
+  animation: cardSelect 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes cardSelect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Checkmark animation for selected cards */
+.selection-card input:checked ~ .selection-content::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  animation: checkmarkAppear 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkmarkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOCUS VISIBLE (Keyboard Navigation)
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.selection-card:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DISABLED STATE
+   ═══════════════════════════════════════════════════════════════ */
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(170, 182, 211, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .form-group label,
+  .form-group input,
+  .form-group textarea,
+  .selection-card,
+  .btn {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .form-group::before {
+    animation: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .form-group.floating-label label {
+    font-size: 0.9rem;
+  }
+  
+  .form-group.floating-label.is-focused label,
+  .form-group.floating-label.is-filled label {
+    font-size: 0.7rem;
+  }
+  
+  /* Larger touch targets on mobile */
+  .form-group input,
+  .form-group textarea {
+    padding: 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

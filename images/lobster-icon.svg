@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="claw-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C5CFF"/>
+      <stop offset="100%" stop-color="#2EE59D"/>
+    </linearGradient>
+    <linearGradient id="claw-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5A3FD6"/>
+      <stop offset="100%" stop-color="#1FBF7A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Body / Tail -->
+  <path d="M256 480 C256 480, 220 420, 220 360 C220 320, 235 290, 256 270 C277 290, 292 320, 292 360 C292 420, 256 480, 256 480Z" 
+        fill="url(#claw-grad)" opacity="0.85"/>
+  
+  <!-- Tail fan segments -->
+  <path d="M256 480 C240 460, 200 470, 190 490 C200 480, 230 465, 256 480Z" fill="url(#claw-grad)" opacity="0.6"/>
+  <path d="M256 480 C272 460, 312 470, 322 490 C312 480, 282 465, 256 480Z" fill="url(#claw-grad)" opacity="0.6"/>
+  
+  <!-- Left claw arm -->
+  <path d="M220 290 C190 260, 140 240, 100 220 C80 210, 60 195, 50 170 C45 155, 50 140, 65 135 C80 130, 95 135, 105 150 C115 165, 130 175, 150 185 C170 195, 195 220, 220 250Z" 
+        fill="url(#claw-grad)" filter="url(#glow)"/>
+  
+  <!-- Left claw pincer top -->
+  <path d="M50 170 C35 145, 15 125, 30 95 C40 75, 65 65, 85 80 C100 92, 95 115, 80 135 C70 148, 55 160, 50 170Z" 
+        fill="url(#claw-grad)"/>
+  
+  <!-- Left claw pincer bottom -->
+  <path d="M65 135 C50 120, 25 115, 20 90 C18 70, 35 55, 55 60 C72 65, 78 85, 75 105 C73 118, 68 128, 65 135Z" 
+        fill="url(#claw-grad-dark)"/>
+  
+  <!-- Right claw arm -->
+  <path d="M292 290 C322 260, 372 240, 412 220 C432 210, 452 195, 462 170 C467 155, 462 140, 447 135 C432 130, 417 135, 407 150 C397 165, 382 175, 362 185 C342 195, 317 220, 292 250Z" 
+        fill="url(#claw-grad)" filter="url(#glow)"/>
+  
+  <!-- Right claw pincer top -->
+  <path d="M462 170 C477 145, 497 125, 482 95 C472 75, 447 65, 427 80 C412 92, 417 115, 432 135 C442 148, 457 160, 462 170Z" 
+        fill="url(#claw-grad)"/>
+  
+  <!-- Right claw pincer bottom -->
+  <path d="M447 135 C462 120, 487 115, 492 90 C494 70, 477 55, 457 60 C440 65, 434 85, 437 105 C439 118, 444 128, 447 135Z" 
+        fill="url(#claw-grad-dark)"/>
+  
+  <!-- Body shell / carapace -->
+  <ellipse cx="256" cy="240" rx="55" ry="70" fill="url(#claw-grad)" opacity="0.9"/>
+  <ellipse cx="256" cy="230" rx="42" ry="55" fill="url(#claw-grad-dark)" opacity="0.3"/>
+  
+  <!-- Head -->
+  <ellipse cx="256" cy="175" rx="38" ry="30" fill="url(#claw-grad)"/>
+  
+  <!-- Eyes -->
+  <circle cx="237" cy="158" r="8" fill="#0B0E18"/>
+  <circle cx="275" cy="158" r="8" fill="#0B0E18"/>
+  <circle cx="239" cy="156" r="3" fill="#fff" opacity="0.9"/>
+  <circle cx="277" cy="156" r="3" fill="#fff" opacity="0.9"/>
+  
+  <!-- Eye stalks -->
+  <path d="M237 165 C237 165, 230 148, 230 138 C230 132, 234 128, 237 128" stroke="url(#claw-grad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M275 165 C275 165, 282 148, 282 138 C282 132, 278 128, 275 128" stroke="url(#claw-grad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Antennae -->
+  <path d="M248 162 C235 135, 210 110, 175 85" stroke="url(#claw-grad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M264 162 C277 135, 302 110, 337 85" stroke="url(#claw-grad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M245 165 C228 142, 195 125, 160 115" stroke="url(#claw-grad)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M267 165 C284 142, 317 125, 352 115" stroke="url(#claw-grad)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+  
+  <!-- Legs (3 per side) -->
+  <path d="M220 260 C200 275, 175 285, 155 295" stroke="url(#claw-grad)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M222 280 C205 298, 182 310, 165 318" stroke="url(#claw-grad)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M225 300 C210 320, 192 332, 178 340" stroke="url(#claw-grad)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  
+  <path d="M292 260 C312 275, 337 285, 357 295" stroke="url(#claw-grad)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M290 280 C307 298, 330 310, 347 318" stroke="url(#claw-grad)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M287 300 C302 320, 320 332, 334 340" stroke="url(#claw-grad)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  
+  <!-- Shell detail lines -->
+  <path d="M235 210 C245 225, 256 230, 267 225 C278 220, 280 210, 277 200" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <path d="M240 230 C248 242, 256 245, 264 242 C272 238, 274 230, 272 222" stroke="#fff" stroke-width="1" fill="none" opacity="0.1" stroke-linecap="round"/>
+</svg>

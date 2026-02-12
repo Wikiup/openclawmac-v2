@@ -1,0 +1,376 @@
+/**
+ * TOOLTIPS.CSS
+ * Premium interactive tooltip system for OpenClaw Mac v2
+ * Sprint #40 - Interactive Tooltip System (2026-02-10 6:45 AM)
+ * 
+ * Features:
+ * - Glassmorphism design with backdrop blur
+ * - Smart auto-positioning (top/bottom/left/right)
+ * - Smooth fade + slide animations
+ * - Arrow pointers with gradient borders
+ * - Mobile touch support
+ * - Keyboard accessible
+ * - Dark mode optimized
+ * 
+ * Inspiration: Stripe, Linear, Vercel, Notion 2026 tooltip UX
+ */
+
+/* ============================================
+   TOOLTIP CONTAINER
+   ============================================ */
+
+.tooltip {
+  position: absolute;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================
+   TOOLTIP CONTENT
+   ============================================ */
+
+.tooltip__content {
+  position: relative;
+  background: rgba(20, 25, 35, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  white-space: nowrap;
+  max-width: 280px;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(139, 92, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Glassmorphism inner glow */
+.tooltip__content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.4) 0%, 
+    rgba(59, 130, 246, 0.2) 50%,
+    rgba(139, 92, 246, 0.1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Premium text gradient (optional) */
+.tooltip__content strong {
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ============================================
+   TOOLTIP ARROW
+   ============================================ */
+
+.tooltip__arrow {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(20, 25, 35, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Arrow positioning based on tooltip placement */
+
+/* Top placement - arrow points down */
+.tooltip[data-placement="top"] .tooltip__arrow {
+  bottom: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border-top: none;
+  border-left: none;
+}
+
+/* Bottom placement - arrow points up */
+.tooltip[data-placement="bottom"] .tooltip__arrow {
+  top: -6px;
+  left: 50%;
+  margin-left: -6px;
+  border-bottom: none;
+  border-right: none;
+}
+
+/* Left placement - arrow points right */
+.tooltip[data-placement="left"] .tooltip__arrow {
+  right: -6px;
+  top: 50%;
+  margin-top: -6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+/* Right placement - arrow points left */
+.tooltip[data-placement="right"] .tooltip__arrow {
+  left: -6px;
+  top: 50%;
+  margin-top: -6px;
+  border-right: none;
+  border-top: none;
+}
+
+/* ============================================
+   POSITIONING & ANIMATIONS
+   ============================================ */
+
+/* Top placement */
+.tooltip[data-placement="top"] {
+  transform: translateY(4px);
+}
+
+.tooltip[data-placement="top"].visible {
+  transform: translateY(0);
+}
+
+/* Bottom placement */
+.tooltip[data-placement="bottom"] {
+  transform: translateY(-4px);
+}
+
+.tooltip[data-placement="bottom"].visible {
+  transform: translateY(0);
+}
+
+/* Left placement */
+.tooltip[data-placement="left"] {
+  transform: translateX(4px);
+}
+
+.tooltip[data-placement="left"].visible {
+  transform: translateX(0);
+}
+
+/* Right placement */
+.tooltip[data-placement="right"] {
+  transform: translateX(-4px);
+}
+
+.tooltip[data-placement="right"].visible {
+  transform: translateX(0);
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .tooltip__content {
+    max-width: 220px;
+    font-size: 12px;
+    padding: 8px 12px;
+    white-space: normal; /* Allow wrapping on mobile */
+  }
+
+  .tooltip__arrow {
+    width: 10px;
+    height: 10px;
+  }
+
+  .tooltip[data-placement="top"] .tooltip__arrow,
+  .tooltip[data-placement="bottom"] .tooltip__arrow {
+    margin-left: -5px;
+  }
+
+  .tooltip[data-placement="left"] .tooltip__arrow,
+  .tooltip[data-placement="right"] .tooltip__arrow {
+    margin-top: -5px;
+  }
+}
+
+/* Touch device optimization - slightly larger tap targets */
+@media (hover: none) {
+  .tooltip__content {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tooltip__content {
+    border: 2px solid rgba(139, 92, 246, 0.8);
+    background: rgba(10, 15, 25, 1);
+  }
+
+  .tooltip__arrow {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip,
+  .tooltip.visible {
+    transition: opacity 0.1s linear, visibility 0.1s linear;
+    transform: none !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+[data-tooltip]:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   VARIANT STYLES
+   ============================================ */
+
+/* Success tooltip */
+.tooltip[data-variant="success"] .tooltip__content {
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(34, 197, 94, 0.15);
+}
+
+.tooltip[data-variant="success"] .tooltip__arrow {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* Warning tooltip */
+.tooltip[data-variant="warning"] .tooltip__content {
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(251, 191, 36, 0.15);
+}
+
+.tooltip[data-variant="warning"] .tooltip__arrow {
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* Error tooltip */
+.tooltip[data-variant="error"] .tooltip__content {
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(239, 68, 68, 0.15);
+}
+
+.tooltip[data-variant="error"] .tooltip__arrow {
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Info tooltip (premium brand colors) */
+.tooltip[data-variant="info"] .tooltip__content {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(59, 130, 246, 0.15);
+}
+
+.tooltip[data-variant="info"] .tooltip__arrow {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* ============================================
+   RICH CONTENT TOOLTIPS
+   ============================================ */
+
+/* For tooltips with HTML content */
+.tooltip__content--rich {
+  white-space: normal;
+  max-width: 320px;
+  padding: 14px 18px;
+}
+
+.tooltip__content--rich .tooltip__title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tooltip__content--rich .tooltip__body {
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tooltip__content--rich .tooltip__footer {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(139, 92, 246, 0.2);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration */
+.tooltip {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Prevent layout shift */
+.tooltip__content {
+  contain: layout style paint;
+}
+
+/* ============================================
+   DARK MODE REFINEMENTS
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .tooltip__content {
+    background: rgba(255, 255, 255, 0.95);
+    color: rgba(10, 15, 25, 0.95);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 8px 32px rgba(139, 92, 246, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .tooltip__arrow {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(139, 92, 246, 0.2);
+  }
+
+  .tooltip__content--rich .tooltip__body {
+    color: rgba(10, 15, 25, 0.7);
+  }
+}

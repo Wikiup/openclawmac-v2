@@ -1,0 +1,168 @@
+/* ═══════════════════════════════════════════════════════════════
+   BENTO INTERACTIVE - Cursor Tracking (2026 Trend)
+   Inspired by: Linear, Arc Browser, Stripe 2026
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Core Interactive Card */
+.bento-card {
+  --mouse-x: 0;
+  --mouse-y: 0;
+  cursor: pointer;
+}
+
+/* Cursor-Following Spotlight */
+.bento-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(124, 92, 255, 0.12),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bento-card:hover::after {
+  opacity: 1;
+}
+
+/* Dynamic Border Glow */
+.bento-card-border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(124, 92, 255, 0.4),
+    rgba(46, 229, 157, 0.2),
+    transparent
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bento-card:hover .bento-card-border-glow {
+  opacity: 1;
+}
+
+/* Content Layer - Above Effects */
+.bento-card > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* Enhanced Highlight Card */
+.bento-card--highlight::after {
+  background: radial-gradient(
+    700px circle at var(--mouse-x) var(--mouse-y),
+    rgba(124, 92, 255, 0.18),
+    rgba(46, 229, 157, 0.08) 40%,
+    transparent 70%
+  );
+}
+
+/* Performance: Will-change on hover only */
+.bento-card:hover {
+  will-change: transform;
+}
+
+/* Smooth icon rotation toward cursor */
+.bento-icon {
+  transform-origin: center;
+  transform: rotate(0deg);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bento-card:hover .bento-icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+/* List item reveal animation */
+.bento-list li {
+  opacity: 0.8;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.bento-card:hover .bento-list li {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.bento-list li:nth-child(1) { transition-delay: 0.05s; }
+.bento-list li:nth-child(2) { transition-delay: 0.1s; }
+.bento-list li:nth-child(3) { transition-delay: 0.15s; }
+
+/* Title shimmer on hover */
+.bento-title {
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #fff 40%,
+    rgba(124, 92, 255, 0.9) 50%,
+    #fff 60%,
+    #fff 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-position: 0% center;
+  transition: background-position 0.6s ease;
+}
+
+.bento-card:hover .bento-title {
+  background-position: 100% center;
+}
+
+/* Accent color variant */
+.bento-card--accent2::after {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(46, 229, 157, 0.12),
+    transparent 40%
+  );
+}
+
+/* Mobile: Disable cursor effects (touch devices) */
+@media (hover: none) {
+  .bento-card::after,
+  .bento-card-border-glow {
+    display: none;
+  }
+  
+  .bento-title {
+    background: #fff;
+    -webkit-text-fill-color: #fff;
+  }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card::after,
+  .bento-card:hover .bento-icon,
+  .bento-list li {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .bento-title {
+    background: #fff;
+    -webkit-text-fill-color: #fff;
+  }
+}

@@ -1,0 +1,453 @@
+/* ═══════════════════════════════════════════════════════════════
+   Aurora Glow Effect (2026 Premium SaaS Trend)
+   Inspired by: Anthropic Claude, OpenAI, Apple Vision Pro
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Aurora Text Effect ──────────────────────────────────────── */
+@keyframes aurora-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes aurora-glow-pulse {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.3);
+  }
+}
+
+.aurora-text {
+  background: linear-gradient(
+    90deg,
+    #7C5CFF 0%,
+    #2EE59D 25%,
+    #FFB020 50%,
+    #FF6B9D 75%,
+    #7C5CFF 100%
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora-shift 8s ease-in-out infinite;
+  will-change: background-position;
+  font-weight: 700;
+  position: relative;
+}
+
+.aurora-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(124, 92, 255, 0.4),
+    rgba(46, 229, 157, 0.4),
+    rgba(255, 176, 32, 0.4),
+    rgba(255, 107, 157, 0.4)
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: aurora-shift 8s ease-in-out infinite;
+}
+
+/* Aurora Heading Styles */
+.hero__title.aurora-enhanced {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #FFFFFF 0%,
+    #EAF0FF 20%,
+    #7C5CFF 40%,
+    #2EE59D 60%,
+    #FFFFFF 80%,
+    #EAF0FF 100%
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora-shift 12s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(124, 92, 255, 0.3));
+}
+
+/* ── Dynamic Gradient Borders ──────────────────────────────── */
+@keyframes border-rotate {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.aurora-border {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.aurora-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    #7C5CFF 0deg,
+    #2EE59D 90deg,
+    #FFB020 180deg,
+    #FF6B9D 270deg,
+    #7C5CFF 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 4s linear infinite;
+  will-change: --angle;
+}
+
+.aurora-border.aurora-border--slow::before {
+  animation-duration: 8s;
+}
+
+.aurora-border.aurora-border--fast::before {
+  animation-duration: 2s;
+}
+
+/* Enhanced Aurora Border with Glow */
+.aurora-border-glow {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: visible;
+}
+
+.aurora-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(
+    from var(--angle),
+    #7C5CFF 0deg,
+    #2EE59D 90deg,
+    #FFB020 180deg,
+    #FF6B9D 270deg,
+    #7C5CFF 360deg
+  );
+  filter: blur(8px);
+  opacity: 0.6;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 6s linear infinite, aurora-glow-pulse 3s ease-in-out infinite;
+  will-change: --angle, filter;
+}
+
+.aurora-border-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle),
+    #7C5CFF 0deg,
+    #2EE59D 90deg,
+    #FFB020 180deg,
+    #FF6B9D 270deg,
+    #7C5CFF 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 6s linear infinite;
+  will-change: --angle;
+}
+
+/* ── Aurora CTA Button ──────────────────────────────────────── */
+.btn-aurora {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #7C5CFF 0%,
+    #9D7CFF 25%,
+    #7C5CFF 50%,
+    #5C3CFF 75%,
+    #7C5CFF 100%
+  );
+  background-size: 400% 400%;
+  border: none;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: aurora-shift 6s ease-in-out infinite;
+  box-shadow: 
+    0 4px 24px rgba(124, 92, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-aurora::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    rgba(255, 255, 255, 0.3) 90deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.3) 270deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-aurora:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 8px 32px rgba(124, 92, 255, 0.6),
+    0 0 60px rgba(124, 92, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-aurora:hover::before {
+  opacity: 1;
+}
+
+.btn-aurora:active {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Aurora Card Accents ──────────────────────────────────── */
+.card-aurora {
+  position: relative;
+  overflow: visible;
+}
+
+.card-aurora::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(124, 92, 255, 0.1) 90deg,
+    transparent 180deg,
+    rgba(46, 229, 157, 0.1) 270deg,
+    transparent 360deg
+  );
+  animation: border-rotate 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.card-aurora:hover::before {
+  opacity: 1;
+}
+
+/* ── Pricing Card Aurora Enhancement ──────────────────────── */
+.pricing-card.aurora-enhanced {
+  position: relative;
+  overflow: visible;
+}
+
+.pricing-card.aurora-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    #7C5CFF 0deg,
+    #2EE59D 90deg,
+    #FFB020 180deg,
+    #FF6B9D 270deg,
+    #7C5CFF 360deg
+  );
+  filter: blur(6px);
+  opacity: 0;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 8s linear infinite;
+  transition: opacity 0.4s ease;
+  will-change: --angle;
+}
+
+.pricing-card.aurora-enhanced:hover::before {
+  opacity: 0.8;
+}
+
+/* ── Hero Badge Aurora ──────────────────────────────────────── */
+.badge.aurora-badge {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    rgba(124, 92, 255, 0.15),
+    rgba(46, 229, 157, 0.15),
+    rgba(124, 92, 255, 0.15)
+  );
+  background-size: 200% 100%;
+  border: 1px solid rgba(124, 92, 255, 0.3);
+  animation: aurora-shift 6s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.badge.aurora-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shine-sweep 3s ease-in-out infinite;
+}
+
+@keyframes shine-sweep {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── Testimonial Card Aurora ──────────────────────────────── */
+.testimonial-card.aurora-enhanced {
+  position: relative;
+  overflow: visible;
+}
+
+.testimonial-card.aurora-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #7C5CFF,
+    #2EE59D,
+    #FFB020,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: aurora-shift 4s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-card.aurora-enhanced:hover::after {
+  opacity: 1;
+}
+
+/* ── Section Title Aurora ──────────────────────────────────── */
+.section__title.aurora-enhanced {
+  position: relative;
+  display: inline-block;
+}
+
+.section__title.aurora-enhanced::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #7C5CFF,
+    #2EE59D,
+    #FFB020,
+    #FF6B9D,
+    #7C5CFF
+  );
+  background-size: 200% 100%;
+  border-radius: 2px;
+  animation: aurora-shift 5s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(124, 92, 255, 0.5);
+}
+
+/* ── Responsive & Accessibility ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-text,
+  .aurora-text::before,
+  .hero__title.aurora-enhanced,
+  .aurora-border::before,
+  .aurora-border-glow::before,
+  .aurora-border-glow::after,
+  .btn-aurora,
+  .btn-aurora::before,
+  .card-aurora::before,
+  .pricing-card.aurora-enhanced::before,
+  .badge.aurora-badge,
+  .badge.aurora-badge::before,
+  .testimonial-card.aurora-enhanced::after,
+  .section__title.aurora-enhanced::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .aurora-border-glow::before {
+    filter: blur(4px);
+  }
+  
+  .btn-aurora {
+    padding: 14px 24px;
+  }
+}
+
+/* ── Performance Optimizations ──────────────────────────────── */
+.aurora-text,
+.aurora-border::before,
+.aurora-border-glow::before,
+.aurora-border-glow::after {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

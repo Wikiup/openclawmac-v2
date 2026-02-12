@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════════════════════════════
+   3D TILT EFFECTS - Interactive Depth & Parallax
+   Modern SaaS Premium UI Pattern (2026)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Enable 3D tilt on pricing cards, testimonials, and feature cards */
+.pricing-card,
+.testimonial-card,
+.deep-card,
+.bento-card {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  position: relative;
+}
+
+/* Inner content gets depth */
+.pricing-card > *,
+.testimonial-card > *,
+.deep-card > *,
+.bento-card > * {
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+/* Highlighted cards get more depth */
+.pricing-card--highlight > *,
+.bento-card--highlight > * {
+  transform: translateZ(30px);
+}
+
+/* Icons get extra pop */
+.pricing-card .pricing-card__header,
+.bento-icon,
+.deep-card__icon,
+.testimonial-card__avatar {
+  transform: translateZ(40px) !important;
+}
+
+/* Badges float even more */
+.pricing-card__badge {
+  transform: translateZ(50px) !important;
+}
+
+/* Glow effect on tilt */
+.pricing-card:hover,
+.testimonial-card:hover,
+.deep-card:hover,
+.bento-card:hover {
+  box-shadow: 
+    0 20px 60px -10px rgba(124, 92, 255, 0.3),
+    0 0 40px -5px rgba(46, 229, 157, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Highlighted pricing card gets premium glow */
+.pricing-card--highlight:hover {
+  box-shadow: 
+    0 30px 80px -10px rgba(124, 92, 255, 0.5),
+    0 0 60px rgba(46, 229, 157, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Shine effect overlay that follows mouse */
+.tilt-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pricing-card:hover .tilt-shine,
+.testimonial-card:hover .tilt-shine,
+.deep-card:hover .tilt-shine,
+.bento-card:hover .tilt-shine {
+  opacity: 1;
+}
+
+/* Ensure content stays above shine */
+.pricing-card > *:not(.tilt-shine),
+.testimonial-card > *:not(.tilt-shine),
+.deep-card > *:not(.tilt-shine),
+.bento-card > *:not(.tilt-shine) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Magnetic button effect */
+.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn--primary:hover {
+  box-shadow: 
+    0 12px 24px -8px rgba(124, 92, 255, 0.6),
+    0 0 20px rgba(124, 92, 255, 0.3);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card,
+  .testimonial-card,
+  .deep-card,
+  .bento-card {
+    transform: none !important;
+  }
+  
+  .tilt-shine {
+    display: none;
+  }
+}
+
+/* Mobile: disable tilt (touch doesn't work well with parallax) */
+@media (max-width: 768px) {
+  .pricing-card,
+  .testimonial-card,
+  .deep-card,
+  .bento-card {
+    transform: none !important;
+  }
+  
+  .tilt-shine {
+    display: none;
+  }
+}

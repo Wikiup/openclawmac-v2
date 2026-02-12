@@ -1,0 +1,481 @@
+/**
+ * VIDEO TESTIMONIALS SYSTEM
+ * Sprint #41 - 2026-02-10 6:57 AM
+ * 
+ * Interactive video testimonial cards with floating picture-in-picture previews.
+ * Inspired by Vercel, Stripe, Linear, Shopify 2026 patterns.
+ * 
+ * Features:
+ * - Floating PiP video preview cards
+ * - Premium glassmorphism containers
+ * - Auto-play muted on hover
+ * - Click-to-expand fullscreen modal
+ * - Customer profile integration
+ * - GPU-accelerated animations
+ * - Touch-optimized mobile UX
+ * - Accessibility support
+ */
+
+/* ============================================
+   VIDEO TESTIMONIALS GRID
+   ============================================ */
+
+.video-testimonials {
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-testimonials__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.video-testimonials__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.video-testimonials__title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.video-testimonials__subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.video-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+/* ============================================
+   VIDEO TESTIMONIAL CARD
+   ============================================ */
+
+.video-testimonial {
+  position: relative;
+  background: rgba(20, 25, 35, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 24px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  
+  /* GPU Acceleration */
+  will-change: transform, box-shadow, border-color;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.video-testimonial::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.3) 0%, 
+    rgba(59, 130, 246, 0.3) 100%);
+  border-radius: 24px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.video-testimonial:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 8px 32px rgba(139, 92, 246, 0.2),
+    0 16px 64px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.video-testimonial:hover::before {
+  opacity: 1;
+}
+
+/* Active/Playing State */
+.video-testimonial--playing {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 
+    0 12px 48px rgba(139, 92, 246, 0.3),
+    0 0 80px rgba(139, 92, 246, 0.15);
+}
+
+/* ============================================
+   VIDEO PREVIEW CONTAINER
+   ============================================ */
+
+.video-testimonial__preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.1) 0%, 
+    rgba(59, 130, 246, 0.1) 100%);
+}
+
+.video-testimonial__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.video-testimonial__video.loaded {
+  opacity: 1;
+}
+
+/* Video Placeholder (before load) */
+.video-testimonial__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.15) 0%, 
+    rgba(59, 130, 246, 0.15) 100%);
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.video-testimonial__video.loaded ~ .video-testimonial__placeholder {
+  opacity: 0;
+}
+
+.video-testimonial__placeholder-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.video-testimonial__placeholder-icon::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.9);
+  margin-left: 4px;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+/* Play Button Overlay */
+.video-testimonial__play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.video-testimonial:hover .video-testimonial__play-overlay {
+  opacity: 0;
+}
+
+.video-testimonial__play-button {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s ease;
+}
+
+.video-testimonial:hover .video-testimonial__play-button {
+  transform: scale(1.1);
+  background: rgba(139, 92, 246, 1);
+}
+
+.video-testimonial__play-button::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 14px 0 14px 24px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+}
+
+/* ============================================
+   CUSTOMER PROFILE
+   ============================================ */
+
+.video-testimonial__profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.video-testimonial__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.2) 0%, 
+    rgba(59, 130, 246, 0.2) 100%);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.video-testimonial__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-testimonial__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-testimonial__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-testimonial__role {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-testimonial__duration {
+  font-size: 13px;
+  color: rgba(139, 92, 246, 0.8);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.video-testimonial__duration::before {
+  content: '▶';
+  font-size: 10px;
+}
+
+/* ============================================
+   QUOTE / PREVIEW TEXT
+   ============================================ */
+
+.video-testimonial__quote {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================
+   FULLSCREEN VIDEO MODAL
+   ============================================ */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 24px 96px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(139, 92, 246, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-modal--active .video-modal__container {
+  transform: scale(1);
+}
+
+.video-modal__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.video-modal__close {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.video-modal__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.video-modal__close::before {
+  content: '×';
+  line-height: 1;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .video-testimonials {
+    padding: 80px 0;
+  }
+
+  .video-testimonials__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .video-testimonial {
+    padding: 20px;
+  }
+
+  .video-testimonial__play-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .video-modal {
+    padding: 16px;
+  }
+
+  .video-modal__close {
+    top: -56px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .video-testimonial,
+  .video-testimonial__video,
+  .video-testimonial__play-overlay,
+  .video-modal,
+  .video-modal__container {
+    transition: none;
+    animation: none;
+  }
+
+  .video-testimonial:hover {
+    transform: none;
+  }
+}
+
+/* Focus States */
+.video-testimonial:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.8);
+  outline-offset: 4px;
+}
+
+.video-modal__close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .video-testimonial {
+    border: 2px solid rgba(139, 92, 246, 0.5);
+  }
+
+  .video-testimonial__play-button {
+    background: #8b5cf6;
+  }
+}

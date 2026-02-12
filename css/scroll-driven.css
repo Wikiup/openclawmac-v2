@@ -1,0 +1,518 @@
+/*
+  ╔═══════════════════════════════════════════════════════════════════════════════╗
+  ║                     SCROLL-DRIVEN ANIMATIONS SYSTEM                           ║
+  ║                   Modern SaaS Premium Interaction Layer                       ║
+  ║                                                                               ║
+  ║  Inspired by: Apple Product Pages, Stripe Marketing, Linear Feature Showcases║
+  ║  Patterns: Horizontal Scroll, Pin/Unpin, Parallax, Progress Indicators       ║
+  ║  Status: 2026 Cutting-Edge Scroll UX                                         ║
+  ╚═══════════════════════════════════════════════════════════════════════════════╝
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   1. HORIZONTAL SCROLL GALLERY (Apple Product Showcase Pattern)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-gallery {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 120px 0;
+  background: linear-gradient(180deg, 
+    rgba(0, 0, 0, 0) 0%,
+    rgba(88, 28, 135, 0.03) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.scroll-gallery__header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 24px;
+}
+
+.scroll-gallery__eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(168, 85, 247, 0.9);
+  margin-bottom: 16px;
+}
+
+.scroll-gallery__title {
+  font-size: 42px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.scroll-gallery__subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.scroll-gallery__track {
+  display: flex;
+  gap: 32px;
+  padding: 0 max(24px, calc(50vw - 600px));
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: 24px;
+}
+
+.scroll-gallery__track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scroll-gallery__item {
+  flex: 0 0 400px;
+  scroll-snap-align: center;
+  position: relative;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 48px 32px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-gallery__item:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 
+    0 0 0 1px rgba(168, 85, 247, 0.2),
+    0 20px 40px -12px rgba(168, 85, 247, 0.3),
+    0 40px 80px -24px rgba(168, 85, 247, 0.2);
+}
+
+.scroll-gallery__icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.scroll-gallery__item-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.scroll-gallery__item-desc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.scroll-gallery__item-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.scroll-gallery__item-feature::before {
+  content: '✓';
+  color: rgba(168, 85, 247, 0.9);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Scroll Indicator Dots */
+.scroll-gallery__nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.scroll-gallery__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.scroll-gallery__dot.active {
+  background: rgba(168, 85, 247, 0.9);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   2. PINNED SECTIONS (Sticky Scroll with Scale Effects)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-pin-section {
+  position: relative;
+  min-height: 200vh; /* Creates scroll distance */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scroll-pin-content {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+.scroll-pin-content h2 {
+  font-size: 64px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, rgba(168, 85, 247, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.scroll-pin-content p {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   3. PARALLAX LAYERS (Multi-Speed Scroll Depth)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.parallax-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.parallax-layer--slow {
+  transform: translateY(var(--scroll-offset-slow, 0));
+}
+
+.parallax-layer--medium {
+  transform: translateY(var(--scroll-offset-medium, 0));
+}
+
+.parallax-layer--fast {
+  transform: translateY(var(--scroll-offset-fast, 0));
+}
+
+.parallax-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.parallax-bg--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.6), transparent);
+  top: 20%;
+  left: -10%;
+}
+
+.parallax-bg--2 {
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+  bottom: 10%;
+  right: -15%;
+}
+
+.parallax-bg--3 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   4. SCROLL PROGRESS INDICATOR (Page Position Feedback)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(168, 85, 247, 0.9) 0%, 
+    rgba(139, 92, 246, 0.9) 100%
+  );
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* Circular Progress (Alternative Style) */
+.scroll-progress-circle {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-progress-circle.visible {
+  opacity: 1;
+}
+
+.scroll-progress-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.scroll-progress-circle circle {
+  fill: none;
+  stroke-width: 3;
+  cx: 28;
+  cy: 28;
+  r: 24;
+}
+
+.scroll-progress-circle .progress-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-progress-circle .progress-fill {
+  stroke: url(#progressGradient);
+  stroke-linecap: round;
+  stroke-dasharray: 150.8; /* 2 * π * r */
+  stroke-dashoffset: 150.8;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   5. CONTENT REVEAL ANIMATIONS (Scroll-Triggered Morphing)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal--fade {
+  opacity: 0;
+}
+
+.scroll-reveal--fade.revealed {
+  opacity: 1;
+}
+
+.scroll-reveal--scale {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.scroll-reveal--scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-reveal--slide-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.scroll-reveal--slide-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal--slide-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.scroll-reveal--slide-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered Reveals */
+.scroll-reveal-group .scroll-reveal:nth-child(1) { transition-delay: 0ms; }
+.scroll-reveal-group .scroll-reveal:nth-child(2) { transition-delay: 100ms; }
+.scroll-reveal-group .scroll-reveal:nth-child(3) { transition-delay: 200ms; }
+.scroll-reveal-group .scroll-reveal:nth-child(4) { transition-delay: 300ms; }
+.scroll-reveal-group .scroll-reveal:nth-child(5) { transition-delay: 400ms; }
+.scroll-reveal-group .scroll-reveal:nth-child(6) { transition-delay: 500ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   6. SCROLL SNAP SECTIONS (Smooth Section Jumping)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   7. NUMBER COUNTER ANIMATIONS (Scroll-Triggered Count-Up)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.scroll-counter {
+  font-size: 72px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, rgba(168, 85, 247, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  display: inline-block;
+}
+
+.scroll-counter-label {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   8. MOBILE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .scroll-gallery__title {
+    font-size: 32px;
+  }
+
+  .scroll-gallery__item {
+    flex: 0 0 300px;
+    padding: 32px 24px;
+  }
+
+  .scroll-pin-content h2 {
+    font-size: 42px;
+  }
+
+  .scroll-counter {
+    font-size: 48px;
+  }
+
+  .scroll-progress-circle {
+    width: 48px;
+    height: 48px;
+    bottom: 24px;
+    right: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   9. REDUCED MOTION SUPPORT
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-gallery__item,
+  .scroll-reveal,
+  .scroll-pin-content,
+  .parallax-layer {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .scroll-gallery__track {
+    scroll-behavior: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   10. PERFORMANCE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.parallax-layer,
+.scroll-pin-content,
+.scroll-progress-fill {
+  will-change: transform;
+}
+
+/* GPU Acceleration */
+.scroll-gallery__item,
+.scroll-reveal {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

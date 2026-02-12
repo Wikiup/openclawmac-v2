@@ -1,0 +1,384 @@
+/**
+ * GLASSMORPHISM V2 - 2026 Premium SaaS Aesthetic
+ * Inspired by: Linear, Arc Browser, macOS Sonoma, iOS 17+, Vercel
+ * 
+ * Frosted glass effect using backdrop-filter: blur() for depth and premium feel.
+ * Works beautifully with gradient mesh backgrounds underneath.
+ */
+
+/* ========================================
+   GLASS CARD BASE
+   ======================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Light theme variant */
+@media (prefers-color-scheme: light) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 
+      0 12px 48px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* ========================================
+   GLASS VARIATIONS
+   ======================================== */
+
+/* Strong Glass - Modal overlays, hero cards */
+.glass-strong {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Subtle Glass - Secondary cards, badges */
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Colored Glass - Accent elements */
+.glass-accent {
+  background: rgba(79, 70, 229, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+}
+
+.glass-accent:hover {
+  background: rgba(79, 70, 229, 0.25);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+/* ========================================
+   APPLY TO COMPONENTS
+   ======================================== */
+
+/* Pricing Cards */
+.pricing-card,
+.price-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.pricing-card:hover,
+.price-card:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Featured/Popular Pricing Card */
+.pricing-card.featured,
+.price-card.featured {
+  background: rgba(79, 70, 229, 0.15) !important;
+  border: 2px solid rgba(129, 140, 248, 0.4) !important;
+}
+
+.pricing-card.featured:hover,
+.price-card.featured:hover {
+  background: rgba(79, 70, 229, 0.25) !important;
+  border-color: rgba(129, 140, 248, 0.6) !important;
+}
+
+/* Feature Cards / Bento Grid Items */
+.feature-card,
+.bento-item,
+.deep-dive-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover,
+.bento-item:hover,
+.deep-dive-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Testimonial Cards */
+.testimonial-card,
+.testimonial {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Booking Form */
+.booking-form,
+#booking-form {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Form Inputs */
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(129, 140, 248, 0.5);
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(79, 70, 229, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Modals / Overlays */
+.modal-content,
+.dialog,
+.tooltip {
+  background: rgba(20, 20, 30, 0.9);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 80px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Navigation / Header (subtle) */
+nav,
+.navbar,
+header {
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Badges / Tags */
+.badge,
+.tag,
+.label {
+  background: rgba(79, 70, 229, 0.2);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* CTA Buttons Glass Variant */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   ACCESSIBILITY & FALLBACKS
+   ======================================== */
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-card,
+  .glass-strong,
+  .glass-subtle,
+  .glass-accent,
+  .pricing-card,
+  .price-card,
+  .feature-card,
+  .bento-item,
+  .booking-form,
+  .modal-content {
+    background: rgba(20, 20, 30, 0.95);
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .glass-card,
+    .pricing-card,
+    .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card,
+  .pricing-card,
+  .feature-card,
+  .btn-glass {
+    transition: none;
+  }
+  
+  .glass-card:hover,
+  .pricing-card:hover,
+  .feature-card:hover {
+    transform: none;
+  }
+}
+
+/* Light Theme Adjustments */
+@media (prefers-color-scheme: light) {
+  .form-control,
+  input,
+  textarea,
+  select {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+  }
+  
+  .form-control:focus,
+  input:focus,
+  textarea:focus {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(79, 70, 229, 0.5);
+  }
+  
+  nav,
+  .navbar,
+  header {
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-content,
+  .dialog {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 
+      0 20px 80px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Reduce blur intensity on mobile for better performance */
+  .glass-card,
+  .pricing-card,
+  .feature-card,
+  .booking-form {
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+  }
+  
+  .glass-strong,
+  .modal-content {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+  
+  .glass-subtle {
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  }
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Force GPU acceleration for backdrop-filter */
+.glass-card,
+.glass-strong,
+.glass-subtle,
+.pricing-card,
+.feature-card,
+.booking-form,
+.modal-content {
+  will-change: backdrop-filter, background, border-color;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Remove will-change after transition completes */
+.glass-card:not(:hover),
+.pricing-card:not(:hover),
+.feature-card:not(:hover) {
+  will-change: auto;
+}

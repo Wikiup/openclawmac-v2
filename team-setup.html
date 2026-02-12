@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team & Power User — OpenClaw Mac</title>
+  <meta name="description" content="Scale your intelligence. Unified AI stack for teams, shared prompt libraries, and on-site training.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦞</text></svg>">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="cloud.css">
+  <link rel="stylesheet" href="gallery.css">
+  <link rel="stylesheet" href="polish.css">
+  <style>
+    .tier-hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .tier-img-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+    .tier-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .tier-details {
+      padding: 4rem 0;
+    }
+    .check-list {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .check-list li {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .check-list li::before {
+      content: "✅";
+      color: var(--color-success);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover { color: var(--color-primary); }
+  </style>
+</head>
+<body id="top">
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="nav__logo-icon">🦞</span> OpenClaw Mac</a>
+      <a href="index.html#book" class="btn btn--sm btn--primary">Book Now</a>
+    </div>
+  </nav>
+
+  <section class="tier-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <h1 class="hero__headline">Team / <span class="gradient-text">Power User</span></h1>
+      <p class="hero__sub">Get your entire team on the same page. Standardized tools, shared knowledge, and automation that actually scales.</p>
+      
+      <div class="tier-img-container">
+        <img src="images/tier-team.jpg" alt="Collaborative AI Team" class="tier-img" onerror="this.style.display='none'">
+      </div>
+      
+      <div class="pricing-card__price" style="margin-top: 2rem;">$799+ <span class="pricing-card__unit">starting</span></div>
+    </div>
+  </section>
+
+  <section class="tier-details">
+    <div class="container">
+      <div class="section-header">
+        <h2>Organizational Intelligence</h2>
+        <p class="section-sub">Includes Pro Setup for the lead user, plus:</p>
+      </div>
+
+      <ul class="check-list">
+        <li>
+          <strong>Multi-Seat Deployment</strong>
+          <p>We install a consistent, standardized stack across your team's Macs. No version mismatch headaches.</p>
+        </li>
+        <li>
+          <strong>Shared Brain (Prompt Library)</strong>
+          <p>We set up a shared repository of prompts (e.g. "Company Voice Tone", "Sales Rebuttal") so everyone sounds like your best performer.</p>
+        </li>
+        <li>
+          <strong>Automation Audit</strong>
+          <p>We review your stack (Slack, Notion, Zapier) and hook OpenClaw into one key pipeline to automate a manual chore.</p>
+        </li>
+        <li>
+          <strong>Training Session</strong>
+          <p>60-minute Zoom or In-Person (Austin) walkthrough for your team to ask questions and learn the tools.</p>
+        </li>
+        <li>
+          <strong>Custom Integration</strong>
+          <p>Need it to read from your specific CRM? We'll scope that out.</p>
+        </li>
+      </ul>
+
+      <div class="section-cta" style="margin-top: 4rem;">
+        <a href="index.html#book" onclick="selectPkg('Team / Power User')" class="btn btn--primary btn--lg">Talk to us about your team</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 OpenClaw Mac</span>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function selectPkg(pkgName) {
+      localStorage.setItem('selectedPackage', pkgName);
+    }
+  </script>
+</body>
+</html>

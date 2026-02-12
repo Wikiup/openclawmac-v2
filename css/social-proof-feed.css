@@ -1,0 +1,311 @@
+/* ============================================
+   LIVE SOCIAL PROOF ACTIVITY FEED
+   Created: 2026-02-10 5:12 AM - Sprint #34
+   ============================================
+   
+   Real-time social proof notification system inspired by:
+   - Stripe's live transaction feed (conversion +35%)
+   - Booking.com's "X people viewing" notifications
+   - Vercel's deployment activity stream
+   
+   Features:
+   - Floating notifications with slide-in animation
+   - Glassmorphism card design (matches site aesthetic)
+   - Auto-dismiss with smooth fade-out
+   - Randomized realistic activity data
+   - Location + timestamp + action type
+   - Avatar emoji for visual identity
+   - Stacking system (max 3 visible)
+   - Hover pause (UX best practice)
+   - Reduced-motion support
+   
+   Psychology: Creates urgency through perceived scarcity
+   and builds trust through social validation.
+   ============================================ */
+
+/* Feed Container - Fixed bottom-right positioning */
+.social-proof-feed {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.75rem;
+  pointer-events: none;
+  max-width: 380px;
+  transition: transform 0.3s ease;
+}
+
+/* Individual Notification Card */
+.social-proof-notification {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(147, 51, 234, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(147, 51, 234, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  /* Slide-in animation */
+  animation: slideInFromRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Noise texture overlay */
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.8" numOctaves="3" seed="42"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.04"/></svg>');
+}
+
+/* Hover state - Pause auto-dismiss + visual feedback */
+.social-proof-notification:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(147, 51, 234, 0.4);
+  transform: translateX(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(147, 51, 234, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Avatar Circle */
+.social-proof-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.social-proof-notification:hover .social-proof-avatar {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Notification Content */
+.social-proof-content {
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+}
+
+.social-proof-message {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 0.25rem 0;
+  line-height: 1.4;
+}
+
+.social-proof-name {
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+.social-proof-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.social-proof-location {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.social-proof-time {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.social-proof-time::before {
+  content: "•";
+  opacity: 0.5;
+}
+
+/* Close button */
+.social-proof-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.social-proof-notification:hover .social-proof-close {
+  opacity: 1;
+}
+
+.social-proof-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Activity type badges */
+.social-proof-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.8;
+}
+
+.social-proof-badge.booking {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.social-proof-badge.completion {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.social-proof-badge.review {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Slide-in animation */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade-out animation (for auto-dismiss) */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+.social-proof-notification.dismissing {
+  animation: fadeOut 0.4s ease forwards;
+}
+
+/* Mobile Responsive - Move to bottom-left, smaller cards */
+@media (max-width: 768px) {
+  .social-proof-feed {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+  
+  .social-proof-notification {
+    padding: 0.875rem 1rem;
+  }
+  
+  .social-proof-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+  }
+  
+  .social-proof-message {
+    font-size: 0.875rem;
+  }
+  
+  .social-proof-meta {
+    font-size: 0.75rem;
+  }
+}
+
+/* Reduced Motion Support - Disable animations */
+@media (prefers-reduced-motion: reduce) {
+  .social-proof-notification {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .social-proof-notification:hover {
+    transform: none;
+  }
+  
+  .social-proof-notification:hover .social-proof-avatar {
+    transform: none;
+  }
+  
+  .social-proof-notification.dismissing {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Dark Mode Adjustments (if theme toggle added later) */
+@media (prefers-color-scheme: light) {
+  .social-proof-notification {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(147, 51, 234, 0.15);
+  }
+  
+  .social-proof-message {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .social-proof-meta {
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Accessibility - Focus states for keyboard navigation */
+.social-proof-notification:focus-visible {
+  outline: 2px solid rgba(147, 51, 234, 0.6);
+  outline-offset: 2px;
+}
+
+.social-proof-close:focus-visible {
+  outline: 2px solid rgba(147, 51, 234, 0.6);
+  outline-offset: 1px;
+}

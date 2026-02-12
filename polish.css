@@ -1,0 +1,138 @@
+
+/* ═══════════════════════════════════════════════════════════════
+   WIZARD FORM
+   ═══════════════════════════════════════════════════════════════ */
+.wizard {
+  max-width: 580px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.wizard-title {
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Progress Bar */
+.wizard-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.wizard-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 33%;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Steps */
+.wizard-step {
+  display: none;
+  animation: fadeIn 0.4s ease;
+  flex: 1;
+  flex-direction: column;
+}
+
+.wizard-step.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Selection Grid */
+.selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.selection-grid--wide {
+  grid-template-columns: 1fr;
+}
+
+/* Selection Card (Radio) */
+.selection-card {
+  position: relative;
+  cursor: pointer;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selection-card:hover {
+  border-color: rgba(124, 92, 255, 0.4);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.selection-card input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Active State */
+.selection-card:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(124, 92, 255, 0.08);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 12px rgba(124, 92, 255, 0.15);
+}
+
+.selection-icon {
+  font-size: 1.5rem;
+}
+
+.selection-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.selection-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.selection-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Actions */
+.wizard-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.wizard-actions .btn {
+  flex: 1;
+}
+
+.next-step {
+  margin-top: auto;
+}

@@ -1,0 +1,293 @@
+/* ═══════════════════════════════════════════════════════════════
+   Noise Texture Overlay (2026 Premium Trend)
+   Seen on: Apple Vision Pro, Anthropic, Linear, Stripe (2026)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Generate noise texture via SVG data URI */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* Enhanced Glassmorphism with Noise */
+.glass-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Apply to key sections */
+.hero,
+.pricing,
+.book {
+  position: relative;
+}
+
+/* Organic depth on cards */
+.pricing-card,
+.bento-card,
+.testimonial-card,
+.deep-card,
+.faq-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::after,
+.bento-card::after,
+.testimonial-card::after,
+.deep-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Tactile button depth */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Aurora button enhancement with noise */
+.btn-aurora::before {
+  opacity: 0.08;
+}
+
+/* Hero mock depth */
+.hero__mock::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 10;
+}
+
+.hero__mock {
+  position: relative;
+}
+
+/* Organic gradient enhancement */
+.gradient-text,
+.aurora-text {
+  position: relative;
+}
+
+.gradient-text::after,
+.aurora-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  mix-blend-mode: overlay;
+  opacity: 0.15;
+  filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3C/svg%3E#noise");
+  pointer-events: none;
+}
+
+/* Navigation glass enhancement */
+.nav {
+  position: relative;
+}
+
+.nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nav__inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Pricing card premium depth */
+.pricing-card--highlight::after {
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Selection cards tactile feel */
+.selection-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.selection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.selection-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Organic grain animation on hover states */
+@keyframes grain-pulse {
+  0%, 100% { opacity: 0.025; }
+  50% { opacity: 0.04; }
+}
+
+.pricing-card:hover::after,
+.bento-card:hover::after,
+.btn:hover::before {
+  animation: grain-pulse 2s ease-in-out infinite;
+}
+
+/* Depth layers for form inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  position: relative;
+  background: rgba(15, 22, 35, 0.6);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+}
+
+/* Subtle grain on mock images */
+.mock__image {
+  position: relative;
+}
+
+.mock__body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  .noise-overlay {
+    animation: none;
+  }
+  
+  .pricing-card:hover::after,
+  .bento-card:hover::after,
+  .btn:hover::before {
+    animation: none;
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .noise-overlay {
+    opacity: 0.02;
+  }
+  
+  .pricing-card::after,
+  .bento-card::after,
+  .testimonial-card::after,
+  .deep-card::after {
+    opacity: 0.015;
+  }
+}
+
+/* Dark mode enhancement (if implemented) */
+@media (prefers-color-scheme: light) {
+  .noise-overlay {
+    opacity: 0.015;
+    mix-blend-mode: multiply;
+  }
+}

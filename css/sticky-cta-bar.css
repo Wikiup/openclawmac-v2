@@ -1,0 +1,392 @@
+/* ========================================
+   FLOATING STICKY CTA BAR
+   Modern conversion pattern - keeps booking action visible during scroll
+   ======================================== */
+
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  
+  /* Hidden by default - appears after scroll */
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  
+  /* Smooth transitions */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.4s;
+  
+  /* Prevent layout shift */
+  pointer-events: none;
+}
+
+.sticky-cta-bar.visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sticky-cta-bar.dismissed {
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Container */
+.sticky-cta-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  
+  /* Glassmorphism */
+  background: rgba(20, 25, 35, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  
+  /* Border gradient */
+  border-top: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 
+    0 -4px 24px rgba(0, 0, 0, 0.3),
+    0 -1px 4px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  
+  /* Subtle gradient overlay */
+  position: relative;
+  overflow: hidden;
+}
+
+.sticky-cta-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.05) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Content sections */
+.sticky-cta-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+  position: relative;
+  z-index: 1;
+}
+
+.sticky-cta-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  
+  background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  box-shadow: 
+    0 4px 12px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  
+  /* Subtle pulse */
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 12px rgba(139, 92, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 4px 16px rgba(139, 92, 246, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+.sticky-cta-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sticky-cta-title {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.sticky-cta-subtitle {
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+  
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Urgency badge */
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-size: 11px;
+  font-weight: 600;
+  color: #EF4444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.urgency-badge::before {
+  content: '🔥';
+  font-size: 10px;
+}
+
+/* Action buttons */
+.sticky-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.sticky-cta-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+  
+  /* GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, box-shadow;
+}
+
+/* Primary CTA (Book Now) */
+.sticky-cta-btn.primary {
+  background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  color: white;
+  box-shadow: 
+    0 4px 12px rgba(139, 92, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sticky-cta-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(139, 92, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sticky-cta-btn.primary:active {
+  transform: translateY(0);
+}
+
+.sticky-cta-btn.primary:focus-visible {
+  outline: 2px solid #8B5CF6;
+  outline-offset: 3px;
+}
+
+/* Secondary CTA (View Availability) */
+.sticky-cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.sticky-cta-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.sticky-cta-btn.secondary:active {
+  transform: translateY(0);
+}
+
+.sticky-cta-btn.secondary:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 3px;
+}
+
+/* Close button */
+.sticky-cta-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.sticky-cta-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  transform: rotate(90deg);
+}
+
+.sticky-cta-close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.sticky-cta-close:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta-bar,
+  .sticky-cta-btn,
+  .sticky-cta-close {
+    transition: opacity 0.2s;
+  }
+  
+  .sticky-cta-icon {
+    animation: none;
+  }
+  
+  .sticky-cta-close:hover {
+    transform: none;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .sticky-cta-container {
+    padding: 12px 16px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .sticky-cta-content {
+    gap: 12px;
+  }
+  
+  .sticky-cta-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .sticky-cta-title {
+    font-size: 14px;
+  }
+  
+  .sticky-cta-subtitle {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .sticky-cta-actions {
+    width: 100%;
+    justify-content: stretch;
+    gap: 8px;
+  }
+  
+  .sticky-cta-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  .sticky-cta-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticky-cta-actions {
+    flex-direction: column;
+  }
+  
+  .sticky-cta-btn.secondary {
+    order: 2;
+  }
+  
+  .urgency-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
+
+/* Ensure bar stays above other fixed elements */
+@media (min-width: 769px) {
+  .sticky-cta-bar {
+    /* Desktop: full width at bottom */
+  }
+}
+
+/* Print - hide the bar */
+@media print {
+  .sticky-cta-bar {
+    display: none !important;
+  }
+}

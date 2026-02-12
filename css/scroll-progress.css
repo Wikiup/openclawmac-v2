@@ -1,0 +1,256 @@
+/*
+ * SCROLL PROGRESS DISABLED
+ * Replaced by mobile-fixes.css logic to ensure no pink bars remain.
+ */
+
+.scroll-progress-container {
+  display: none !important;
+}
+
+.scroll-progress-bar {
+  display: none !important;
+}
+
+.scroll-progress {
+    display: none !important;
+}
+
+/* ========================================
+   SMART STICKY NAVIGATION (Kept intact)
+   ======================================== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: 
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform;
+  transform: translateY(0) translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Default state: Transparent */
+.nav {
+  background: rgba(10, 10, 15, 0.3);
+  backdrop-filter: blur(0px);
+  padding: 1.5rem 0;
+}
+
+/* Scrolled state: Glassmorphism + Shrink */
+.nav.scrolled {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 0.75rem 0;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Hide on scroll down */
+.nav.hidden {
+  transform: translateY(-100%) translateZ(0);
+}
+
+/* Logo shrink on scroll */
+.nav__logo-icon {
+  transition: width 0.3s ease, height 0.3s ease;
+  width: 28px;
+  height: 28px;
+}
+
+.nav.scrolled .nav__logo-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* CTA button shrink on scroll */
+.nav__cta {
+  transition: padding 0.3s ease, font-size 0.3s ease;
+}
+
+.nav.scrolled .nav__cta {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Enhanced glass border glow on scroll */
+.nav.scrolled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(168, 85, 247, 0.4) 20%,
+    rgba(139, 92, 246, 0.4) 50%,
+    rgba(168, 85, 247, 0.4) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ========================================
+   SCROLL DIRECTION INDICATOR (Optional Visual)
+   ======================================== */
+
+.scroll-direction-hint {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: rgba(168, 85, 247, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9998;
+}
+
+.scroll-direction-hint.show {
+  opacity: 1;
+}
+
+.scroll-direction-hint svg {
+  width: 20px;
+  height: 20px;
+  stroke: hsl(280, 80%, 60%);
+  transition: transform 0.3s ease;
+}
+
+.scroll-direction-hint.up svg {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Ensure scroll bar is hidden on mobile too */
+  .scroll-progress-container,
+  .scroll-progress-bar,
+  .scroll-progress {
+    display: none !important;
+  }
+  
+  .nav {
+    padding: 1rem 0;
+  }
+  
+  .nav.scrolled {
+    padding: 0.625rem 0;
+  }
+  
+  .nav__logo-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .nav.scrolled .nav__logo-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .scroll-direction-hint {
+    width: 40px;
+    height: 40px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .scroll-direction-hint svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
+  
+  .nav__logo-icon,
+  .nav__cta,
+  .scroll-direction-hint,
+  .scroll-direction-hint svg {
+    transition: none;
+  }
+  
+  .nav.scrolled::before {
+    animation: none;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.nav a:focus-visible,
+.nav button:focus-visible {
+  outline: 2px solid hsl(280, 80%, 60%);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* GPU acceleration for smooth animations */
+.nav,
+.scroll-direction-hint {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.nav {
+  contain: layout style;
+}
+
+/* ========================================
+   DARK MODE ADJUSTMENTS
+   ======================================== */
+
+@media (prefers-color-scheme: light) {
+  .nav {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .nav.scrolled {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      0 1px 0 rgba(0, 0, 0, 0.05) inset;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}

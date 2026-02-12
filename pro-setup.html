@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Setup — OpenClaw Mac</title>
+  <meta name="description" content="Turn your Mac into a daily AI driver. Secure permissions, custom workflow templates, and performance tuning for power users.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦞</text></svg>">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="cloud.css">
+  <link rel="stylesheet" href="gallery.css">
+  <link rel="stylesheet" href="polish.css">
+  <style>
+    .tier-hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .tier-img-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+    .tier-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .tier-details {
+      padding: 4rem 0;
+    }
+    .check-list {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .check-list li {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .check-list li::before {
+      content: "✅";
+      color: var(--color-success);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover { color: var(--color-primary); }
+    .badge-pop {
+      background: var(--color-primary);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body id="top">
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo"><span class="nav__logo-icon">🦞</span> OpenClaw Mac</a>
+      <a href="index.html#book" class="btn btn--sm btn--primary">Book Now</a>
+    </div>
+  </nav>
+
+  <section class="tier-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <h1 class="hero__headline">The <span class="gradient-text">Pro Setup</span></h1>
+      <p class="hero__sub">Don't just install it—tune it. We configure privacy boundaries, performance settings, and load it with workflows you'll actually use.</p>
+      
+      <div class="tier-img-container">
+        <img src="images/tier-pro.jpg" alt="Pro Workstation Setup" class="tier-img" onerror="this.style.display='none'">
+      </div>
+      
+      <div class="pricing-card__price" style="margin-top: 2rem;">$299 <span class="pricing-card__unit">one-time</span></div>
+    </div>
+  </section>
+
+  <section class="tier-details">
+    <div class="container">
+      <div class="section-header">
+        <h2>From "Toy" to "Tool"</h2>
+        <p class="section-sub">Includes everything in Quick Install, plus:</p>
+      </div>
+
+      <ul class="check-list">
+        <li>
+          <strong>Security Hardening <span class="badge-pop">Essential</span></strong>
+          <p>We configure "Safe Zones." The AI can read your `~/Documents/Projects` but is physically blocked from `~/Documents/Finance`. You keep total control.</p>
+        </li>
+        <li>
+          <strong>Workflow Starter Pack</strong>
+          <p>We pre-load 10+ system prompts tailored to you: "Email Triage", "Code Review", "Meeting Summary", "Content Repurposing".</p>
+        </li>
+        <li>
+          <strong>Performance Tuning</strong>
+          <p>We edit the config files to maximize your M1/M2/M3 chip's neural engine usage. Faster responses, less battery drain.</p>
+        </li>
+        <li>
+          <strong>Tool Integration</strong>
+          <p>We connect it to *one* key tool you use daily (e.g. Obsidian, Notion, or VS Code) so it lives where you work.</p>
+        </li>
+        <li>
+          <strong>30-Day Priority Support</strong>
+          <p>If an update breaks it next week, we fix it for free.</p>
+        </li>
+      </ul>
+
+      <div class="section-cta" style="margin-top: 4rem;">
+        <a href="index.html#book" onclick="selectPkg('Pro Setup')" class="btn btn--primary btn--lg">Book Pro Setup</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 OpenClaw Mac</span>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function selectPkg(pkgName) {
+      localStorage.setItem('selectedPackage', pkgName);
+    }
+  </script>
+</body>
+</html>

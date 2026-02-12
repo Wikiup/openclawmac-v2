@@ -1,0 +1,77 @@
+/* Mobile-specific Hero Fixes */
+@media (max-width: 900px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero__content {
+    order: 0;
+    text-align: left; /* Keep left alignment for readability */
+  }
+
+  .hero__visual--desktop {
+    display: none !important;
+  }
+  
+  .hero__visual--mobile {
+    display: block !important;
+    order: -1; /* Move visual to top on mobile */
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  /* Reduce headline size on mobile */
+  .hero__headline {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    line-height: 1.1;
+  }
+
+  /* Stack badges */
+  .hero__badges {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .badge {
+    width: 100%; /* Full width badges on mobile */
+  }
+
+  /* Stack CTAs */
+  .hero__ctas {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-aurora, 
+  .btn--secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 3D Mock Adjustments for Mobile */
+  .hero__mock {
+    transform: none !important; /* Remove 3D tilt on mobile for clarity */
+    box-shadow: var(--shadow-card);
+    max-width: 100%;
+  }
+  
+  .hero__mock:hover {
+    transform: none !important;
+  }
+  
+  /* Aurora Text Fix */
+  .aurora-text {
+    display: inline-block; /* Prevent wrapping issues */
+  }
+}
+
+/* Ensure desktop visual is hidden on mobile and vice versa */
+.hero__visual--mobile {
+  display: none;
+}
+
+.hero__visual--desktop {
+  display: flex;
+}

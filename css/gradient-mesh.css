@@ -1,0 +1,186 @@
+/* ================================================
+   GRADIENT MESH BACKGROUNDS
+   ================================================
+   Cutting-edge 2026 aesthetic - Apple WWDC 2025, 
+   Stripe Identity Refresh, Arc Browser
+   Multi-layered animated mesh gradients for organic depth
+   ================================================ */
+
+:root {
+  /* Mesh gradient color palette */
+  --mesh-primary: hsl(220, 90%, 56%);
+  --mesh-secondary: hsl(280, 80%, 60%);
+  --mesh-tertiary: hsl(260, 75%, 65%);
+  --mesh-accent: hsl(180, 70%, 50%);
+  --mesh-highlight: hsl(45, 90%, 60%);
+}
+
+/* Base mesh container */
+.gradient-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure parent sections are positioned */
+.pricing,
+.book,
+.deep-dives {
+  position: relative;
+}
+
+/* Ensure content stays above mesh */
+.pricing > .container,
+.book > .container,
+.deep-dives > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Individual mesh layers */
+.mesh-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  opacity: 0.15;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  animation: mesh-float 20s ease-in-out infinite;
+}
+
+.mesh-layer:nth-child(1) {
+  background: radial-gradient(
+    circle at 20% 30%,
+    var(--mesh-primary) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 70%,
+    var(--mesh-secondary) 0%,
+    transparent 50%
+  );
+  animation-duration: 25s;
+  animation-delay: 0s;
+}
+
+.mesh-layer:nth-child(2) {
+  background: radial-gradient(
+    circle at 60% 50%,
+    var(--mesh-tertiary) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 40% 80%,
+    var(--mesh-accent) 0%,
+    transparent 50%
+  );
+  animation-duration: 30s;
+  animation-delay: -5s;
+  opacity: 0.12;
+}
+
+.mesh-layer:nth-child(3) {
+  background: radial-gradient(
+    circle at 70% 20%,
+    var(--mesh-highlight) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 30% 60%,
+    var(--mesh-primary) 0%,
+    transparent 50%
+  );
+  animation-duration: 35s;
+  animation-delay: -10s;
+  opacity: 0.1;
+}
+
+/* Mesh float animation */
+@keyframes mesh-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(-5%, 5%) rotate(5deg) scale(1.05);
+  }
+  50% {
+    transform: translate(5%, -5%) rotate(-5deg) scale(0.95);
+  }
+  75% {
+    transform: translate(-5%, -5%) rotate(3deg) scale(1.02);
+  }
+}
+
+/* Hero mesh - more vibrant */
+.hero .gradient-mesh .mesh-layer {
+  opacity: 0.25;
+  filter: blur(120px);
+}
+
+/* Pricing mesh - cooler tones */
+.pricing .gradient-mesh .mesh-layer:nth-child(1) {
+  background: radial-gradient(
+    circle at 30% 40%,
+    hsl(220, 90%, 56%) 0%,
+    transparent 50%
+  );
+}
+
+.pricing .gradient-mesh .mesh-layer:nth-child(2) {
+  background: radial-gradient(
+    circle at 70% 60%,
+    hsl(280, 80%, 60%) 0%,
+    transparent 50%
+  );
+}
+
+/* Booking mesh - warm accent */
+.booking .gradient-mesh .mesh-layer:nth-child(1) {
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(260, 75%, 65%) 0%,
+    transparent 60%
+  );
+  opacity: 0.2;
+}
+
+/* Testimonials mesh - subtle */
+.testimonials .gradient-mesh .mesh-layer {
+  opacity: 0.08;
+  filter: blur(100px);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-layer {
+    animation: none;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .mesh-layer {
+    opacity: 0.2;
+    filter: blur(100px);
+  }
+  
+  .hero .gradient-mesh .mesh-layer {
+    opacity: 0.3;
+  }
+}
+
+/* Performance optimization - disable on mobile */
+@media (max-width: 768px) {
+  .mesh-layer {
+    filter: blur(60px);
+    opacity: 0.1;
+  }
+  
+  .mesh-layer:nth-child(3) {
+    display: none;
+  }
+}

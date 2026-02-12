@@ -1,0 +1,372 @@
+/* ═══════════════════════════════════════════════════════════════
+   BENTO MAGNETIC - Advanced Cursor Interactions (2026)
+   Magnetic attraction, 3D depth, particle effects, dynamic borders
+   Inspired by: Apple WWDC 2026, Linear, Framer, Stripe Premium
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════ CORE SETUP ═══════════════════════════ */
+
+.bento-grid {
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+  position: relative;
+}
+
+.bento-card {
+  --card-x: 0;
+  --card-y: 0;
+  --rotation-x: 0deg;
+  --rotation-y: 0deg;
+  --magnetic-pull: 0;
+  
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  
+  /* Smooth spring animation for magnetic pull */
+  transition: 
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.3s ease;
+}
+
+/* ═══════════════════════ MAGNETIC ATTRACTION ═══════════════════════ */
+
+.bento-card.magnetic-active {
+  /* Cards lift and pull toward cursor */
+  transform: 
+    translate3d(
+      calc(var(--card-x) * 8px),
+      calc(var(--card-y) * 8px),
+      30px
+    )
+    rotateX(calc(var(--rotation-x) * -1))
+    rotateY(var(--rotation-y));
+  
+  /* Enhanced shadow during interaction */
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(124, 92, 255, 0.2),
+    0 0 0 1px rgba(124, 92, 255, 0.1);
+}
+
+/* Highlight card gets stronger pull */
+.bento-card--highlight.magnetic-active {
+  transform: 
+    translate3d(
+      calc(var(--card-x) * 12px),
+      calc(var(--card-y) * 12px),
+      40px
+    )
+    rotateX(calc(var(--rotation-x) * -1))
+    rotateY(var(--rotation-y));
+}
+
+/* ═══════════════════ 3D PERSPECTIVE DEPTH ═══════════════════ */
+
+/* Create depth layers inside cards */
+.bento-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bento-card.magnetic-active .bento-card-inner {
+  transform: translateZ(20px);
+}
+
+/* Icon floats forward */
+.bento-icon {
+  transition: 
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.3s ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.bento-card.magnetic-active .bento-icon {
+  transform: 
+    translateZ(40px)
+    scale(1.15)
+    rotate(calc(var(--rotation-y) * 0.5));
+  filter: drop-shadow(0 8px 16px rgba(124, 92, 255, 0.3));
+}
+
+/* Content layers have subtle parallax */
+.bento-title {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bento-card.magnetic-active .bento-title {
+  transform: translateZ(15px);
+}
+
+.bento-desc {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bento-card.magnetic-active .bento-desc {
+  transform: translateZ(10px);
+}
+
+/* ═══════════════════ DYNAMIC BORDER GLOW ═══════════════════ */
+
+/* Animated gradient border that faces the cursor */
+.bento-magnetic-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(
+    calc(var(--rotation-y) * 2 + 135deg),
+    rgba(124, 92, 255, 0.8) 0%,
+    rgba(46, 229, 157, 0.6) 50%,
+    rgba(252, 83, 86, 0.4) 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bento-card.magnetic-active .bento-magnetic-border {
+  opacity: 1;
+}
+
+/* Rotating shine effect */
+.bento-magnetic-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    calc(var(--rotation-y) * 3 + 45deg),
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.bento-card.magnetic-active .bento-magnetic-shine {
+  opacity: 1;
+}
+
+/* ═══════════════════ CURSOR-FOLLOWING SPOTLIGHT ═══════════════════ */
+
+.bento-magnetic-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: radial-gradient(
+    500px circle at var(--card-x, 50%) var(--card-y, 50%),
+    rgba(124, 92, 255, 0.15) 0%,
+    rgba(46, 229, 157, 0.08) 30%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+.bento-card.magnetic-active .bento-magnetic-spotlight {
+  opacity: 1;
+}
+
+/* Highlight card gets stronger spotlight */
+.bento-card--highlight .bento-magnetic-spotlight {
+  background: radial-gradient(
+    650px circle at var(--card-x, 50%) var(--card-y, 50%),
+    rgba(124, 92, 255, 0.22) 0%,
+    rgba(46, 229, 157, 0.12) 30%,
+    rgba(252, 83, 86, 0.06) 50%,
+    transparent 70%
+  );
+}
+
+/* ═══════════════════ PARTICLE TRAIL ═══════════════════ */
+
+/* Container for particle effects */
+.bento-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 15;
+  border-radius: var(--radius);
+}
+
+.bento-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.8), transparent);
+  pointer-events: none;
+  animation: particle-fade 1.5s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes particle-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-20px);
+  }
+}
+
+/* ═══════════════════ LIST ITEM ANIMATIONS ═══════════════════ */
+
+.bento-list li {
+  transition: 
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.3s ease;
+  transform-origin: left center;
+}
+
+.bento-card.magnetic-active .bento-list li {
+  transform: translateX(6px) translateZ(8px);
+  opacity: 1;
+}
+
+.bento-list li:nth-child(1) { transition-delay: 0.05s; }
+.bento-list li:nth-child(2) { transition-delay: 0.1s; }
+.bento-list li:nth-child(3) { transition-delay: 0.15s; }
+
+/* ═══════════════════ GRID-LEVEL EFFECTS ═══════════════════ */
+
+/* Ambient glow around active card */
+.bento-grid::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(124, 92, 255, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+.bento-grid.has-magnetic-active::before {
+  opacity: 1;
+}
+
+/* ═══════════════════ PERFORMANCE OPTIMIZATIONS ═══════════════════ */
+
+/* Only enable will-change during interaction */
+.bento-card.magnetic-active {
+  will-change: transform, box-shadow;
+}
+
+.bento-card:not(.magnetic-active) {
+  will-change: auto;
+}
+
+/* GPU acceleration */
+.bento-card,
+.bento-icon,
+.bento-magnetic-border,
+.bento-magnetic-spotlight {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ═══════════════════ RESPONSIVE BREAKPOINTS ═══════════════════ */
+
+/* Tablet: Reduce magnetic pull */
+@media (max-width: 1024px) {
+  .bento-card.magnetic-active {
+    transform: 
+      translate3d(
+        calc(var(--card-x) * 4px),
+        calc(var(--card-y) * 4px),
+        20px
+      )
+      rotateX(calc(var(--rotation-x) * -0.5))
+      rotateY(calc(var(--rotation-y) * 0.5));
+  }
+}
+
+/* Mobile: Disable magnetic effects (touch devices) */
+@media (hover: none) {
+  .bento-card.magnetic-active {
+    transform: none !important;
+  }
+  
+  .bento-magnetic-border,
+  .bento-magnetic-spotlight,
+  .bento-particles {
+    display: none;
+  }
+  
+  .bento-card.magnetic-active .bento-icon {
+    transform: scale(1.05);
+  }
+}
+
+/* ═══════════════════ ACCESSIBILITY ═══════════════════ */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card,
+  .bento-icon,
+  .bento-card-inner,
+  .bento-title,
+  .bento-desc,
+  .bento-list li {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .bento-magnetic-border,
+  .bento-magnetic-spotlight,
+  .bento-particles {
+    display: none;
+  }
+}
+
+/* Focus states for keyboard navigation */
+.bento-card:focus-visible {
+  outline: 2px solid rgba(124, 92, 255, 0.8);
+  outline-offset: 4px;
+}
+
+/* ═══════════════════ DARK MODE SUPPORT ═══════════════════ */
+
+@media (prefers-color-scheme: light) {
+  .bento-magnetic-spotlight {
+    background: radial-gradient(
+      500px circle at var(--card-x, 50%) var(--card-y, 50%),
+      rgba(124, 92, 255, 0.08) 0%,
+      rgba(46, 229, 157, 0.04) 30%,
+      transparent 60%
+    );
+  }
+  
+  .bento-card.magnetic-active {
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.15),
+      0 8px 24px rgba(124, 92, 255, 0.1);
+  }
+}

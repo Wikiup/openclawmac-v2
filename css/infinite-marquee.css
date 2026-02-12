@@ -1,0 +1,438 @@
+/* 
+ * INFINITE SCROLL MARQUEE SYSTEM
+ * ================================
+ * The #1 trending 2026 SaaS pattern for social proof, trust signals, and motion.
+ * Used by: Vercel, Linear, Stripe, Notion, Anthropic, OpenAI.
+ * 
+ * Creates endless horizontal scrolling bands with:
+ * - Smooth infinite loop animation
+ * - Gradient fade edges for seamless wrap
+ * - Hover pause functionality
+ * - Multiple speed variations
+ * - Mobile-optimized performance
+ * - Duplicate content for seamless looping
+ */
+
+/* ===================================
+   MARQUEE CONTAINER
+   =================================== */
+
+.marquee-section {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 60px 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.03) 0%, 
+    rgba(255, 255, 255, 0.01) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.marquee-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Gradient fade edges for seamless infinite loop */
+.marquee-container::before,
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, 
+    rgba(17, 17, 17, 1) 0%,
+    rgba(17, 17, 17, 0.8) 20%,
+    transparent 100%);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, 
+    rgba(17, 17, 17, 1) 0%,
+    rgba(17, 17, 17, 0.8) 20%,
+    transparent 100%);
+}
+
+/* ===================================
+   MARQUEE TRACK & ANIMATION
+   =================================== */
+
+.marquee-track {
+  display: flex;
+  gap: 40px;
+  width: fit-content;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Speed variations */
+.marquee-track.marquee-fast {
+  animation-duration: 25s;
+}
+
+.marquee-track.marquee-slow {
+  animation-duration: 60s;
+}
+
+/* Reverse direction */
+.marquee-track.marquee-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===================================
+   MARQUEE ITEMS
+   =================================== */
+
+.marquee-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%);
+  transition: left 0.6s ease;
+}
+
+.marquee-item:hover::before {
+  left: 100%;
+}
+
+.marquee-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(168, 85, 247, 0.15),
+    0 0 0 1px rgba(168, 85, 247, 0.2) inset;
+}
+
+/* ===================================
+   LOGO MARQUEE
+   =================================== */
+
+.marquee-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2) opacity(0.6);
+  transition: all 0.3s ease;
+}
+
+.marquee-item:hover .marquee-logo {
+  filter: grayscale(0%) brightness(1) opacity(1);
+}
+
+/* ===================================
+   TESTIMONIAL MARQUEE
+   =================================== */
+
+.marquee-testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  padding: 24px 28px;
+  min-width: 320px;
+}
+
+.marquee-quote {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  position: relative;
+  padding-left: 20px;
+}
+
+.marquee-quote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -4px;
+  font-size: 32px;
+  line-height: 1;
+  color: rgba(168, 85, 247, 0.5);
+  font-family: Georgia, serif;
+}
+
+.marquee-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.marquee-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.marquee-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.marquee-author-name {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+}
+
+.marquee-author-role {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===================================
+   STAT MARQUEE
+   =================================== */
+
+.marquee-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+  padding: 24px 32px;
+}
+
+.marquee-stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.marquee-stat-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ===================================
+   FEATURE MARQUEE
+   =================================== */
+
+.marquee-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 240px;
+  padding: 20px 28px;
+}
+
+.marquee-feature-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.marquee-feature-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===================================
+   SECTION HEADER
+   =================================== */
+
+.marquee-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 20px;
+}
+
+.marquee-section-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(168, 85, 247, 0.8);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.marquee-section-subtitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.2;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+  .marquee-section {
+    padding: 40px 0;
+  }
+
+  .marquee-container::before,
+  .marquee-container::after {
+    width: 60px;
+  }
+
+  .marquee-track {
+    gap: 24px;
+    animation-duration: 30s;
+  }
+
+  .marquee-track.marquee-fast {
+    animation-duration: 20s;
+  }
+
+  .marquee-item {
+    min-width: 160px;
+    padding: 16px 24px;
+  }
+
+  .marquee-testimonial {
+    min-width: 280px;
+    padding: 20px 24px;
+  }
+
+  .marquee-stat {
+    min-width: 140px;
+    padding: 20px 24px;
+  }
+
+  .marquee-stat-value {
+    font-size: 28px;
+  }
+
+  .marquee-section-subtitle {
+    font-size: 24px;
+  }
+}
+
+/* ===================================
+   PERFORMANCE OPTIMIZATIONS
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  
+  .marquee-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* GPU acceleration */
+.marquee-track,
+.marquee-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===================================
+   LIGHT MODE ADJUSTMENTS
+   =================================== */
+
+@media (prefers-color-scheme: light) {
+  .marquee-section {
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.02) 0%, 
+      rgba(0, 0, 0, 0.01) 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .marquee-container::before {
+    background: linear-gradient(to right, 
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.8) 20%,
+      transparent 100%);
+  }
+
+  .marquee-container::after {
+    background: linear-gradient(to left, 
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.8) 20%,
+      transparent 100%);
+  }
+
+  .marquee-item {
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.03) 0%, 
+      rgba(0, 0, 0, 0.01) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .marquee-quote,
+  .marquee-author-name,
+  .marquee-feature-text {
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .marquee-author-role,
+  .marquee-stat-label {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .marquee-section-subtitle {
+    color: rgba(0, 0, 0, 0.95);
+  }
+}

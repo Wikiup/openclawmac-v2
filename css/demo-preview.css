@@ -1,0 +1,451 @@
+/* =================================================================
+   DEMO PREVIEW - Interactive Installation Showcase
+   Sprint #35 | 2026-02-10 5:27 AM | Rick Sanchez
+   ================================================================= */
+
+/* SECTION CONTAINER */
+.demo-preview-section {
+  position: relative;
+  padding: 8rem 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(139, 92, 246, 0.03),
+    transparent 30%,
+    transparent 70%,
+    rgba(139, 92, 246, 0.03)
+  );
+  overflow: hidden;
+}
+
+.demo-preview-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.3) 50%,
+    transparent
+  );
+}
+
+/* SECTION HEADER */
+.demo-preview-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.demo-preview-eyebrow {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(139, 92, 246);
+  margin-bottom: 1.5rem;
+}
+
+.demo-preview-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, rgb(139, 92, 246), rgb(139, 92, 246));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.demo-preview-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+/* SPLIT-SCREEN CONTAINER */
+.demo-preview-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.demo-preview-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* LEFT PANEL - TERMINAL */
+.demo-terminal {
+  background: rgba(15, 15, 20, 0.8);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 1rem;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+  transition: all 0.3s ease;
+}
+
+.demo-terminal:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 20px 80px rgba(139, 92, 246, 0.2),
+              0 0 0 1px rgba(139, 92, 246, 0.2) inset;
+}
+
+.demo-terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.demo-terminal-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.demo-terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.demo-terminal-dot.red { background: #ff5f56; }
+.demo-terminal-dot.yellow { background: #ffbd2e; }
+.demo-terminal-dot.green { background: #27c93f; }
+
+.demo-terminal-title {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+}
+
+.demo-terminal-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.demo-control-btn {
+  background: transparent;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: rgba(139, 92, 246, 0.9);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-control-btn:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateY(-1px);
+}
+
+.demo-control-btn.playing {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.demo-terminal-body {
+  padding: 2rem;
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  min-height: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* TERMINAL TEXT STYLES */
+.terminal-line {
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: terminalFadeIn 0.3s ease forwards;
+}
+
+@keyframes terminalFadeIn {
+  to { opacity: 1; }
+}
+
+.terminal-prompt {
+  color: rgb(139, 92, 246);
+  font-weight: 600;
+}
+
+.terminal-command {
+  color: rgb(96, 165, 250);
+}
+
+.terminal-output {
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 2rem;
+}
+
+.terminal-success {
+  color: rgb(34, 197, 94);
+  font-weight: 600;
+}
+
+.terminal-comment {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background: rgb(139, 92, 246);
+  margin-left: 2px;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* PROGRESS BAR */
+.demo-progress-bar {
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.demo-progress-track {
+  height: 8px;
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.demo-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgb(139, 92, 246), rgb(139, 92, 246));
+  border-radius: 0.5rem;
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+/* RIGHT PANEL - BENEFITS */
+.demo-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.demo-benefit-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0.3;
+  transform: translateX(20px);
+  transition: all 0.4s ease;
+}
+
+.demo-benefit-card.active {
+  opacity: 1;
+  transform: translateX(0);
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.05);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+}
+
+.demo-benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(139, 92, 246), rgb(139, 92, 246));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.demo-benefit-card.active::before {
+  opacity: 1;
+}
+
+.demo-benefit-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.demo-benefit-card.active .demo-benefit-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+.demo-benefit-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.demo-benefit-description {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+.demo-benefit-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.2);
+  color: rgb(34, 197, 94);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease 0.2s;
+}
+
+.demo-benefit-card.active .demo-benefit-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* STEP INDICATOR */
+.demo-step-indicator {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.demo-step-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-steps {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.demo-step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.demo-step.active {
+  background: rgb(139, 92, 246);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.demo-step.completed {
+  background: rgb(34, 197, 94);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 968px) {
+  .demo-preview-section {
+    padding: 5rem 0;
+  }
+
+  .demo-preview-title {
+    font-size: 2rem;
+  }
+
+  .demo-preview-split {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .demo-terminal-body {
+    min-height: 300px;
+    max-height: 400px;
+    font-size: 0.8125rem;
+  }
+
+  .demo-benefit-card {
+    transform: translateY(20px);
+  }
+
+  .demo-benefit-card.active {
+    transform: translateY(0);
+  }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  .demo-benefit-card,
+  .demo-benefit-icon,
+  .demo-benefit-check,
+  .terminal-line,
+  .terminal-cursor {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .demo-benefit-card.active {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* SCROLLBAR STYLING */
+.demo-terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.demo-terminal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+}
+
+.demo-terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 1rem;
+}
+
+.demo-terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}

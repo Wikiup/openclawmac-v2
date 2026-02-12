@@ -1,0 +1,417 @@
+/* ═══════════════════════════════════════════════════════════════
+   STATS DASHBOARD - Live Social Proof & Trust Signals System
+   ═══════════════════════════════════════════════════════════════
+   
+   Premium animated statistics dashboard with real-time counters.
+   Implements 2026 conversion psychology patterns for instant credibility.
+   
+   INSPIRED BY: Stripe Dashboard, Vercel Analytics, Linear Metrics
+   
+   FEATURES:
+   - Animated count-up numbers on scroll reveal
+   - Glassmorphism stat cards with gradient borders
+   - Real-time availability status indicator
+   - Pulsing badge animations
+   - Mobile-optimized responsive grid
+   - Accessibility support (prefers-reduced-motion)
+   
+   Sprint #33 - 2026-02-10 04:57 AM
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION CONTAINER
+   ───────────────────────────────────────────────────────────── */
+
+.stats-dashboard {
+  position: relative;
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg,
+      rgba(139, 92, 246, 0.03) 0%,
+      transparent 50%,
+      rgba(139, 92, 246, 0.03) 100%);
+  overflow: hidden;
+}
+
+.stats-dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1400px;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(139, 92, 246, 0.3) 50%,
+      transparent 100%);
+}
+
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HEADER SECTION
+   ───────────────────────────────────────────────────────────── */
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.stats-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stats-eyebrow::before {
+  content: '📊';
+  font-size: 1rem;
+}
+
+.stats-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg,
+      var(--purple) 0%,
+      var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stats-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STATS GRID
+   ───────────────────────────────────────────────────────────── */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STAT CARD
+   ───────────────────────────────────────────────────────────── */
+
+.stat-card {
+  position: relative;
+  padding: 2.5rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+      var(--purple) 0%,
+      var(--purple) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15),
+    0 0 60px rgba(139, 92, 246, 0.1);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+/* Icon */
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,
+      rgba(139, 92, 246, 0.2) 0%,
+      rgba(139, 92, 246, 0.2) 100%);
+  border-radius: 1rem;
+  font-size: 2rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Number */
+.stat-number {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg,
+      var(--purple) 0%,
+      var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-number[data-suffix]::after {
+  content: attr(data-suffix);
+  font-size: 2rem;
+  margin-left: 0.25rem;
+  opacity: 0.7;
+}
+
+/* Label */
+.stat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+/* Description */
+.stat-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   AVAILABILITY STATUS BAR
+   ───────────────────────────────────────────────────────────── */
+
+.availability-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.availability-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status-indicator {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-green {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  75%,
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.availability-text {
+  font-size: 0.95rem;
+}
+
+.availability-slots {
+  padding: 0.5rem 1rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL REVEAL ANIMATION
+   ───────────────────────────────────────────────────────────── */
+
+.stat-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.stat-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stats-grid .stat-card:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.stats-grid .stat-card:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.stats-grid .stat-card:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.stats-grid .stat-card:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOBILE OPTIMIZATIONS
+   ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .stats-dashboard {
+    padding: 4rem 1.5rem;
+  }
+
+  .stats-header {
+    margin-bottom: 3rem;
+  }
+
+  .stats-title {
+    font-size: 2rem;
+  }
+
+  .stats-subtitle {
+    font-size: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-number[data-suffix]::after {
+    font-size: 1.5rem;
+  }
+
+  .availability-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .availability-status {
+    justify-content: center;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .stat-icon {
+    transition: none;
+  }
+
+  .status-indicator,
+  .status-indicator::before {
+    animation: none;
+  }
+
+  .stat-card:hover {
+    transform: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DARK MODE ADJUSTMENTS
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(139, 92, 246, 0.2);
+  }
+
+  .stat-card:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
