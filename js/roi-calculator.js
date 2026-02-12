@@ -1,15 +1,6 @@
 /**
- * ROI Calculator - Interactive Value Estimator
- * Sprint #37 - 2026-02-10 5:57 AM
- * 
- * Calculates and visualizes the cost of manual OpenClaw setup
- * vs. using OpenClaw Mac professional service.
- * 
- * Features:
- * - Real-time calculation updates
- * - Animated number counters
- * - Visual chart representation
- * - Personalized ROI based on user inputs
+ * ROI Calculator (Auto-focus Disabled)
+ * Removes focus-stealing behavior on initialization.
  */
 
 class ROICalculator {
@@ -45,20 +36,24 @@ class ROICalculator {
     this.updateDisplay();
     
     // Add event listeners
-    this.hoursSlider.addEventListener('input', () => this.updateDisplay());
-    this.rateSlider.addEventListener('input', () => this.updateDisplay());
+    if (this.hoursSlider && this.rateSlider) {
+        this.hoursSlider.addEventListener('input', () => this.updateDisplay());
+        this.rateSlider.addEventListener('input', () => this.updateDisplay());
+    }
     
     // Trigger initial animation
     setTimeout(() => this.animateChart(), 500);
   }
   
   updateDisplay() {
+    if (!this.hoursSlider || !this.rateSlider) return;
+
     const hours = parseFloat(this.hoursSlider.value);
     const rate = parseFloat(this.rateSlider.value);
     
     // Update slider value displays
-    this.hoursValue.textContent = hours;
-    this.rateValue.textContent = `$${rate}`;
+    if (this.hoursValue) this.hoursValue.textContent = hours;
+    if (this.rateValue) this.rateValue.textContent = `$${rate}`;
     
     // Calculate costs
     const monthlyLoss = hours * rate;
@@ -78,6 +73,7 @@ class ROICalculator {
   }
   
   animateValue(element, targetValue, prefix = '', suffix = '') {
+    if (!element) return;
     const currentValue = parseFloat(element.getAttribute('data-value') || '0');
     const duration = 800;
     const steps = 30;
@@ -102,6 +98,8 @@ class ROICalculator {
   }
   
   updateChart(monthlyLoss, netSavings) {
+    if (!this.manualCostBar) return;
+
     // Calculate yearly values for chart
     const manualYearlyCost = monthlyLoss * 12;
     const serviceCost = this.serviceCost;
