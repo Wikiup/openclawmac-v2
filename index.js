@@ -263,10 +263,10 @@ New Booking Request:
     const typewriterElement = document.getElementById('typewriter');
     if (typewriterElement) {
         const phrases = [
-            "in one visit.",
-            "stress-free.",
-            "securely.",
-            "for you."
+            "AI agents.",
+            "for 1/10th the cost.",
+            "autonomous workers.",
+            "digital employees."
         ];
         
         let phraseIndex = 0;
