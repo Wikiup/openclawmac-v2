@@ -95,11 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Wizard Logic (Deprecated) ─────────────────────────────
-    // Removed old logic to prevent conflicts with Two-Step Form
-
-
-    // ── Wizard Logic ──────────────────────────────────────────
+    // ── Wizard Logic (Disabled) ─────────────────────────────
+    /* 
+     * The old wizard logic was causing scroll jumps because it calls
+     * scrollIntoView() on initialization.
+     * 
+     * Since the wizard HTML might still exist or be hidden, we ensure
+     * this block doesn't execute scroll logic on load.
+     */
+    
+    /*
     const steps = document.querySelectorAll('.wizard-step');
     const progressBar = document.getElementById('wizardProgress');
     let currentStep = 0;
@@ -109,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index === currentStep) {
                 step.classList.add('active');
                 // Smooth scroll to top of form if needed
-                step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // step.scrollIntoView({ behavior: 'smooth', block: 'center' }); // THIS WAS THE CULPRIT
             } else {
                 step.classList.remove('active');
             }
@@ -122,71 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize first step
-    updateWizard();
-
-    // Next Buttons
-    document.querySelectorAll('.next-step').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const currentStepEl = steps[currentStep];
-            
-            // Validation
-            const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
-            let valid = true;
-
-            // Check radios (special case: grouping)
-            const radioGroups = new Set();
-            currentStepEl.querySelectorAll('input[type="radio"][required]').forEach(r => radioGroups.add(r.name));
-            
-            radioGroups.forEach(name => {
-                const checked = currentStepEl.querySelector(`input[name="${name}"]:checked`);
-                if (!checked) valid = false;
-            });
-
-            // Check standard inputs
-            requiredInputs.forEach(input => {
-                if (input.type !== 'radio' && !input.value.trim()) {
-                    valid = false;
-                    input.classList.add('error');
-                } else {
-                    input.classList.remove('error');
-                }
-            });
-
-            if (!valid) {
-                currentStepEl.classList.add('shake');
-                setTimeout(() => currentStepEl.classList.remove('shake'), 400);
-                return;
-            }
-
-            if (currentStep < steps.length - 1) {
-                currentStep++;
-                updateWizard();
-            }
-        });
-    });
-
-    // Back Buttons
-    document.querySelectorAll('.back-step').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (currentStep > 0) {
-                currentStep--;
-                updateWizard();
-            }
-        });
-    });
-
-    // Auto-advance on Mac Selection (Step 1)
-    const step1Radios = document.querySelectorAll('#step1 input[type="radio"]');
-    step1Radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            setTimeout(() => {
-                if (currentStep === 0) {
-                    currentStep++;
-                    updateWizard();
-                }
-            }, 300);
-        });
-    });
+    if (steps.length > 0) {
+        updateWizard();
+    }
+    */
 
     // ── Form Submission ────────────────────────────────────────
     const form = document.getElementById('bookForm');
