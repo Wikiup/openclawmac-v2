@@ -1,6 +1,5 @@
 /* =================================================================
-   DEMO PREVIEW CONTROLLER - Interactive Installation Showcase
-   Sprint #35 | 2026-02-10 5:27 AM | Rick Sanchez
+   DEMO PREVIEW CONTROLLER (Scroll Trigger Disabled)
    ================================================================= */
 
 (function() {
@@ -120,30 +119,13 @@
       resetBtn.addEventListener('click', resetDemo);
     }
 
-    // Start demo automatically when scrolled into view
-    setupScrollTrigger();
+    // SCROLL TRIGGER DISABLED
+    // setupScrollTrigger(); 
   }
 
   // SETUP SCROLL TRIGGER (auto-play on first view)
   function setupScrollTrigger() {
-    const demoSection = document.querySelector('.demo-preview-section');
-    if (!demoSection) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !isPlaying && currentStepIndex === 0) {
-            // Auto-start demo on first view
-            setTimeout(() => {
-              startDemo();
-            }, 500);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(demoSection);
+    // Disabled to prevent unwanted page jumps or focus stealing
   }
 
   // PLAY/PAUSE TOGGLE
