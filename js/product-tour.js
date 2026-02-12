@@ -524,10 +524,10 @@ class ProductTour {
 // Initialize tour when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    new ProductTour();
+    // new ProductTour(); // Disabled auto-start
   });
 } else {
-  new ProductTour();
+  // new ProductTour(); // Disabled auto-start
 }
 
 // Expose for debugging
