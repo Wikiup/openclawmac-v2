@@ -20,7 +20,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 99999;
-  mix-blend-mode: exclusion;
+  mix-blend-mode: normal; /* Changed from exclusion for better visibility */
 }
 
 /* Main cursor dot */
@@ -35,7 +35,9 @@
   transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
   z-index: 99999;
   will-change: transform;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 0 0 2px rgba(0, 0, 0, 0.5), /* Black outline for light backgrounds */
+    0 0 20px rgba(255, 255, 255, 0.8); /* White glow for dark backgrounds */
 }
 
 /* Cursor ring (follower) */
@@ -43,13 +45,14 @@
   position: fixed;
   width: 40px;
   height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
   z-index: 99998;
   will-change: transform;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 /* Cursor trail dots */
@@ -58,7 +61,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.6);
   pointer-events: none;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -68,7 +71,7 @@
 
 @keyframes trail-fade {
   0% {
-    opacity: 0.6;
+    opacity: 0.8;
     transform: translate(-50%, -50%) scale(1);
   }
   100% {
@@ -97,14 +100,17 @@
 .custom-cursor.hover {
   width: 16px;
   height: 16px;
-  background: rgba(59, 130, 246, 0.9);
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+  background: #3b82f6; /* Blue fill */
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.8), /* White ring */
+    0 0 30px rgba(59, 130, 246, 0.6); /* Blue glow */
 }
 
 .cursor-ring.hover {
   width: 60px;
   height: 60px;
   border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .cursor-glow.hover {
@@ -113,23 +119,26 @@
 
 /* Click state - shrink and pulse */
 .custom-cursor.click {
-  width: 8px;
-  height: 8px;
-  background: rgba(99, 102, 241, 1);
+  width: 10px;
+  height: 10px;
+  background: #6366f1;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
 .cursor-ring.click {
   width: 30px;
   height: 30px;
   border-color: rgba(99, 102, 241, 0.8);
+  background: rgba(99, 102, 241, 0.1);
 }
 
 /* Text select state - elongated cursor */
 .custom-cursor.text {
-  width: 2px;
-  height: 20px;
-  border-radius: 1px;
-  background: rgba(255, 255, 255, 0.9);
+  width: 4px;
+  height: 24px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .cursor-ring.text {
@@ -166,7 +175,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.8);
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 99994;
@@ -182,11 +191,11 @@
 @keyframes magnetic-pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
+    opacity: 0.8;
   }
   50% {
     transform: translate(-50%, -50%) scale(1.5);
-    opacity: 0.3;
+    opacity: 0.4;
   }
 }
 
@@ -223,34 +232,6 @@
   }
 }
 
-/* Dark mode adjustments */
-@media (prefers-color-scheme: light) {
-  .custom-cursor {
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .cursor-ring {
-    border-color: rgba(0, 0, 0, 0.3);
-  }
-  
-  .cursor-trail {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .cursor-glow {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-  }
-  
-  .cursor-ripple {
-    border-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .custom-cursor-container {
-    mix-blend-mode: normal;
-  }
-}
-
 /* Performance optimizations */
 .custom-cursor,
 .cursor-ring,
@@ -270,39 +251,11 @@ a, button, input, textarea, select, [role="button"], [onclick] {
   position: relative;
 }
 
-/* Magnetic zone visualization (debug) */
-.magnetic-zone {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-/* Enhanced cursor for CTA buttons */
-button.cta:hover ~ .custom-cursor,
-.btn-primary:hover ~ .custom-cursor {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
-}
-
-/* Smooth easing */
-@media (hover: hover) and (pointer: fine) {
-  html {
-    cursor: none;
-  }
-  
-  body {
-    cursor: none;
-  }
-}
-
 /* Loading state */
 .custom-cursor.loading {
   animation: cursor-spin 1s linear infinite;
+  border-top: 2px solid transparent;
+  border-right: 2px solid transparent;
 }
 
 @keyframes cursor-spin {
@@ -334,27 +287,4 @@ button.cta:hover ~ .custom-cursor,
 
 .cursor-label.active {
   opacity: 1;
-}
-
-/* Particle effects on click */
-.cursor-particle {
-  position: fixed;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  pointer-events: none;
-  z-index: 99993;
-  animation: particle-float 0.8s ease-out forwards;
-}
-
-@keyframes particle-float {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translateY(-40px) scale(0.5);
-  }
 }
