@@ -4,29 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- force redeploy 2026-02-12 13:42 -->
-  <!-- Theme Detection Script - Load FIRST to prevent flash -->
-  <script>
-    (function() {
-      const STORAGE_KEY = 'openclaw-theme-preference';
-      const stored = localStorage.getItem(STORAGE_KEY);
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      let theme;
-      if (stored === 'light') {
-        theme = 'light';
-      } else if (stored === 'dark') {
-        theme = 'dark';
-      } else {
-        // Auto mode or not set - use system preference
-        theme = prefersDark ? 'dark' : 'light';
-      }
-      
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
-  
+
+
   <title>OpenClaw Mac — Install + Setup + Support (Austin)</title>
   <meta name="description"
     content="Get OpenClaw installed and tuned on your Mac in one visit. Privacy-first setup, workflow templates, and 30-day support included. Serving Austin.">
@@ -55,13 +34,11 @@
   <link rel="stylesheet" href="css/morphing-blobs.css">
   <link rel="stylesheet" href="css/bento-magnetic.css">
   <link rel="stylesheet" href="css/grid-blueprint.css">
-  <link rel="stylesheet" href="css/conversion-psychology.css">
   <link rel="stylesheet" href="css/fab.css">
   <link rel="stylesheet" href="css/custom-cursor.css">
   <link rel="stylesheet" href="css/particle-system.css">
   <link rel="stylesheet" href="css/command-palette.css">
   <link rel="stylesheet" href="css/infinite-marquee.css">
-  <link rel="stylesheet" href="css/scroll-driven.css">
   <link rel="stylesheet" href="css/faq-accordion.css">
   <link rel="stylesheet" href="css/typography-animations.css">
   <link rel="stylesheet" href="css/form-interactions.css">
@@ -69,26 +46,18 @@
   <link rel="stylesheet" href="css/scroll-progress.css">
   <link rel="stylesheet" href="css/service-timeline.css">
   <link rel="stylesheet" href="css/stats-dashboard.css">
-  <link rel="stylesheet" href="css/social-proof-feed.css">
   <link rel="stylesheet" href="css/demo-preview.css">
   <link rel="stylesheet" href="css/comparison-cards.css">
   <link rel="stylesheet" href="css/roi-calculator.css">
   <link rel="stylesheet" href="css/trust-badges.css">
   <link rel="stylesheet" href="css/code-blocks.css">
   <link rel="stylesheet" href="css/tooltips.css">
-  <link rel="stylesheet" href="css/video-testimonials.css">
   <link rel="stylesheet" href="css/testimonial-carousel.css">
   <link rel="stylesheet" href="css/package-builder.css">
   <link rel="stylesheet" href="css/before-after-slider.css">
   <link rel="stylesheet" href="css/availability-calendar.css">
-  <link rel="stylesheet" href="css/sticky-cta-bar.css">
   <link rel="stylesheet" href="css/package-quiz.css">
-  <link rel="stylesheet" href="css/product-tour.css">
-  <link rel="stylesheet" href="css/theme-switcher.css">
   <link rel="stylesheet" href="css/mobile-fixes.css">
-  <link rel="stylesheet" href="css/hotfix-ui.css">
-  <script src="js/scroll-fix.js"></script>
-  <script src="js/social-proof-feed.js"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -143,7 +112,7 @@
 <body id="top">
   <!-- Noise Texture Overlay (2026 Premium Aesthetic) -->
   <div class="noise-overlay" aria-hidden="true"></div>
-  
+
   <!-- Scroll Progress Bar (Top) -->
   <!-- <div class="scroll-progress-bar" aria-hidden="true">
     <div class="scroll-progress-fill"></div>
@@ -162,7 +131,7 @@
       <circle class="progress-fill" />
     </svg>
   </div>
-  
+
   <!-- <div class="scroll-progress"></div> -->
 
   <!-- ═══════════════════════════════════════ NAV ═══════════════════════════════════════ -->
@@ -230,25 +199,27 @@
       <div class="gradient-orb orb-2"></div>
       <div class="gradient-orb orb-3"></div>
       <div class="gradient-orb orb-4"></div>
-      
+
       <!-- Radial glow overlay -->
       <div class="gradient-radial"></div>
-      
+
       <!-- Mesh grid texture -->
       <div class="gradient-mesh"></div>
-      
+
       <!-- Organic noise texture -->
       <div class="gradient-noise"></div>
     </div>
-    
+
     <div class="container">
       <div class="hero__content">
         <span class="hero__eyebrow">Install + Setup + Support</span>
         <h1 class="hero__headline aurora-enhanced">
-          Replace your team with <span id="typewriter" class="text-gradient-flow">AI agents.</span><span class="cursor"></span>
+          Replace your team with <span id="typewriter" class="text-gradient-flow">AI agents.</span><span
+            class="cursor"></span>
         </h1>
-        
-        <p class="hero__sub">Stop burning cash on headcount. We install, configure, and tune autonomous AI agents on your Mac to do the work for you.</p>
+
+        <p class="hero__sub">Stop burning cash on headcount. We install, configure, and tune autonomous AI agents on
+          your Mac to do the work for you.</p>
 
         <div class="hero__badges">
           <div class="badge aurora-badge">
@@ -297,7 +268,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Mobile Hero Visual (Only visible on small screens) -->
       <div class="hero__visual hero__visual--mobile">
         <div class="hero__mock">
@@ -440,17 +411,20 @@
   </section>
 
   <!-- ═══════════════════════════════════════ QUICK START (CODE BLOCKS) ═══════════════════════════════════════ -->
-  <section class="quick-start-section" id="quick-start" style="padding: 6rem 0; background: linear-gradient(180deg, rgba(11,14,24,0) 0%, rgba(11,14,24,0.5) 50%, rgba(11,14,24,0) 100%);">
+  <section class="quick-start-section" id="quick-start"
+    style="padding: 6rem 0; background: linear-gradient(180deg, rgba(11,14,24,0) 0%, rgba(11,14,24,0.5) 50%, rgba(11,14,24,0) 100%);">
     <div class="container" style="max-width: 900px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <div style="display: inline-block; padding: 0.5rem 1rem; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); border-radius: 999px; color: rgba(168,85,247,1); font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem;">
+        <div
+          style="display: inline-block; padding: 0.5rem 1rem; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); border-radius: 999px; color: rgba(168,85,247,1); font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem;">
           ⚡ DIY Installation
         </div>
         <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #fff; margin-bottom: 1rem;">
           Try It Yourself First
         </h2>
         <p style="font-size: 1.125rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto;">
-          Comfortable with Terminal? Install OpenClaw yourself in under 5 minutes. If you hit a snag, our expert setup service is here to help.
+          Comfortable with Terminal? Install OpenClaw yourself in under 5 minutes. If you hit a snag, our expert setup
+          service is here to help.
         </p>
       </div>
 
@@ -461,9 +435,11 @@
 ✓ Ready to initialize!" data-language="bash" data-title="Terminal — Installation"></div>
 
       <div style="margin: 2.5rem 0; text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(168,85,247,0.05); border: 1px solid rgba(168,85,247,0.15); border-radius: 12px;">
+        <div
+          style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(168,85,247,0.05); border: 1px solid rgba(168,85,247,0.15); border-radius: 12px;">
           <span style="font-size: 1.5rem;">↓</span>
-          <span style="color: rgba(255,255,255,0.8); font-size: 0.875rem; font-weight: 500;">Then initialize your workspace</span>
+          <span style="color: rgba(255,255,255,0.8); font-size: 0.875rem; font-weight: 500;">Then initialize your
+            workspace</span>
         </div>
       </div>
 
@@ -478,7 +454,8 @@
 🎉 Ready to start!" data-language="bash" data-title="Terminal — Initialization"></div>
 
       <div style="margin: 2.5rem 0; text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(46,229,157,0.05); border: 1px solid rgba(46,229,157,0.15); border-radius: 12px;">
+        <div
+          style="display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: rgba(46,229,157,0.05); border: 1px solid rgba(46,229,157,0.15); border-radius: 12px;">
           <span style="font-size: 1.5rem;">🚀</span>
           <span style="color: rgba(255,255,255,0.8); font-size: 0.875rem; font-weight: 500;">Launch your AI agent</span>
         </div>
@@ -493,9 +470,11 @@
 🤖 Agent ready! Try: 'Hey, what can you do?'" data-language="bash" data-title="Terminal — Start Gateway"></div>
 
       <!-- CTA Section -->
-      <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(46,229,157,0.1) 100%); border: 1px solid rgba(168,85,247,0.2); border-radius: 16px; text-align: center;">
+      <div
+        style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(46,229,157,0.1) 100%); border: 1px solid rgba(168,85,247,0.2); border-radius: 16px; text-align: center;">
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: rgba(251,191,36,1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="color: rgba(251,191,36,1);">
             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
             <line x1="12" y1="9" x2="12" y2="13"></line>
             <line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -505,12 +484,15 @@
           </h3>
         </div>
         <p style="font-size: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
-          Model selection, API keys, permissions, hardware optimization — DIY setup has hidden complexity. 
-          <strong style="color: rgba(255,255,255,0.9);">Skip the frustration</strong> and get a perfect setup in one session.
+          Model selection, API keys, permissions, hardware optimization — DIY setup has hidden complexity.
+          <strong style="color: rgba(255,255,255,0.9);">Skip the frustration</strong> and get a perfect setup in one
+          session.
         </p>
-        <a href="#pricing" class="btn btn--primary btn--shimmer" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; font-size: 1rem; text-decoration: none;">
+        <a href="#pricing" class="btn btn--primary btn--shimmer"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; font-size: 1rem; text-decoration: none;">
           Book Expert Setup
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -519,9 +501,11 @@
 
       <!-- Documentation Link -->
       <div style="margin-top: 2rem; text-align: center;">
-        <a href="https://docs.openclaw.ai" target="_blank" rel="noopener noreferrer" style="color: rgba(168,85,247,1); font-size: 0.875rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s;">
+        <a href="https://docs.openclaw.ai" target="_blank" rel="noopener noreferrer"
+          style="color: rgba(168,85,247,1); font-size: 0.875rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s;">
           📚 View Full Documentation
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -539,7 +523,8 @@
         <div class="demo-preview-eyebrow">🎬 Watch It Work</div>
         <h2 class="demo-preview-title">See OpenClaw Install in Under 2 Minutes</h2>
         <p class="demo-preview-subtitle">
-          Watch a realistic installation demo. Four simple commands, zero confusion. See exactly what happens from npm install to AI agent ready.
+          Watch a realistic installation demo. Four simple commands, zero confusion. See exactly what happens from npm
+          install to AI agent ready.
         </p>
       </div>
 
@@ -632,12 +617,13 @@
       <!-- Header -->
       <div class="trust-header">
         <h2>Enterprise-Grade Security & Privacy</h2>
-        <p>Your data stays on your Mac. We use industry-standard security practices to protect your privacy and ensure reliable service.</p>
+        <p>Your data stays on your Mac. We use industry-standard security practices to protect your privacy and ensure
+          reliable service.</p>
       </div>
 
       <!-- Badge Grid -->
       <div class="trust-badge-grid">
-        
+
         <!-- Badge: Local-First Privacy -->
         <div class="trust-badge" data-tooltip="All AI processing happens on your device">
           <div class="trust-status"></div>
@@ -645,7 +631,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">Local-First Privacy</h3>
             <p class="trust-badge-description">
-              Zero cloud storage. Your files, conversations, and settings never leave your Mac unless you explicitly configure cloud models.
+              Zero cloud storage. Your files, conversations, and settings never leave your Mac unless you explicitly
+              configure cloud models.
             </p>
             <span class="trust-verified">Verified Secure</span>
           </div>
@@ -658,7 +645,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">Encrypted Storage</h3>
             <p class="trust-badge-description">
-              API keys, credentials, and personal data are encrypted using macOS Keychain. Protected by your system password.
+              API keys, credentials, and personal data are encrypted using macOS Keychain. Protected by your system
+              password.
             </p>
             <span class="trust-verified">AES-256 Standard</span>
           </div>
@@ -671,7 +659,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">No Telemetry Tracking</h3>
             <p class="trust-badge-description">
-              OpenClaw doesn't phone home. No analytics, no usage tracking, no hidden data collection. Complete privacy by design.
+              OpenClaw doesn't phone home. No analytics, no usage tracking, no hidden data collection. Complete privacy
+              by design.
             </p>
             <span class="trust-verified">Privacy-First</span>
           </div>
@@ -684,7 +673,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">Open Source Foundation</h3>
             <p class="trust-badge-description">
-              Built on OpenClaw, an open-source AI agent framework. Transparent code means no hidden backdoors or data collection.
+              Built on OpenClaw, an open-source AI agent framework. Transparent code means no hidden backdoors or data
+              collection.
             </p>
             <span class="trust-verified">MIT Licensed</span>
           </div>
@@ -697,7 +687,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">Sandboxed Execution</h3>
             <p class="trust-badge-description">
-              Agents run in controlled environments with explicit permissions. You define what they can access — nothing more.
+              Agents run in controlled environments with explicit permissions. You define what they can access — nothing
+              more.
             </p>
             <span class="trust-verified">Containerized</span>
           </div>
@@ -710,7 +701,8 @@
           <div class="trust-badge-content">
             <h3 class="trust-badge-title">Expert Human Support</h3>
             <p class="trust-badge-description">
-              Direct access to experienced developers who know OpenClaw inside-out. No offshore support, no ticket queues.
+              Direct access to experienced developers who know OpenClaw inside-out. No offshore support, no ticket
+              queues.
             </p>
             <span class="trust-verified">Austin-Based Team</span>
           </div>
@@ -741,16 +733,22 @@
       <!-- Trust Certifications (Optional logos for future) -->
       <div class="trust-certifications">
         <div class="trust-cert-logo" title="SOC 2 Type II Compliant">
-          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">SOC 2 TYPE II</span>
+          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">SOC
+            2 TYPE II</span>
         </div>
         <div class="trust-cert-logo" title="GDPR Compliant">
-          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">GDPR COMPLIANT</span>
+          <span
+            style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">GDPR
+            COMPLIANT</span>
         </div>
         <div class="trust-cert-logo" title="ISO 27001 Certified">
-          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">ISO 27001</span>
+          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">ISO
+            27001</span>
         </div>
         <div class="trust-cert-logo" title="HIPAA Ready">
-          <span style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">HIPAA READY</span>
+          <span
+            style="color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em;">HIPAA
+            READY</span>
         </div>
       </div>
 
@@ -768,7 +766,7 @@
 
       <!-- Comparison Grid -->
       <div class="comparison-grid">
-        
+
         <!-- Column 1: DIY Setup -->
         <div class="comparison-column">
           <div class="comparison-column-header">
@@ -911,7 +909,7 @@
   <!-- ═══════════════════════════════════════ ROI CALCULATOR ═══════════════════════════════════════ -->
   <section class="roi-calculator-section reveal" id="roi-calculator">
     <div class="roi-calculator-container">
-      
+
       <!-- Header -->
       <div class="roi-header">
         <div class="roi-badge">Calculate Your Savings</div>
@@ -921,10 +919,10 @@
 
       <!-- Calculator Grid -->
       <div class="roi-calculator-grid">
-        
+
         <!-- Inputs Section -->
         <div class="roi-inputs">
-          
+
           <!-- Hours per month -->
           <div class="roi-input-group">
             <div class="roi-input-label">
@@ -932,16 +930,8 @@
               <span class="roi-input-value" id="roi-hours-value">8</span>
             </div>
             <div class="roi-slider-container">
-              <input 
-                type="range" 
-                id="roi-hours-slider" 
-                class="roi-slider" 
-                min="1" 
-                max="40" 
-                value="8" 
-                step="1"
-                aria-label="Hours per month"
-              >
+              <input type="range" id="roi-hours-slider" class="roi-slider" min="1" max="40" value="8" step="1"
+                aria-label="Hours per month">
               <div class="roi-slider-markers">
                 <span class="roi-slider-marker">1h</span>
                 <span class="roi-slider-marker">20h</span>
@@ -957,16 +947,8 @@
               <span class="roi-input-value" id="roi-rate-value">$75</span>
             </div>
             <div class="roi-slider-container">
-              <input 
-                type="range" 
-                id="roi-rate-slider" 
-                class="roi-slider" 
-                min="25" 
-                max="300" 
-                value="75" 
-                step="5"
-                aria-label="Hourly rate"
-              >
+              <input type="range" id="roi-rate-slider" class="roi-slider" min="25" max="300" value="75" step="5"
+                aria-label="Hourly rate">
               <div class="roi-slider-markers">
                 <span class="roi-slider-marker">$25</span>
                 <span class="roi-slider-marker">$150</span>
@@ -979,7 +961,7 @@
 
         <!-- Results Section -->
         <div class="roi-results">
-          
+
           <!-- Monthly loss -->
           <div class="roi-result-card">
             <div class="roi-result-label">Monthly time cost</div>
@@ -1029,7 +1011,7 @@
       <div class="roi-visual-chart">
         <div class="roi-chart-title">First Year Comparison</div>
         <div class="roi-bar-chart">
-          
+
           <div class="roi-bar">
             <div class="roi-bar-fill" id="roi-bar-manual-cost" style="height: 150px;">
               <div class="roi-bar-value" id="roi-bar-manual-value">-$7,200</div>
@@ -1082,7 +1064,8 @@
             <!-- Slide 1 -->
             <div class="testimonial-carousel__slide is-active">
               <div class="testimonial-card">
-                <p class="testimonial-card__quote">"I went from 'why won't this run' to a working AI setup in one session."</p>
+                <p class="testimonial-card__quote">"I went from 'why won't this run' to a working AI setup in one
+                  session."</p>
                 <div class="testimonial-card__author">
                   <div class="testimonial-card__avatar">JD</div>
                   <div>
@@ -1092,11 +1075,12 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Slide 2 -->
             <div class="testimonial-carousel__slide">
               <div class="testimonial-card">
-                <p class="testimonial-card__quote">"The workflows were the real win — email, research, and content all got faster."</p>
+                <p class="testimonial-card__quote">"The workflows were the real win — email, research, and content all
+                  got faster."</p>
                 <div class="testimonial-card__author">
                   <div class="testimonial-card__avatar">MR</div>
                   <div>
@@ -1106,7 +1090,7 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Slide 3 -->
             <div class="testimonial-carousel__slide">
               <div class="testimonial-card">
@@ -1122,7 +1106,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Navigation Controls -->
         <div class="testimonial-carousel__controls">
           <button class="testimonial-carousel__button" data-carousel-prev aria-label="Previous testimonial">
@@ -1130,9 +1114,9 @@
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
-          
+
           <div class="testimonial-carousel__pagination"></div>
-          
+
           <button class="testimonial-carousel__button" data-carousel-next aria-label="Next testimonial">
             <svg viewBox="0 0 24 24">
               <polyline points="9 18 15 12 9 6"></polyline>
@@ -1156,7 +1140,8 @@
     <div class="container">
       <div class="section-header">
         <h2 data-scroll-reveal>Your setup, <span class="gradient-text text-gradient-flow">supercharged.</span></h2>
-        <p class="section-sub">We don't just "install" software. We engineer a workflow that fits your Mac and your privacy.</p>
+        <p class="section-sub">We don't just "install" software. We engineer a workflow that fits your Mac and your
+          privacy.</p>
       </div>
 
       <div class="bento-grid">
@@ -1169,11 +1154,18 @@
             </svg>
           </div>
           <h3 class="bento-title">Privacy First & Secure</h3>
-          <p class="bento-desc">We configure OpenClaw with strict permission boundaries. Your files stay yours. We define "safe zones" for AI context so sensitive data never leaks.</p>
+          <p class="bento-desc">We configure OpenClaw with strict permission boundaries. Your files stay yours. We
+            define "safe zones" for AI context so sensitive data never leaks.</p>
           <ul class="bento-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No data harvesting</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Local-first option available</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Credential safety audit</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" />
+              </svg> No data harvesting</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" />
+              </svg> Local-first option available</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" />
+              </svg> Credential safety audit</li>
           </ul>
         </div>
 
@@ -1186,10 +1178,12 @@
               </svg>
             </div>
             <h3 class="bento-title">Tuned for Speed</h3>
-            <p class="bento-desc">Whether you have an M1 Air or an M3 Max, we pick the model size that runs snappy without melting your battery.</p>
+            <p class="bento-desc">Whether you have an M1 Air or an M3 Max, we pick the model size that runs snappy
+              without melting your battery.</p>
           </div>
           <div class="bento-visual">
-            <img src="images/before-after-3.jpg" alt="Performance tuning" style="opacity: 0.8; width: 100%; height: 100%; object-fit: cover;">
+            <img src="images/before-after-3.jpg" alt="Performance tuning"
+              style="opacity: 0.8; width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
 
@@ -1219,7 +1213,7 @@
           <h3 class="bento-title">30-Day Support</h3>
           <p class="bento-desc">If an update breaks something, we fix it. Peace of mind included.</p>
         </div>
-        
+
       </div>
 
       <div class="section-cta">
@@ -1234,7 +1228,7 @@
       <div class="marquee-section-title">TRUSTED BY</div>
       <div class="marquee-section-subtitle">Join Austin's best-equipped power users</div>
     </div>
-    
+
     <div class="marquee-container">
       <div class="marquee-track marquee-slow">
         <!-- Stats Marquee Items -->
@@ -1266,101 +1260,8 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ VIDEO TESTIMONIALS ═══════════════════════════════════════ -->
-  <section class="video-testimonials" id="video-testimonials">
-    <div class="video-testimonials__container">
-      <div class="video-testimonials__header">
-        <h2 class="video-testimonials__title">Hear From Our Clients</h2>
-        <p class="video-testimonials__subtitle">Real stories from real people who transformed their Mac productivity</p>
-      </div>
+  <!-- Video Testimonials: Removed — S3 videos did not exist, showing broken placeholders -->
 
-      <div class="video-testimonials__grid">
-        <!-- Video Testimonial 1 -->
-        <article class="video-testimonial">
-          <div class="video-testimonial__preview">
-            <video class="video-testimonial__video" 
-                   data-src="https://customer-assets.s3.amazonaws.com/testimonial-david.mp4"
-                   src="https://customer-assets.s3.amazonaws.com/testimonial-david.mp4"
-                   playsinline muted loop>
-            </video>
-            <div class="video-testimonial__placeholder">
-              <div class="video-testimonial__placeholder-icon"></div>
-            </div>
-            <div class="video-testimonial__play-overlay">
-              <div class="video-testimonial__play-button"></div>
-            </div>
-          </div>
-          <div class="video-testimonial__profile">
-            <div class="video-testimonial__avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%238b5cf6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='40' fill='white' text-anchor='middle' dominant-baseline='central'%3EDS%3C/text%3E%3C/svg%3E" alt="David S.">
-            </div>
-            <div class="video-testimonial__info">
-              <h3 class="video-testimonial__name">David S.</h3>
-              <p class="video-testimonial__role">Software Engineer</p>
-            </div>
-            <span class="video-testimonial__duration">2:15</span>
-          </div>
-          <p class="video-testimonial__quote">"Finally got OpenClaw running smoothly on my M1 Air. The privacy setup was exactly what I needed, and support walked me through every step."</p>
-        </article>
-
-        <!-- Video Testimonial 2 -->
-        <article class="video-testimonial">
-          <div class="video-testimonial__preview">
-            <video class="video-testimonial__video" 
-                   data-src="https://customer-assets.s3.amazonaws.com/testimonial-maria.mp4"
-                   src="https://customer-assets.s3.amazonaws.com/testimonial-maria.mp4"
-                   playsinline muted loop>
-            </video>
-            <div class="video-testimonial__placeholder">
-              <div class="video-testimonial__placeholder-icon"></div>
-            </div>
-            <div class="video-testimonial__play-overlay">
-              <div class="video-testimonial__play-button"></div>
-            </div>
-          </div>
-          <div class="video-testimonial__profile">
-            <div class="video-testimonial__avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233b82f6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='40' fill='white' text-anchor='middle' dominant-baseline='central'%3EMR%3C/text%3E%3C/svg%3E" alt="Maria R.">
-            </div>
-            <div class="video-testimonial__info">
-              <h3 class="video-testimonial__name">Maria R.</h3>
-              <p class="video-testimonial__role">Startup Founder</p>
-            </div>
-            <span class="video-testimonial__duration">1:45</span>
-          </div>
-          <p class="video-testimonial__quote">"Worth every penny. My whole team is now running the same workflow templates. Massive time saver and everyone loves it."</p>
-        </article>
-
-        <!-- Video Testimonial 3 -->
-        <article class="video-testimonial">
-          <div class="video-testimonial__preview">
-            <video class="video-testimonial__video" 
-                   data-src="https://customer-assets.s3.amazonaws.com/testimonial-james.mp4"
-                   src="https://customer-assets.s3.amazonaws.com/testimonial-james.mp4"
-                   playsinline muted loop>
-            </video>
-            <div class="video-testimonial__placeholder">
-              <div class="video-testimonial__placeholder-icon"></div>
-            </div>
-            <div class="video-testimonial__play-overlay">
-              <div class="video-testimonial__play-button"></div>
-            </div>
-          </div>
-          <div class="video-testimonial__profile">
-            <div class="video-testimonial__avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2310b981' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='40' fill='white' text-anchor='middle' dominant-baseline='central'%3EJL%3C/text%3E%3C/svg%3E" alt="James L.">
-            </div>
-            <div class="video-testimonial__info">
-              <h3 class="video-testimonial__name">James L.</h3>
-              <p class="video-testimonial__role">Designer</p>
-            </div>
-            <span class="video-testimonial__duration">3:20</span>
-          </div>
-          <p class="video-testimonial__quote">"The support is fantastic. Had an issue after a system update and they fixed it remotely in 20 minutes. That's the kind of service you want."</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══════════════════════════════════════ TESTIMONIAL MARQUEE ═══════════════════════════════════════ -->
   <section class="marquee-section" aria-label="Customer testimonials">
@@ -1368,12 +1269,13 @@
       <div class="marquee-section-title">REAL FEEDBACK</div>
       <div class="marquee-section-subtitle">What our clients say</div>
     </div>
-    
+
     <div class="marquee-container">
       <div class="marquee-track">
         <!-- Testimonial Items -->
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">Finally got OpenClaw running smoothly on my M1 Air. The privacy setup was exactly what I needed.</div>
+          <div class="marquee-quote">Finally got OpenClaw running smoothly on my M1 Air. The privacy setup was exactly
+            what I needed.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">DS</div>
             <div class="marquee-author-info">
@@ -1382,9 +1284,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">Worth every penny. My whole team is now running the same workflow templates. Huge time saver.</div>
+          <div class="marquee-quote">Worth every penny. My whole team is now running the same workflow templates. Huge
+            time saver.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">MR</div>
             <div class="marquee-author-info">
@@ -1393,9 +1296,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">The support is fantastic. Had an issue after a system update and they fixed it remotely in 20 minutes.</div>
+          <div class="marquee-quote">The support is fantastic. Had an issue after a system update and they fixed it
+            remotely in 20 minutes.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">JL</div>
             <div class="marquee-author-info">
@@ -1404,9 +1308,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">I was skeptical about AI agents, but the workflow pack made it immediately useful. Game changer for research.</div>
+          <div class="marquee-quote">I was skeptical about AI agents, but the workflow pack made it immediately useful.
+            Game changer for research.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">PK</div>
             <div class="marquee-author-info">
@@ -1415,9 +1320,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">Best part? No bloat, no cloud dependencies I don't want. Just clean, fast AI on my terms.</div>
+          <div class="marquee-quote">Best part? No bloat, no cloud dependencies I don't want. Just clean, fast AI on my
+            terms.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">TC</div>
             <div class="marquee-author-info">
@@ -1426,9 +1332,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-item marquee-testimonial">
-          <div class="marquee-quote">The team setup package was perfect. Everyone got the same baseline, then customized from there.</div>
+          <div class="marquee-quote">The team setup package was perfect. Everyone got the same baseline, then customized
+            from there.</div>
           <div class="marquee-author">
             <div class="marquee-avatar">AH</div>
             <div class="marquee-author-info">
@@ -1447,7 +1354,7 @@
       <div class="marquee-section-title">WHAT YOU GET</div>
       <div class="marquee-section-subtitle">Everything you need to succeed</div>
     </div>
-    
+
     <div class="marquee-container">
       <div class="marquee-track marquee-fast marquee-reverse">
         <!-- Feature Items -->
@@ -1455,47 +1362,47 @@
           <div class="marquee-feature-icon">🚀</div>
           <div class="marquee-feature-text">Same-Day Installation Available</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">🔒</div>
           <div class="marquee-feature-text">Privacy-First Configuration</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">⚡</div>
           <div class="marquee-feature-text">Performance-Tuned for Your Mac</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">📦</div>
           <div class="marquee-feature-text">Custom Workflow Templates</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">💬</div>
           <div class="marquee-feature-text">30-Day Priority Support</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">🎯</div>
           <div class="marquee-feature-text">Hands-On Training Included</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">🛡️</div>
           <div class="marquee-feature-text">Safe Folder Permissions</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">🔧</div>
           <div class="marquee-feature-text">Model Optimization</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">📚</div>
           <div class="marquee-feature-text">Quick-Start Documentation</div>
         </div>
-        
+
         <div class="marquee-item marquee-feature">
           <div class="marquee-feature-icon">🤝</div>
           <div class="marquee-feature-text">Team Setup Packages Available</div>
@@ -1511,12 +1418,13 @@
       <h2 class="scroll-gallery__title" data-scroll-reveal>Everything You Need</h2>
       <p class="scroll-gallery__subtitle">Explore the complete OpenClaw Mac installation experience</p>
     </div>
-    
+
     <div class="scroll-gallery__track" tabindex="0" aria-label="Service features gallery">
       <div class="scroll-gallery__item">
         <span class="scroll-gallery__icon">🔧</span>
         <h3 class="scroll-gallery__item-title">Expert Installation</h3>
-        <p class="scroll-gallery__item-desc">Professional setup on your Mac hardware with optimized performance tuning.</p>
+        <p class="scroll-gallery__item-desc">Professional setup on your Mac hardware with optimized performance tuning.
+        </p>
         <div class="scroll-gallery__item-feature">Same-day installation available</div>
         <div class="scroll-gallery__item-feature">M1/M2/M3 optimization included</div>
         <div class="scroll-gallery__item-feature">Performance benchmarking</div>
@@ -1589,25 +1497,26 @@
     <div class="parallax-layer parallax-layer--fast">
       <div class="parallax-bg parallax-bg--3"></div>
     </div>
-    
+
     <div class="parallax-content">
       <div class="scroll-reveal scroll-reveal--fade">
         <h2 style="font-size: 42px; font-weight: 700; color: white; margin-bottom: 48px; text-align: center;">
           Trusted by Austin's Tech Community
         </h2>
       </div>
-      
-      <div class="scroll-reveal-group" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto;">
+
+      <div class="scroll-reveal-group"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto;">
         <div class="scroll-reveal scroll-reveal--scale" style="text-align: center;">
           <div class="scroll-counter" data-target="50" data-duration="2000">0</div>
           <div class="scroll-counter-label">Setups Delivered</div>
         </div>
-        
+
         <div class="scroll-reveal scroll-reveal--scale" style="text-align: center;">
           <div class="scroll-counter" data-target="95" data-duration="2000">0</div>
           <div class="scroll-counter-label">Local Model %</div>
         </div>
-        
+
         <div class="scroll-reveal scroll-reveal--scale" style="text-align: center;">
           <div class="scroll-counter" data-target="24" data-duration="2000">0</div>
           <div class="scroll-counter-label">Avg Response (hrs)</div>
@@ -1636,7 +1545,7 @@
           <!-- Step 1: Book -->
           <div class="timeline-step">
             <div class="timeline-step-connector"></div>
-            
+
             <div class="timeline-step-node" tabindex="0">
               <span class="timeline-step-icon">📅</span>
               <div class="timeline-step-number">1</div>
@@ -1664,7 +1573,7 @@
           <!-- Step 2: Consult -->
           <div class="timeline-step">
             <div class="timeline-step-connector"></div>
-            
+
             <div class="timeline-step-node" tabindex="0">
               <span class="timeline-step-icon">💬</span>
               <div class="timeline-step-number">2</div>
@@ -1673,7 +1582,8 @@
             <div class="timeline-step-content">
               <h3 class="timeline-step-title">Initial Consultation</h3>
               <p class="timeline-step-description">
-                We review your workflow needs, privacy preferences, and hardware capabilities to design your perfect setup.
+                We review your workflow needs, privacy preferences, and hardware capabilities to design your perfect
+                setup.
               </p>
             </div>
 
@@ -1693,7 +1603,7 @@
           <!-- Step 3: Execute -->
           <div class="timeline-step">
             <div class="timeline-step-connector"></div>
-            
+
             <div class="timeline-step-node" tabindex="0">
               <span class="timeline-step-icon">⚙️</span>
               <div class="timeline-step-number">3</div>
@@ -1723,7 +1633,7 @@
           <!-- Step 4: Deliver -->
           <div class="timeline-step">
             <div class="timeline-step-connector"></div>
-            
+
             <div class="timeline-step-node" tabindex="0">
               <span class="timeline-step-icon">🎓</span>
               <div class="timeline-step-number">4</div>
@@ -1732,7 +1642,8 @@
             <div class="timeline-step-content">
               <h3 class="timeline-step-title">Training & Handoff</h3>
               <p class="timeline-step-description">
-                You get a hands-on walkthrough, documentation, and ongoing support to ensure you're confident and productive.
+                You get a hands-on walkthrough, documentation, and ongoing support to ensure you're confident and
+                productive.
               </p>
             </div>
 
@@ -1757,23 +1668,30 @@
         <h3 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 1.5rem;">
           🎯 You Walk Away With:
         </h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto;">
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ OpenClaw running reliably
           </div>
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ Models configured (local or cloud)
           </div>
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ Safe folder rules + permissions
           </div>
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ Custom workflow templates
           </div>
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ 30-day support channel
           </div>
-          <div style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
+          <div
+            style="padding: 1rem; background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 0.75rem;">
             ✅ Documentation + guides
           </div>
         </div>
@@ -1794,34 +1712,38 @@
       <div class="mesh-layer"></div>
       <div class="mesh-layer"></div>
     </div>
-    
+
     <div class="container">
       <div class="section-header">
         <h2 data-reveal="char"><span class="aurora-text text-gradient-flow">Simple pricing</span></h2>
         <p class="section-sub">Choose the package that matches how deep you want to go.</p>
-        
+
         <!-- Trust Badges (Risk Reversal) -->
         <div class="trust-badges">
           <div class="trust-badge" data-tooltip="Full refund if you're not completely satisfied within 30 days">
             <svg class="trust-badge__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             100% Satisfaction Guaranteed
           </div>
           <div class="trust-badge" data-tooltip="We never access your personal files or send data to external servers">
             <svg class="trust-badge__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             Privacy-First Setup
           </div>
-          <div class="trust-badge" data-tooltip="Book today and get installed as soon as tomorrow" data-tooltip-variant="success">
+          <div class="trust-badge" data-tooltip="Book today and get installed as soon as tomorrow"
+            data-tooltip-variant="success">
             <svg class="trust-badge__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             Same-Day Available
           </div>
         </div>
-        
+
         <!-- Availability Badge (Scarcity) -->
         <div class="availability-badge" data-availability data-availability-max="5">
           <span class="availability-badge__dot"></span>
@@ -1847,7 +1769,8 @@
           <div style="margin-bottom: 1rem; text-align: center;">
             <a href="quick-install.html" class="btn btn--link btn--sm">View details →</a>
           </div>
-          <a href="#book" class="btn btn--secondary btn--block" onclick="selectPkg('Quick Install')">Book Quick Install</a>
+          <a href="#book" class="btn btn--secondary btn--block" onclick="selectPkg('Quick Install')">Book Quick
+            Install</a>
         </div>
 
         <!-- Pro Setup -->
@@ -1910,7 +1833,7 @@
       <div class="mesh-layer"></div>
       <div class="mesh-layer"></div>
     </div>
-    
+
     <div class="container">
       <div class="section-header">
         <h2 data-scroll-reveal>Built for trust <span class="muted">(privacy, reliability, sanity)</span></h2>
@@ -2076,7 +1999,7 @@
         <h2>See Available Times</h2>
         <p>Check real-time availability and book a slot that works for you. No guesswork.</p>
       </div>
-      
+
       <div class="availability-calendar-wrapper">
         <div id="availability-calendar-grid"></div>
       </div>
@@ -2091,7 +2014,7 @@
       <div class="mesh-layer"></div>
       <div class="mesh-layer"></div>
     </div>
-    
+
     <div class="container">
       <div class="section-header">
         <h2 data-reveal="word">Book your OpenClaw Mac install</h2>
@@ -2244,12 +2167,12 @@
               <strong>Either — we customize based on your Mac and needs.</strong>
             </p>
             <p>
-              If your Mac has enough power (M1 Pro/Max/Ultra, M2/M3 series with 16GB+ RAM), we can configure 
+              If your Mac has enough power (M1 Pro/Max/Ultra, M2/M3 series with 16GB+ RAM), we can configure
               <strong>local models</strong> that run entirely on your machine with zero cloud dependency.
             </p>
             <p>
-              If local models would slow things down or you prioritize reliability, we'll optimize a 
-              <strong>cloud setup</strong> using providers like OpenAI, Anthropic, or Google — configured 
+              If local models would slow things down or you prioritize reliability, we'll optimize a
+              <strong>cloud setup</strong> using providers like OpenAI, Anthropic, or Google — configured
               for speed, cost-efficiency, and privacy.
             </p>
             <p>
@@ -2271,12 +2194,12 @@
               <strong>Not if configured properly — that's what we do.</strong>
             </p>
             <p>
-              We tune resource usage, model selection, and runtime settings to match your hardware. 
+              We tune resource usage, model selection, and runtime settings to match your hardware.
               If local models would be too heavy, we recommend cloud alternatives.
             </p>
             <p>
-              We also set up <strong>smart scheduling</strong> so intensive tasks run when you're not 
-              actively using your Mac, and configure memory limits to prevent background processes from 
+              We also set up <strong>smart scheduling</strong> so intensive tasks run when you're not
+              actively using your Mac, and configure memory limits to prevent background processes from
               hogging resources.
             </p>
           </div>
@@ -2295,16 +2218,16 @@
               <strong>No. We help you define safe boundaries.</strong>
             </p>
             <p>
-              During setup, we configure <strong>folder permissions</strong> and <strong>access rules</strong> 
-              so OpenClaw can only interact with directories you explicitly authorize (e.g., a "Work" or 
+              During setup, we configure <strong>folder permissions</strong> and <strong>access rules</strong>
+              so OpenClaw can only interact with directories you explicitly authorize (e.g., a "Work" or
               "Projects" folder).
             </p>
             <p>
-              We <strong>don't copy, transfer, or take your data</strong>. Everything stays on your Mac 
+              We <strong>don't copy, transfer, or take your data</strong>. Everything stays on your Mac
               (or in your own cloud accounts if you choose cloud models).
             </p>
             <p>
-              We can also set up <strong>read-only access</strong> for sensitive directories, or completely 
+              We can also set up <strong>read-only access</strong> for sensitive directories, or completely
               block entire folders (like personal photos, financial documents, etc.).
             </p>
           </div>
@@ -2323,16 +2246,16 @@
               <strong>Support is included — we fix it.</strong>
             </p>
             <p>
-              All packages include post-install support (30 days for Quick Install, 90 days for Pro Setup, 
-              1 year for Team). If an OpenClaw update breaks your configuration, we troubleshoot and restore 
+              All packages include post-install support (30 days for Quick Install, 90 days for Pro Setup,
+              1 year for Team). If an OpenClaw update breaks your configuration, we troubleshoot and restore
               a stable version.
             </p>
             <p>
-              We also configure <strong>automatic backups</strong> of your config files so we can rollback 
+              We also configure <strong>automatic backups</strong> of your config files so we can rollback
               quickly if needed.
             </p>
             <p>
-              For ongoing peace of mind, you can add <strong>priority support</strong> ($99/month) for 
+              For ongoing peace of mind, you can add <strong>priority support</strong> ($99/month) for
               same-day response and proactive monitoring.
             </p>
           </div>
@@ -2362,7 +2285,7 @@
               <li><strong>Optional Slack/Discord integration</strong> for team notifications</li>
             </ul>
             <p>
-              Need more than 5 users? We offer <strong>custom enterprise packages</strong> — contact us 
+              Need more than 5 users? We offer <strong>custom enterprise packages</strong> — contact us
               to discuss your needs.
             </p>
           </div>
@@ -2381,13 +2304,13 @@
               <strong>No — we're an independent service provider.</strong>
             </p>
             <p>
-              We specialize in OpenClaw setup on Mac hardware, but we're not affiliated with Apple Inc. 
-              or the OpenClaw project. We're simply experts who love both ecosystems and want to help 
+              We specialize in OpenClaw setup on Mac hardware, but we're not affiliated with Apple Inc.
+              or the OpenClaw project. We're simply experts who love both ecosystems and want to help
               people get the most out of them together.
             </p>
             <p>
-              OpenClaw is <strong>open-source software</strong> (MIT licensed), so anyone can install it 
-              for free. What we offer is <strong>professional installation, optimization, and support</strong> 
+              OpenClaw is <strong>open-source software</strong> (MIT licensed), so anyone can install it
+              for free. What we offer is <strong>professional installation, optimization, and support</strong>
               to save you hours of troubleshooting and ensure a production-ready setup.
             </p>
           </div>
@@ -2411,7 +2334,7 @@
               <strong>Team Setup:</strong> ~3-4 hours (multi-user config, shared resources)
             </p>
             <p>
-              We work efficiently and respect your schedule. If you need to pause and resume later, 
+              We work efficiently and respect your schedule. If you need to pause and resume later,
               we can split the visit into multiple sessions.
             </p>
           </div>
@@ -2430,12 +2353,12 @@
               <strong>No problem — just give us 24 hours notice.</strong>
             </p>
             <p>
-              Life happens. If you need to reschedule, contact us at least 24 hours before your 
+              Life happens. If you need to reschedule, contact us at least 24 hours before your
               appointment and we'll find a new time that works.
             </p>
             <p>
-              <strong>Cancellation policy:</strong> Full refund if you cancel 48+ hours before your 
-              appointment. 50% refund for 24-48 hours notice. No refund for same-day cancellations 
+              <strong>Cancellation policy:</strong> Full refund if you cancel 48+ hours before your
+              appointment. 50% refund for 24-48 hours notice. No refund for same-day cancellations
               (but we can still reschedule if slots are available).
             </p>
           </div>
@@ -2447,7 +2370,7 @@
     <div class="faq-footer">
       <h3 class="faq-footer-title">Still have questions?</h3>
       <p class="faq-footer-text">
-        We're happy to chat before you book. Shoot us an email or text and we'll get back to you 
+        We're happy to chat before you book. Shoot us an email or text and we'll get back to you
         within a few hours.
       </p>
       <a href="mailto:support@openclawmac.com" class="faq-footer-cta">
@@ -2490,49 +2413,40 @@
     </div>
   </footer>
 
-  <!-- Mobile Sticky CTA Removed -->
-
-  <script src="index.js"></script>
-  <script src="bento-interactive.js"></script>
-  <script src="micro-interactions.js"></script>
-  <script src="mesh-gradient.js"></script>
-  <script src="3d-tilt.js"></script>
-  <script src="spotlight.js"></script>
-  <script src="scroll-reveal.js"></script>
-  <script src="js/magnetic.js"></script>
-  <script src="js/microinteractions.js"></script>
-  <script src="js/morphing-blobs.js"></script>
-  <script src="js/bento-magnetic.js"></script>
-  <script src="js/conversion-psychology.js"></script>
-  <script src="js/grid-blueprint.js"></script>
-  <script src="js/fab.js"></script>
-  <script src="js/custom-cursor.js"></script>
-  <script src="js/particle-system.js"></script>
-  <script src="js/command-palette.js"></script>
-  <script src="js/infinite-marquee.js"></script>
-  <!-- <script src="js/scroll-driven.js"></script> -->
-  <script src="js/faq-accordion.js"></script>
-  <script src="js/typography-animations.js"></script>
-  <script src="js/form-interactions.js"></script>
-  <script src="js/scroll-progress.js"></script>
-  <script src="js/service-timeline.js"></script>
-  <script src="js/stats-dashboard.js"></script>
-  <!-- <script src="js/social-proof-feed.js"></script> -->
-  <script src="js/demo-preview.js"></script>
-  <script src="js/comparison-matrix.js"></script>
-  <script src="js/roi-calculator.js"></script>
-  <script src="js/trust-badges.js"></script>
-  <script src="js/code-blocks.js"></script>
-  <script src="js/tooltips.js"></script>
-  <script src="js/video-testimonials.js"></script>
-  <script src="js/testimonial-carousel.js"></script>
-  <script src="js/package-builder.js"></script>
-  <script src="js/before-after-slider.js"></script>
-  <script src="js/availability-calendar.js"></script>
-  <script src="js/sticky-cta-bar.js"></script>
-  <script src="js/package-quiz.js"></script>
-  <script src="js/product-tour.js"></script>
-  <script src="js/theme-switcher.js"></script>
+  <script defer src="index.js"></script>
+  <script defer src="bento-interactive.js"></script>
+  <script defer src="micro-interactions.js"></script>
+  <script defer src="mesh-gradient.js"></script>
+  <script defer src="3d-tilt.js"></script>
+  <script defer src="spotlight.js"></script>
+  <script defer src="scroll-reveal.js"></script>
+  <script defer src="js/magnetic.js"></script>
+  <script defer src="js/microinteractions.js"></script>
+  <script defer src="js/morphing-blobs.js"></script>
+  <script defer src="js/bento-magnetic.js"></script>
+  <script defer src="js/grid-blueprint.js"></script>
+  <script defer src="js/fab.js"></script>
+  <script defer src="js/custom-cursor.js"></script>
+  <script defer src="js/particle-system.js"></script>
+  <script defer src="js/command-palette.js"></script>
+  <script defer src="js/infinite-marquee.js"></script>
+  <script defer src="js/faq-accordion.js"></script>
+  <script defer src="js/typography-animations.js"></script>
+  <script defer src="js/form-interactions.js"></script>
+  <script defer src="js/scroll-progress.js"></script>
+  <script defer src="js/service-timeline.js"></script>
+  <script defer src="js/stats-dashboard.js"></script>
+  <script defer src="js/demo-preview.js"></script>
+  <script defer src="js/comparison-matrix.js"></script>
+  <script defer src="js/roi-calculator.js"></script>
+  <script defer src="js/trust-badges.js"></script>
+  <script defer src="js/code-blocks.js"></script>
+  <script defer src="js/tooltips.js"></script>
+  <script defer src="js/testimonial-carousel.js"></script>
+  <script defer src="js/package-builder.js"></script>
+  <script defer src="js/before-after-slider.js"></script>
+  <script defer src="js/availability-calendar.js"></script>
+  <script defer src="js/package-quiz.js"></script>
 </body>
 
 </html>

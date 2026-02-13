@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Smooth Scroll (anchor links) ───────────────────────────
     const scrollProgress = document.querySelector('.scroll-progress');
     window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-      const clientHeight = document.documentElement.clientHeight;
-      
-      const progress = (scrollTop / (scrollHeight - clientHeight));
-      if (scrollProgress) scrollProgress.style.transform = `scaleX(${progress})`;
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+
+        const progress = (scrollTop / (scrollHeight - clientHeight));
+        if (scrollProgress) scrollProgress.style.transform = `scaleX(${progress})`;
     }, { passive: true });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -95,148 +95,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Wizard Logic (Disabled) ─────────────────────────────
-    /* 
-     * The old wizard logic was causing scroll jumps because it calls
-     * scrollIntoView() on initialization.
-     * 
-     * Since the wizard HTML might still exist or be hidden, we ensure
-     * this block doesn't execute scroll logic on load.
-     */
-    
-    /*
-    const steps = document.querySelectorAll('.wizard-step');
-    const progressBar = document.getElementById('wizardProgress');
-    let currentStep = 0;
 
-    function updateWizard() {
-        steps.forEach((step, index) => {
-            if (index === currentStep) {
-                step.classList.add('active');
-                // Smooth scroll to top of form if needed
-                // step.scrollIntoView({ behavior: 'smooth', block: 'center' }); // THIS WAS THE CULPRIT
-            } else {
-                step.classList.remove('active');
-            }
-        });
-
-        if (progressBar) {
-            const progress = ((currentStep + 1) / steps.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-    }
-
-    // Initialize first step
-    if (steps.length > 0) {
-        updateWizard();
-    }
-    */
 
     // ── Form Submission ────────────────────────────────────────
     const form = document.getElementById('bookForm');
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const button = form.querySelector('button[type="submit"]');
-        
-        // Use micro-interactions loading state
-        if (window.showLoadingState) {
-            window.showLoadingState(button, 'Scheduling...');
-        } else {
-            button.disabled = true;
-            button.innerText = 'Scheduling...';
-        }
-
-        try {
+            const button = form.querySelector('button[type="submit"]');
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            
-            // Construct message
-            const message = `
-New Booking Request:
-- Package: ${data.package}
-- Mac: ${data.macModel}
-- Goals: ${data.goals}
-- Location: ${document.querySelector('.book__option--active')?.dataset.value || 'Austin'}
-            `.trim();
 
-            formData.set('message', message);
+            // Show loading state
+            if (button) {
+                button.disabled = true;
+                button.innerText = 'Redirecting to calendar...';
+            }
 
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                body: formData
-            });
+            // Build Calendly URL with prefilled fields
+            // TODO: Replace 'openclawmac' with your actual Calendly handle
+            const calendlyUrl = new URL('https://calendly.com/openclawmac/openclaw-install');
+            if (data.name) calendlyUrl.searchParams.set('name', data.name);
+            if (data.email) calendlyUrl.searchParams.set('email', data.email);
 
-            if (response.ok) {
-                // Trigger success celebration with particles
+            // Trigger success celebration with particles (if available)
+            if (button) {
                 const rect = button.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                
-                // Dispatch custom event for particle system
                 document.dispatchEvent(new CustomEvent('formSubmitSuccess', {
-                    detail: { x, y }
+                    detail: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
                 }));
-                
-                // Show success animation (if available)
-                if (window.showSuccessAnimation) {
-                    window.showSuccessAnimation(document.body, 'Booking submitted! Redirecting to calendar...');
-                }
-                
-                // Redirect to Calendly
-                const calendlyUrl = new URL('https://calendly.com/your-handle/openclaw-install');
-                calendlyUrl.searchParams.set('name', data.name);
-                calendlyUrl.searchParams.set('email', data.email);
-                
-                setTimeout(() => {
-                    window.location.href = calendlyUrl.toString();
-                }, 2000);
-            } else {
-                throw new Error('API failed');
             }
-        } catch (error) {
-            console.error(error);
-            
-            // Hide loading, show error
-            if (window.hideLoadingState) {
-                window.hideLoadingState(button);
-            }
-            
-            // Show toast notification (if available)
-            const toast = document.createElement('div');
-            toast.className = 'toast toast-warning';
-            toast.textContent = 'Redirecting to manual scheduling...';
-            document.body.appendChild(toast);
-            
+
+            // Brief delay for visual feedback, then redirect
             setTimeout(() => {
-                toast.classList.add('toast-exit');
-                setTimeout(() => toast.remove(), 300);
-            }, 2500);
-            
-            setTimeout(() => {
-                window.location.href = 'https://calendly.com/your-handle/openclaw-install';
-            }, 3000);
-        }
-    });
+                window.location.href = calendlyUrl.toString();
+            }, 800);
+        });
+    }
 
     // ── Spotlight Buttons ──────────────────────────────────────
     const spotlightButtons = document.querySelectorAll('.btn--primary');
-    
+
     spotlightButtons.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             btn.style.setProperty('--x', `${x}px`);
             btn.style.setProperty('--y', `${y}px`);
-            
+
             // Subtle magnetic pull (optional, reduced strength to avoid jitter)
             const cx = x - rect.width / 2;
             const cy = y - rect.height / 2;
             btn.style.transform = `translate(${cx * 0.1}px, ${cy * 0.1}px)`;
         });
-        
+
         btn.addEventListener('mouseleave', () => {
             btn.style.transform = '';
             // Reset spotlight to center
@@ -268,16 +183,16 @@ New Booking Request:
             "autonomous workers.",
             "digital employees."
         ];
-        
+
         let phraseIndex = 0;
         // Start from full length of first phrase (assumed to match HTML)
         let charIndex = phrases[0].length;
         let isDeleting = false;
-        
+
         function type() {
             const currentPhrase = phrases[phraseIndex];
             let typeSpeed = 100;
-            
+
             if (isDeleting) {
                 typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
                 charIndex--;
@@ -287,7 +202,7 @@ New Booking Request:
                 charIndex++;
                 typeSpeed = 100;
             }
-            
+
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
                 typeSpeed = 2000;
@@ -296,10 +211,10 @@ New Booking Request:
                 phraseIndex = (phraseIndex + 1) % phrases.length;
                 typeSpeed = 500;
             }
-            
+
             setTimeout(type, typeSpeed);
         }
-        
+
         // Start loop after initial delay
         setTimeout(() => {
             isDeleting = true; // Start by deleting "AI Assistant"
@@ -314,12 +229,12 @@ New Booking Request:
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left; // x position within the element.
             const y = e.clientY - rect.top;  // y position within the element.
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             // Calculate rotation. Max rotation is 8 degrees.
-            const rotateX = ((y - centerY) / centerY) * -4; 
+            const rotateX = ((y - centerY) / centerY) * -4;
             const rotateY = ((x - centerX) / centerX) * 4;
 
             // Apply the transform
