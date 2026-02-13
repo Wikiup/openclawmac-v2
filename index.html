@@ -71,7 +71,7 @@
   <link rel="stylesheet" href="css/stats-dashboard.css">
   <link rel="stylesheet" href="css/social-proof-feed.css">
   <link rel="stylesheet" href="css/demo-preview.css">
-  <link rel="stylesheet" href="css/comparison-matrix.css">
+  <link rel="stylesheet" href="css/comparison-cards.css">
   <link rel="stylesheet" href="css/roi-calculator.css">
   <link rel="stylesheet" href="css/trust-badges.css">
   <link rel="stylesheet" href="css/code-blocks.css">
@@ -345,68 +345,48 @@
           DIY Setup <span class="gradient-text">vs</span> Professional Install
         </h2>
         <p>
-          See the difference between struggling through docs and having an expert handle it.
-          Drag the slider to compare.
+          Stop struggling with docs. Get a production-ready setup in one session.
         </p>
       </div>
 
-      <div class="comparison-slider-wrapper">
-        <!-- Comparison Labels -->
-        <div class="comparison-labels">
-          <div class="label label-after">After: Professional Setup</div>
-          <div class="label label-before">Before: DIY Chaos</div>
+      <!-- Static Card Comparison (Replaces broken slider) -->
+      <div class="comparison-cards-wrapper">
+        <!-- DIY Card -->
+        <div class="comparison-card diy-card">
+          <div class="comparison-card-header">
+            <h3>Before: DIY Chaos</h3>
+            <span class="status-badge error">❌ The Struggle</span>
+          </div>
+          <ul class="problems-list">
+            <li>Hours reading conflicting docs</li>
+            <li>Breaking permissions & sudo errors</li>
+            <li>Privacy leaks you didn't notice</li>
+            <li>"Why isn't this model loading?"</li>
+            <li>Updates break your setup weekly</li>
+            <li>Zero support when it fails</li>
+          </ul>
         </div>
 
-        <!-- Comparison Slider -->
-        <div class="comparison-slider">
-          <!-- BEFORE (Right side - DIY chaos) -->
-          <div class="comparison-image comparison-before">
-            <div class="comparison-before-content">
-              <div class="status-badge">❌ Common DIY Issues</div>
-              <h3>The Reality of DIY Setup</h3>
-              <ul class="problems-list">
-                <li>Hours reading conflicting documentation</li>
-                <li>Breaking things with wrong permissions</li>
-                <li>Privacy leaks you didn't notice</li>
-                <li>No clue if it's "right" or just "working"</li>
-                <li>Updates breaking your setup weekly</li>
-                <li>Zero support when it fails</li>
-              </ul>
-            </div>
+        <!-- VS Divider -->
+        <div class="comparison-divider">VS</div>
+
+        <!-- Pro Card -->
+        <div class="comparison-card pro-card">
+          <div class="comparison-card-header">
+            <h3>After: Professional Setup</h3>
+            <span class="status-badge success">✓ The Solution</span>
           </div>
-
-          <!-- AFTER (Left side - Professional solution) -->
-          <div class="comparison-image comparison-after">
-            <div class="comparison-after-content">
-              <div class="status-badge">✓ Professional Results</div>
-              <h3>What You Get Instead</h3>
-              <ul class="benefits-list">
-                <li>Installed correctly in one session</li>
-                <li>Privacy-first configuration hardened</li>
-                <li>Workflow templates ready to use</li>
-                <li>Clear documentation for your setup</li>
-                <li>30-day support included</li>
-                <li>Update guidance to prevent breaks</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Slider Divider Line -->
-          <div class="slider-divider"></div>
-
-          <!-- Draggable Handle -->
-          <div class="slider-handle"></div>
-        </div>
-
-        <!-- Instructions -->
-        <div class="slider-instructions">
-          <p>
-            <span class="icon">👆</span>
-            <span>Drag the slider • Click anywhere • Use arrow keys</span>
-            <span class="icon">⌨️</span>
-          </p>
+          <ul class="benefits-list">
+            <li>Installed correctly in 60 mins</li>
+            <li>Privacy-first security hardened</li>
+            <li>Workflow templates ready to use</li>
+            <li>Clear documentation included</li>
+            <li>30-day support channel</li>
+            <li>Update-safe configuration</li>
+          </ul>
         </div>
       </div>
+
     </div>
   </section>
 
