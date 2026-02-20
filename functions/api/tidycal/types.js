@@ -1,7 +1,7 @@
 /**
  * GET /api/tidycal/types
- * Proxies TidyCal booking types — returns id, name, duration for mapping.
- * The TIDYCAL_API_KEY secret is injected by Cloudflare at runtime.
+ * Returns the Openclaw Consultation team booking types.
+ * Team id: 9184 ("Openclaw Consultation")
  */
 export async function onRequestGet(context) {
     const apiKey = context.env.TIDYCAL_API_KEY;
@@ -14,7 +14,7 @@ export async function onRequestGet(context) {
     }
 
     try {
-        const res = await fetch('https://tidycal.com/api/booking-types', {
+        const res = await fetch('https://tidycal.com/api/teams/9184/booking-types', {
             headers: {
                 Authorization: `Bearer ${apiKey}`,
                 Accept: 'application/json',
@@ -31,19 +31,19 @@ export async function onRequestGet(context) {
 
         const data = await res.json();
 
-        // Return a slimmed-down response with just what the frontend needs
         const types = (data.data || []).map((t) => ({
             id: t.id,
             name: t.title,
             duration: t.duration_minutes,
             slug: t.url_slug,
+            booking_page_url: t.booking_page_url,
         }));
 
         return new Response(JSON.stringify({ data: types }), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'public, max-age=300', // cache for 5 minutes
+                'Cache-Control': 'public, max-age=300',
                 'Access-Control-Allow-Origin': '*',
             },
         });

@@ -1,16 +1,22 @@
 /**
  * POST /api/tidycal/book
- * Creates a real booking in TidyCal.
+ * Creates a real booking for the Openclaw team booking type.
+ *
+ * Default booking type: 1756759 ("15 Minute Open Claw Consultation Call")
+ * Team URL: https://tidycal.com/team/openclaw/15-minute-open-claw-consultation-call
  *
  * Expected request body:
  * {
- *   bookingTypeId: number,   // TidyCal booking type ID
- *   name: string,            // Customer name
- *   email: string,           // Customer email
- *   notes: string,           // Goals / context (mapped to custom question)
- *   timezone: string         // e.g. "America/Chicago"
+ *   bookingTypeId?: number,  // Optional override; defaults to 1756759
+ *   name: string,
+ *   email: string,
+ *   notes?: string,
+ *   timezone?: string
  * }
  */
+
+const DEFAULT_BOOKING_TYPE_ID = 1756759;
+
 export async function onRequestPost(context) {
     const apiKey = context.env.TIDYCAL_API_KEY;
 
@@ -21,7 +27,6 @@ export async function onRequestPost(context) {
         });
     }
 
-    // Parse request body
     let body;
     try {
         body = await context.request.json();
@@ -34,14 +39,15 @@ export async function onRequestPost(context) {
 
     const { bookingTypeId, name, email, notes, timezone } = body;
 
-    if (!bookingTypeId || !name || !email) {
-        return new Response(JSON.stringify({ error: 'bookingTypeId, name, and email are required' }), {
+    if (!name || !email) {
+        return new Response(JSON.stringify({ error: 'name and email are required' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' },
         });
     }
 
-    // Build the TidyCal booking payload
+    const typeId = bookingTypeId || DEFAULT_BOOKING_TYPE_ID;
+
     const payload = {
         name,
         email,
@@ -52,7 +58,7 @@ export async function onRequestPost(context) {
     };
 
     try {
-        const res = await fetch(`https://tidycal.com/api/booking-types/${bookingTypeId}/bookings`, {
+        const res = await fetch(`https://tidycal.com/api/booking-types/${typeId}/bookings`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${apiKey}`,
@@ -71,9 +77,10 @@ export async function onRequestPost(context) {
             });
         }
 
-        // Extract the booking URL if available
         const booking = data.data;
-        const bookingUrl = booking?.booking_page_url || booking?.tidycal_url || null;
+        const bookingUrl =
+            booking?.booking_page_url ||
+            'https://tidycal.com/team/openclaw/15-minute-open-claw-consultation-call';
 
         return new Response(
             JSON.stringify({
@@ -97,7 +104,6 @@ export async function onRequestPost(context) {
     }
 }
 
-// Handle CORS preflight
 export async function onRequestOptions() {
     return new Response(null, {
         status: 204,
