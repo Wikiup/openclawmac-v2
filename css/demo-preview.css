@@ -53,17 +53,14 @@
 .demo-preview-title {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, rgb(139, 92, 246), rgb(139, 92, 246));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .demo-preview-subtitle {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.6;
 }
 

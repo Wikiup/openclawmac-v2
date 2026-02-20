@@ -16,7 +16,7 @@
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -25,30 +25,13 @@
 .glass-card:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 
+  box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
-/* Light theme variant */
-@media (prefers-color-scheme: light) {
-  .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  }
-  
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(0, 0, 0, 0.12);
-    box-shadow: 
-      0 12px 48px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
-}
+/* Light theme variant - DISABLED: dark-only site */
 
 /* ========================================
    GLASS VARIATIONS
@@ -94,7 +77,7 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
@@ -103,7 +86,7 @@
 .price-card:hover {
   background: rgba(255, 255, 255, 0.12) !important;
   border-color: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 
+  box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
@@ -129,7 +112,7 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -139,7 +122,7 @@
 .deep-dive-card:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 
+  box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -151,7 +134,7 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
@@ -164,7 +147,7 @@
   -webkit-backdrop-filter: blur(32px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 20px;
-  box-shadow: 
+  box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
@@ -191,7 +174,7 @@ select:focus {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(129, 140, 248, 0.5);
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(79, 70, 229, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -205,7 +188,7 @@ select:focus {
   -webkit-backdrop-filter: blur(40px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  box-shadow: 
+  box-shadow:
     0 20px 80px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -260,6 +243,7 @@ header {
 
 /* Fallback for browsers without backdrop-filter support */
 @supports not (backdrop-filter: blur(20px)) {
+
   .glass-card,
   .glass-strong,
   .glass-subtle,
@@ -272,25 +256,20 @@ header {
   .modal-content {
     background: rgba(20, 20, 30, 0.95);
   }
-  
-  @media (prefers-color-scheme: light) {
-    .glass-card,
-    .pricing-card,
-    .feature-card {
-      background: rgba(255, 255, 255, 0.95);
-    }
-  }
+
+
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+
   .glass-card,
   .pricing-card,
   .feature-card,
   .btn-glass {
     transition: none;
   }
-  
+
   .glass-card:hover,
   .pricing-card:hover,
   .feature-card:hover {
@@ -298,46 +277,14 @@ header {
   }
 }
 
-/* Light Theme Adjustments */
-@media (prefers-color-scheme: light) {
-  .form-control,
-  input,
-  textarea,
-  select {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #1a1a1a;
-  }
-  
-  .form-control:focus,
-  input:focus,
-  textarea:focus {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(79, 70, 229, 0.5);
-  }
-  
-  nav,
-  .navbar,
-  header {
-    background: rgba(255, 255, 255, 0.8);
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-content,
-  .dialog {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 
-      0 20px 80px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(0, 0, 0, 0.05);
-  }
-}
+/* Light Theme Adjustments - DISABLED: dark-only site */
 
 /* ========================================
    MOBILE OPTIMIZATIONS
    ======================================== */
 
 @media (max-width: 768px) {
+
   /* Reduce blur intensity on mobile for better performance */
   .glass-card,
   .pricing-card,
@@ -346,13 +293,13 @@ header {
     backdrop-filter: blur(12px) saturate(150%);
     -webkit-backdrop-filter: blur(12px) saturate(150%);
   }
-  
+
   .glass-strong,
   .modal-content {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
-  
+
   .glass-subtle {
     backdrop-filter: blur(8px) saturate(140%);
     -webkit-backdrop-filter: blur(8px) saturate(140%);
