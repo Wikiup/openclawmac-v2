@@ -362,10 +362,9 @@ img {
 }
 
 .nav__cta.btn {
-  background: #F4804E !important;
-  color: #111 !important;
-  /* using dark text or white text, reference image has white text. Let's use white #fff */
-  border: none !important;
+  background: rgba(124, 92, 255, 0.1) !important;
+  border: 1px solid rgba(124, 92, 255, 0.2) !important;
+  color: #7C5CFF !important;
   box-shadow: none !important;
   padding: 10px 24px !important;
   border-radius: 100px !important;

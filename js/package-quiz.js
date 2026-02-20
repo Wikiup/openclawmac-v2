@@ -106,7 +106,7 @@ class PackageQuiz {
         ]
       }
     ];
-    
+
     this.packages = {
       starter: {
         name: 'Starter Package',
@@ -152,21 +152,21 @@ class PackageQuiz {
         bookingLink: '#book'
       }
     };
-    
+
     this.init();
   }
-  
+
   init() {
     this.container = document.getElementById('package-quiz');
     if (!this.container) return;
-    
+
     this.render();
     this.attachEventListeners();
   }
-  
+
   render() {
     const progress = ((this.currentQuestion) / this.questions.length) * 100;
-    
+
     this.container.innerHTML = `
       <div class="quiz-container">
         <div class="quiz-header">
@@ -194,15 +194,15 @@ class PackageQuiz {
       </div>
     `;
   }
-  
+
   renderQuestion() {
     if (this.currentQuestion >= this.questions.length) {
       return this.renderResults();
     }
-    
+
     const question = this.questions[this.currentQuestion];
     const selectedValue = this.answers[question.id];
-    
+
     return `
       <div class="quiz-question">
         <div class="question-number">Question ${this.currentQuestion + 1}/${this.questions.length}</div>
@@ -232,11 +232,11 @@ class PackageQuiz {
       </div>
     `;
   }
-  
+
   renderResults() {
     const recommendation = this.calculateRecommendation();
     const pkg = this.packages[recommendation];
-    
+
     return `
       <div class="quiz-results">
         <div class="results-header">
@@ -290,61 +290,61 @@ class PackageQuiz {
       </div>
     `;
   }
-  
+
   calculateRecommendation() {
     const scores = { starter: 0, professional: 0, team: 0 };
-    
+
     // Calculate weighted scores based on answers
     this.questions.forEach(question => {
       const answer = this.answers[question.id];
       if (!answer) return;
-      
+
       const option = question.options.find(opt => opt.value === answer);
       if (!option) return;
-      
+
       Object.keys(option.weight).forEach(pkg => {
         scores[pkg] += option.weight[pkg];
       });
     });
-    
+
     // Find package with highest score
     let recommended = 'professional'; // default
     let maxScore = 0;
-    
+
     Object.keys(scores).forEach(pkg => {
       if (scores[pkg] > maxScore) {
         maxScore = scores[pkg];
         recommended = pkg;
       }
     });
-    
+
     return recommended;
   }
-  
+
   attachEventListeners() {
     // Option selection
     this.container.addEventListener('click', (e) => {
       const option = e.target.closest('.quiz-option');
       if (!option) return;
-      
+
       const question = this.questions[this.currentQuestion];
       if (!question) return;
-      
+
       const value = option.dataset.value;
-      
+
       // Update answer
       this.answers[question.id] = value;
-      
+
       // Update UI
       this.container.querySelectorAll('.quiz-option').forEach(opt => {
         opt.classList.remove('selected');
       });
       option.classList.add('selected');
-      
+
       // Enable next button
       const nextBtn = this.container.querySelector('.btn-next');
       if (nextBtn) nextBtn.disabled = false;
-      
+
       // Auto-advance after short delay (optional UX enhancement)
       setTimeout(() => {
         if (this.currentQuestion < this.questions.length - 1) {
@@ -352,7 +352,7 @@ class PackageQuiz {
         }
       }, 600);
     });
-    
+
     // Navigation
     this.container.addEventListener('click', (e) => {
       if (e.target.closest('.btn-next')) {
@@ -364,14 +364,14 @@ class PackageQuiz {
         this.back();
       }
     });
-    
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (!this.container.querySelector('.quiz-question')) return;
-      
+
       const question = this.questions[this.currentQuestion];
       if (!question) return;
-      
+
       // Number keys 1-3 for quick selection
       if (e.key >= '1' && e.key <= '3') {
         const index = parseInt(e.key) - 1;
@@ -380,7 +380,7 @@ class PackageQuiz {
           if (option) option.click();
         }
       }
-      
+
       // Arrow keys
       if (e.key === 'ArrowRight' || e.key === 'Enter') {
         const nextBtn = this.container.querySelector('.btn-next');
@@ -396,50 +396,50 @@ class PackageQuiz {
       }
     });
   }
-  
+
   next() {
     const question = this.questions[this.currentQuestion];
     if (!question || !this.answers[question.id]) return;
-    
+
     // Animate out current question
     const questionEl = this.container.querySelector('.quiz-question');
     if (questionEl) {
       questionEl.classList.add('fade-out');
     }
-    
+
     setTimeout(() => {
       this.currentQuestion++;
       this.render();
-      this.attachEventListeners();
-      
-      // Scroll to top of quiz
-      this.container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Scroll to center of quiz
+      this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 300);
   }
-  
+
   back() {
     if (this.currentQuestion <= 0) return;
-    
+
     const questionEl = this.container.querySelector('.quiz-question');
     if (questionEl) {
       questionEl.classList.add('fade-out');
     }
-    
+
     setTimeout(() => {
       this.currentQuestion--;
       this.render();
-      this.attachEventListeners();
+
+      // Scroll to center of quiz
+      this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 300);
   }
-  
+
   restart() {
     this.currentQuestion = 0;
     this.answers = {};
     this.render();
-    this.attachEventListeners();
-    this.container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  
+
   viewAllPackages() {
     // Scroll to pricing section
     const pricingSection = document.getElementById('pricing');
