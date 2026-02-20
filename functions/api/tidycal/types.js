@@ -14,7 +14,7 @@ export async function onRequestGet(context) {
     }
 
     try {
-        const res = await fetch('https://api.tidycal.com/v1/booking-types', {
+        const res = await fetch('https://tidycal.com/api/booking-types', {
             headers: {
                 Authorization: `Bearer ${apiKey}`,
                 Accept: 'application/json',
@@ -34,9 +34,9 @@ export async function onRequestGet(context) {
         // Return a slimmed-down response with just what the frontend needs
         const types = (data.data || []).map((t) => ({
             id: t.id,
-            name: t.name,
-            duration: t.duration,
-            slug: t.slug,
+            name: t.title,
+            duration: t.duration_minutes,
+            slug: t.url_slug,
         }));
 
         return new Response(JSON.stringify({ data: types }), {

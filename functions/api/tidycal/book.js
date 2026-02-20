@@ -52,7 +52,7 @@ export async function onRequestPost(context) {
     };
 
     try {
-        const res = await fetch(`https://api.tidycal.com/v1/booking-types/${bookingTypeId}/bookings`, {
+        const res = await fetch(`https://tidycal.com/api/booking-types/${bookingTypeId}/bookings`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${apiKey}`,
