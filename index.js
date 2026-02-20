@@ -173,42 +173,93 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wizardProgress) {
         wizardProgress.style.width = `${(1 / wizardSteps.length) * 100}%`;
     }
-    // ── Form Submission ────────────────────────────────────────
+    // ── TidyCal Booking Types (loaded once on init) ─────────────
+    let tidycalTypes = [];
+    fetch('/api/tidycal/types')
+        .then(r => r.json())
+        .then(res => {
+            tidycalTypes = res.data || [];
+            console.log('[TidyCal] Types loaded:', tidycalTypes.map(t => `${t.name} (id:${t.id})`));
+        })
+        .catch(err => console.warn('[TidyCal] Could not load booking types:', err));
+
+    function findBookingTypeId(packageLabel) {
+        if (!tidycalTypes.length) return null;
+        const label = (packageLabel || '').toLowerCase();
+        return (
+            tidycalTypes.find(t => {
+                const n = t.name.toLowerCase();
+                return (n.includes('quick') && label.includes('quick')) ||
+                    (n.includes('pro') && label.includes('pro')) ||
+                    (n.includes('power') && label.includes('power')) ||
+                    (n.includes('team') && label.includes('team'));
+            }) || tidycalTypes[0]
+        )?.id || null;
+    }
+
+    // ── Form Submission → TidyCal API ──────────────────────────
     const form = document.getElementById('bookForm');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const button = form.querySelector('button[type="submit"]');
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // Show loading state
             if (button) {
                 button.disabled = true;
-                button.innerText = 'Redirecting to calendar...';
+                button.innerText = 'Booking...';
             }
 
-            // Build Calendly URL with prefilled fields
-            // TODO: Replace 'openclawmac' with your actual Calendly handle
-            const calendlyUrl = new URL('https://calendly.com/openclawmac/openclaw-install');
-            if (data.name) calendlyUrl.searchParams.set('name', data.name);
-            if (data.email) calendlyUrl.searchParams.set('email', data.email);
+            const bookingTypeId = findBookingTypeId(data.package);
 
-            // Trigger success celebration with particles (if available)
-            if (button) {
-                const rect = button.getBoundingClientRect();
-                document.dispatchEvent(new CustomEvent('formSubmitSuccess', {
-                    detail: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
-                }));
+            try {
+                const res = await fetch('/api/tidycal/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        bookingTypeId,
+                        name: data.name,
+                        email: data.email,
+                        notes: data.goals,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Chicago',
+                    }),
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    if (button) {
+                        const rect = button.getBoundingClientRect();
+                        document.dispatchEvent(new CustomEvent('formSubmitSuccess', {
+                            detail: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+                        }));
+                    }
+                    form.innerHTML = `
+                        <div style="text-align:center;padding:40px 20px;">
+                            <div style="font-size:3rem;margin-bottom:16px;">🎉</div>
+                            <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:12px;">You're booked!</h3>
+                            <p style="color:var(--muted);margin-bottom:24px;">
+                                Confirmation heading to <strong>${data.email}</strong>.
+                            </p>
+                            ${result.booking_url ? `<a href="${result.booking_url}" target="_blank" rel="noopener" class="btn btn--primary">View Booking →</a>` : ''}
+                        </div>`;
+                } else {
+                    console.error('[TidyCal] Error:', result);
+                    if (button) { button.disabled = false; button.innerText = 'Try again'; }
+                    const errEl = document.createElement('p');
+                    errEl.style.cssText = 'color:var(--accent-warm,#f87171);margin-top:12px;font-size:0.9rem;';
+                    errEl.textContent = 'Something went wrong — please try again or email us directly.';
+                    form.appendChild(errEl);
+                }
+            } catch (err) {
+                console.error('[TidyCal] Network error:', err);
+                if (button) { button.disabled = false; button.innerText = 'Book Install'; }
             }
-
-            // Brief delay for visual feedback, then redirect
-            setTimeout(() => {
-                window.location.href = calendlyUrl.toString();
-            }, 800);
         });
     }
+
 
     // ── Spotlight Buttons ──────────────────────────────────────
     const spotlightButtons = document.querySelectorAll('.btn--primary');
