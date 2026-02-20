@@ -103,13 +103,13 @@ function initScrollAnimations() {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('visible');
-        }, index * 100); // Stagger by 100ms
+        }, index * 30); // Fast stagger (30ms)
         observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px 200px 0px' // Trigger 200px BEFORE entering viewport
   });
 
   const elements = document.querySelectorAll(
@@ -117,8 +117,13 @@ function initScrollAnimations() {
   );
 
   elements.forEach(el => {
-    el.classList.add('fade-in'); // Start hidden
-    observer.observe(el);
+    el.classList.add('fade-in');
+    // Instantly reveal elements already in viewport
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
   });
 }
 

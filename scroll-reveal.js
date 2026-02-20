@@ -4,14 +4,14 @@
  * Zero dependencies, 60fps smooth
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Configuration
   const config = {
-    threshold: 0.15,        // Trigger when 15% visible
-    rootMargin: '0px 0px -50px 0px',  // Start revealing slightly before element enters viewport
-    triggerOnce: true       // Only animate once (set to false for re-trigger on scroll up)
+    threshold: 0.05,        // Trigger when 5% visible
+    rootMargin: '0px 0px 200px 0px',  // Trigger 200px BEFORE element enters viewport
+    triggerOnce: true       // Only animate once
   };
 
   // Intersection Observer callback
@@ -20,7 +20,7 @@
       if (entry.isIntersecting) {
         // Add visible class
         entry.target.classList.add('is-visible');
-        
+
         // Unobserve if triggerOnce is enabled
         if (config.triggerOnce) {
           observer.unobserve(entry.target);
