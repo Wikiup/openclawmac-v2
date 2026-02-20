@@ -1674,3 +1674,33 @@ img {
 
   /* Long wait */
 }
+
+/* ── Pricing Trust Badges ─────────────────────────────────── */
+.pricing .trust-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.pricing .trust-badges .trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+}
+
+.pricing .trust-badges .trust-badge svg,
+.pricing .trust-badges .trust-badge-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--accent2);
+}

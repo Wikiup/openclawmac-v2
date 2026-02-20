@@ -95,8 +95,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ── Wizard Step Navigation ────────────────────────────────
+    const wizardSteps = document.querySelectorAll('.wizard-step');
+    const wizardProgress = document.getElementById('wizardProgress');
+    let currentStep = 0;
 
+    function goToStep(stepIndex) {
+        if (stepIndex < 0 || stepIndex >= wizardSteps.length) return;
 
+        // Hide all steps
+        wizardSteps.forEach(step => step.classList.remove('active'));
+
+        // Show target step
+        wizardSteps[stepIndex].classList.add('active');
+        currentStep = stepIndex;
+
+        // Update progress bar
+        if (wizardProgress) {
+            const progress = ((stepIndex + 1) / wizardSteps.length) * 100;
+            wizardProgress.style.width = `${progress}%`;
+        }
+
+        // Scroll the booking section into view
+        const bookSection = document.getElementById('book');
+        if (bookSection) {
+            bookSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // Next step buttons
+    document.querySelectorAll('.next-step').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Validate current step has a selection
+            const currentStepEl = wizardSteps[currentStep];
+            const radios = currentStepEl.querySelectorAll('input[type="radio"]');
+
+            if (radios.length > 0) {
+                const selected = currentStepEl.querySelector('input[type="radio"]:checked');
+                if (!selected) {
+                    // Shake the step to indicate missing selection
+                    currentStepEl.style.animation = 'shake 0.4s ease';
+                    setTimeout(() => currentStepEl.style.animation = '', 400);
+                    return;
+                }
+            }
+
+            goToStep(currentStep + 1);
+        });
+    });
+
+    // Back step buttons
+    document.querySelectorAll('.back-step').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            goToStep(currentStep - 1);
+        });
+    });
+
+    // Initialize progress bar
+    if (wizardProgress) {
+        wizardProgress.style.width = `${(1 / wizardSteps.length) * 100}%`;
+    }
     // ── Form Submission ────────────────────────────────────────
     const form = document.getElementById('bookForm');
     if (form) {
