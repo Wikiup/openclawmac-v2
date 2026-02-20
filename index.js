@@ -65,25 +65,40 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // ── Scroll-triggered Fade-in (Intersection Observer) ──────
-    const fadeElements = document.querySelectorAll('.fade-in');
+    // ── Scroll-triggered Reveal Animations (Minimal restorative fix) ──
+    const revealElements = document.querySelectorAll('.fade-in, .reveal, .reveal-scale, .trust-stat, .comparison-feature');
+
     if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    const el = entry.target;
+
+                    // Unified mapping of trigger classes to their "active" counterparts
+                    if (el.classList.contains('reveal') || el.classList.contains('reveal-scale')) {
+                        el.classList.add('active');
+                    } else if (el.classList.contains('fade-in')) {
+                        el.classList.add('visible');
+                    } else {
+                        el.classList.add('revealed'); // For stats, features, etc.
+                    }
+
+                    revealObserver.unobserve(el);
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'
-        });
+        }, observerOptions);
 
-        fadeElements.forEach(el => observer.observe(el));
+        revealElements.forEach(el => revealObserver.observe(el));
     } else {
-        // Fallback: show everything immediately
-        fadeElements.forEach(el => el.classList.add('visible'));
+        // Fallback: Show everything immediately if observer is missing
+        revealElements.forEach(el => {
+            el.classList.add('visible', 'active', 'revealed');
+        });
     }
 
     // ── Booking Toggle (Austin / Remote) ──────────────────────
