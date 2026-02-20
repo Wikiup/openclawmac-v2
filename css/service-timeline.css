@@ -19,12 +19,11 @@
 
 .service-timeline {
   position: relative;
-  padding: 8rem 0;
-  background: linear-gradient(180deg, 
-    rgba(11, 14, 24, 0) 0%,
-    rgba(15, 10, 30, 0.4) 50%,
-    rgba(11, 14, 24, 0) 100%
-  );
+  padding: 4rem 0;
+  background: linear-gradient(180deg,
+      rgba(11, 14, 24, 0) 0%,
+      rgba(15, 10, 30, 0.4) 50%,
+      rgba(11, 14, 24, 0) 100%);
   overflow: hidden;
 }
 
@@ -36,19 +35,18 @@
   width: 1px;
   height: 100%;
   background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(168, 85, 247, 0.2) 20%,
-    rgba(168, 85, 247, 0.4) 50%,
-    rgba(168, 85, 247, 0.2) 80%,
-    transparent 100%
-  );
+      transparent 0%,
+      rgba(168, 85, 247, 0.2) 20%,
+      rgba(168, 85, 247, 0.4) 50%,
+      rgba(168, 85, 247, 0.2) 80%,
+      transparent 100%);
   transform: translateX(-50%);
   pointer-events: none;
 }
 
 .timeline-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .timeline-header h2 {
@@ -121,10 +119,13 @@
 }
 
 @keyframes timelinePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-50%, -3px) scale(1);
     opacity: 1;
   }
+
   50% {
     transform: translate(-50%, -3px) scale(1.5);
     opacity: 0.6;
@@ -139,8 +140,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
-  padding: 2rem 0;
+  gap: 3rem;
+  padding: 1rem 0;
 }
 
 .timeline-step {
@@ -205,10 +206,9 @@
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  background: radial-gradient(circle, 
-    rgba(168, 85, 247, 0.2) 0%, 
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(168, 85, 247, 0.2) 0%,
+      transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -221,7 +221,7 @@
 .timeline-step-node:hover,
 .timeline-step.active .timeline-step-node {
   border-color: rgba(168, 85, 247, 0.8);
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(168, 85, 247, 0.4),
     0 0 60px rgba(139, 92, 246, 0.2);
   transform: scale(1.1);
@@ -313,7 +313,7 @@
   transform: scale(1);
   background: rgba(168, 85, 247, 0.08);
   border-color: rgba(168, 85, 247, 0.4);
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(168, 85, 247, 0.1),
     0 0 0 1px rgba(168, 85, 247, 0.1) inset;
 }
@@ -371,10 +371,9 @@
   top: 50%;
   width: 3rem;
   height: 2px;
-  background: linear-gradient(90deg, 
-    rgba(168, 85, 247, 0.4) 0%, 
-    rgba(168, 85, 247, 0) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(168, 85, 247, 0.4) 0%,
+      rgba(168, 85, 247, 0) 100%);
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -385,10 +384,9 @@
 
 .timeline-step:nth-child(even) .timeline-step-connector {
   left: calc(50% + 40px);
-  background: linear-gradient(90deg, 
-    rgba(168, 85, 247, 0) 0%, 
-    rgba(168, 85, 247, 0.4) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(168, 85, 247, 0) 0%,
+      rgba(168, 85, 247, 0.4) 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -472,6 +470,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
+
   .timeline-step,
   .timeline-step-node,
   .timeline-step-icon,

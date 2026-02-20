@@ -6,14 +6,12 @@
 /* SECTION CONTAINER */
 .demo-preview-section {
   position: relative;
-  padding: 8rem 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(139, 92, 246, 0.03),
-    transparent 30%,
-    transparent 70%,
-    rgba(139, 92, 246, 0.03)
-  );
+  padding: 4rem 0;
+  background: linear-gradient(to bottom,
+      rgba(139, 92, 246, 0.03),
+      transparent 30%,
+      transparent 70%,
+      rgba(139, 92, 246, 0.03));
   overflow: hidden;
 }
 
@@ -24,12 +22,10 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(139, 92, 246, 0.3) 50%,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(139, 92, 246, 0.3) 50%,
+      transparent);
 }
 
 /* SECTION HEADER */
@@ -93,14 +89,14 @@
   overflow: hidden;
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-              0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+    0 0 0 1px rgba(139, 92, 246, 0.1) inset;
   transition: all 0.3s ease;
 }
 
 .demo-terminal:hover {
   border-color: rgba(139, 92, 246, 0.4);
   box-shadow: 0 20px 80px rgba(139, 92, 246, 0.2),
-              0 0 0 1px rgba(139, 92, 246, 0.2) inset;
+    0 0 0 1px rgba(139, 92, 246, 0.2) inset;
 }
 
 .demo-terminal-header {
@@ -124,9 +120,17 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.demo-terminal-dot.red { background: #ff5f56; }
-.demo-terminal-dot.yellow { background: #ffbd2e; }
-.demo-terminal-dot.green { background: #27c93f; }
+.demo-terminal-dot.red {
+  background: #ff5f56;
+}
+
+.demo-terminal-dot.yellow {
+  background: #ffbd2e;
+}
+
+.demo-terminal-dot.green {
+  background: #27c93f;
+}
 
 .demo-terminal-title {
   font-size: 0.875rem;
@@ -183,7 +187,9 @@
 }
 
 @keyframes terminalFadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 .terminal-prompt {
@@ -220,8 +226,16 @@
 }
 
 @keyframes cursorBlink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* PROGRESS BAR */
@@ -416,6 +430,7 @@
 
 /* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
+
   .demo-benefit-card,
   .demo-benefit-icon,
   .demo-benefit-check,
