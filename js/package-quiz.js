@@ -174,20 +174,6 @@ class PackageQuiz {
           <p>Answer 4 quick questions to get a personalized recommendation</p>
         </div>
         
-        <div class="quiz-progress">
-          <div class="progress-bar-container">
-            <div class="progress-bar-fill" style="width: ${progress}%"></div>
-          </div>
-          <div class="progress-text">
-            <div class="progress-steps">
-              ${this.questions.map((_, i) => `
-                <div class="progress-step ${i < this.currentQuestion ? 'completed' : ''} ${i === this.currentQuestion ? 'active' : ''}"></div>
-              `).join('')}
-            </div>
-            <span>${this.currentQuestion} of ${this.questions.length}</span>
-          </div>
-        </div>
-        
         <div id="quiz-content">
           ${this.renderQuestion()}
         </div>
@@ -203,9 +189,28 @@ class PackageQuiz {
     const question = this.questions[this.currentQuestion];
     const selectedValue = this.answers[question.id];
 
+    const progress = ((this.currentQuestion) / this.questions.length) * 100;
+
     return `
       <div class="quiz-question">
-        <div class="question-number">Question ${this.currentQuestion + 1}/${this.questions.length}</div>
+        <div class="question-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; gap: 2rem;">
+          <div class="question-number" style="margin-bottom: 0;">Question ${this.currentQuestion + 1}/${this.questions.length}</div>
+          
+          <div class="quiz-progress-inline" style="flex: 1; max-width: 300px;">
+            <div class="progress-bar-container" style="margin-bottom: 0.75rem;">
+              <div class="progress-bar-fill" style="width: ${progress}%"></div>
+            </div>
+            <div class="progress-text">
+              <div class="progress-steps">
+                ${this.questions.map((_, i) => `
+                  <div class="progress-step ${i < this.currentQuestion ? 'completed' : ''} ${i === this.currentQuestion ? 'active' : ''}"></div>
+                `).join('')}
+              </div>
+              <span style="font-size: 0.875rem; color: rgba(255,255,255,0.6);">${this.currentQuestion + 1} of ${this.questions.length}</span>
+            </div>
+          </div>
+        </div>
+        
         <div class="question-text">${question.text}</div>
         
         <div class="quiz-options">
