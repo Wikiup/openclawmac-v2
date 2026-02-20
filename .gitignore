@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Environment & Secrets — NEVER commit these
+.env
+.env.*
+.dev.vars
+
+# Wrangler local state
+.wrangler/
+
+# OS/Editor
+.DS_Store
+*.log
