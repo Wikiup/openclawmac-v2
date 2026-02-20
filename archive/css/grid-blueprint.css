@@ -1,0 +1,390 @@
+/**
+ * Grid Blueprint Aesthetic
+ * 
+ * Sophisticated technical grid overlay inspired by Vercel, Linear, Railway.
+ * Adds precision engineering depth to modern SaaS interfaces.
+ * 
+ * Features:
+ * - Animated SVG grid patterns
+ * - Perspective grid fade effects
+ * - Section-specific grid colors
+ * - Scan line animations
+ * - Coordinate system overlays
+ * - GPU-accelerated performance
+ */
+
+/* ==================== Base Grid Container ==================== */
+
+.grid-blueprint-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.grid-blueprint-wrapper--hero {
+  opacity: 0.5;
+}
+
+.grid-blueprint-wrapper--subtle {
+  opacity: 0.25;
+}
+
+.grid-blueprint-wrapper--vibrant {
+  opacity: 0.6;
+}
+
+/* ==================== SVG Grid Pattern ==================== */
+
+.grid-blueprint-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.grid-line {
+  stroke-width: 1;
+  stroke: currentColor;
+  fill: none;
+  opacity: 0.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.grid-line--major {
+  stroke-width: 1.5;
+  opacity: 0.25;
+}
+
+.grid-line--accent {
+  opacity: 0.4;
+  animation: gridPulse 4s ease-in-out infinite;
+}
+
+/* ==================== Grid Color Themes ==================== */
+
+.grid-blueprint-wrapper--primary {
+  color: var(--color-primary, #3b82f6);
+}
+
+.grid-blueprint-wrapper--secondary {
+  color: var(--color-secondary, #8b5cf6);
+}
+
+.grid-blueprint-wrapper--accent {
+  color: var(--color-accent, #06b6d4);
+}
+
+.grid-blueprint-wrapper--success {
+  color: var(--color-success, #10b981);
+}
+
+.grid-blueprint-wrapper--white {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== Scan Line Animation ==================== */
+
+.grid-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    currentColor 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  animation: scanlineMove 8s linear infinite;
+  filter: blur(1px);
+  will-change: transform;
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(0) scaleX(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) scaleX(0.5);
+    opacity: 0;
+  }
+}
+
+/* ==================== Perspective Fade Effect ==================== */
+
+.grid-blueprint-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.grid-blueprint-fade--top {
+  bottom: auto;
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+/* ==================== Coordinate System ==================== */
+
+.grid-coordinates {
+  position: absolute;
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 10px;
+  color: currentColor;
+  opacity: 0.3;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.grid-coordinates--top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.grid-coordinates--top-right {
+  top: 20px;
+  right: 20px;
+  text-align: right;
+}
+
+.grid-coordinates--bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.grid-coordinates--bottom-right {
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+}
+
+.grid-coordinates span {
+  display: block;
+  margin: 2px 0;
+  opacity: 0.5;
+}
+
+/* ==================== Dot Grid Pattern ==================== */
+
+.grid-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at center,
+    currentColor 0.5px,
+    transparent 0.5px
+  );
+  background-size: 20px 20px;
+  opacity: 0.2;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* ==================== Grid Pulse Animation ==================== */
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.2;
+    stroke-width: 1;
+  }
+  50% {
+    opacity: 0.5;
+    stroke-width: 1.5;
+  }
+}
+
+/* ==================== Glow Lines ==================== */
+
+.grid-glow-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    currentColor 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  filter: blur(2px);
+  animation: glowLineMove 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.grid-glow-line--horizontal {
+  width: 100%;
+  left: 0;
+}
+
+.grid-glow-line--vertical {
+  width: 1px;
+  height: 100%;
+  top: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    currentColor 50%,
+    transparent 100%
+  );
+}
+
+@keyframes glowLineMove {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(20px);
+  }
+}
+
+/* ==================== Perspective Grid Floor ==================== */
+
+.grid-perspective-floor {
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1000px) rotateX(60deg);
+  transform-origin: center bottom;
+  opacity: 0.3;
+}
+
+/* ==================== Mobile Optimizations ==================== */
+
+@media (max-width: 768px) {
+  .grid-blueprint-wrapper {
+    opacity: 0.25;
+  }
+  
+  .grid-scanline {
+    display: none;
+  }
+  
+  .grid-coordinates {
+    font-size: 8px;
+  }
+  
+  .grid-glow-line {
+    display: none;
+  }
+  
+  .grid-perspective-floor {
+    display: none;
+  }
+}
+
+/* ==================== Dark Mode Support ==================== */
+
+@media (prefers-color-scheme: dark) {
+  .grid-blueprint-fade {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 100%
+    );
+  }
+}
+
+/* ==================== Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-scanline,
+  .grid-line--accent,
+  .grid-glow-line {
+    animation: none;
+  }
+}
+
+/* ==================== GPU Acceleration ==================== */
+
+.grid-blueprint-wrapper,
+.grid-scanline,
+.grid-glow-line,
+.grid-perspective-floor {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* ==================== Blueprint Badge ==================== */
+
+.grid-blueprint-badge {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: currentColor;
+  opacity: 0.4;
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+}
+
+/* ==================== Section-Specific Overrides ==================== */
+
+.hero-section .grid-blueprint-wrapper {
+  z-index: 0;
+}
+
+.pricing-section .grid-blueprint-wrapper {
+  opacity: 0.3;
+}
+
+.booking-section .grid-blueprint-wrapper {
+  opacity: 0.25;
+}
+
+.features-section .grid-blueprint-wrapper {
+  opacity: 0.35;
+}

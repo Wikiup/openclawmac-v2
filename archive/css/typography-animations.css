@@ -1,0 +1,403 @@
+/**
+ * TYPOGRAPHY ANIMATION SYSTEM
+ * 2026 Premium SaaS Aesthetic
+ * 
+ * Features:
+ * - Scramble Effect (Matrix-style decode)
+ * - Split Text Reveal (character/word stagger)
+ * - Gradient Flow (animated text gradients)
+ * - Typewriter Effect (progressive reveal)
+ * - Text Morph (smooth transitions)
+ * - Scroll-Triggered Animations
+ * 
+ * Inspired by: Stripe, Linear, Framer, Apple 2026 marketing
+ */
+
+/* ===================================
+   SCRAMBLE EFFECT
+   =================================== */
+
+.text-scramble {
+    position: relative;
+    display: inline-block;
+}
+
+.text-scramble .char {
+    display: inline-block;
+    opacity: 0;
+    animation: scramble-fade-in 0.05s forwards;
+}
+
+.text-scramble .char.scrambling {
+    animation: scramble-glitch 0.05s;
+}
+
+@keyframes scramble-fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scramble-glitch {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-2px);
+    }
+    75% {
+        transform: translateY(2px);
+    }
+}
+
+/* ===================================
+   SPLIT TEXT REVEAL
+   =================================== */
+
+.text-reveal {
+    overflow: hidden;
+}
+
+.text-reveal .word,
+.text-reveal .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%) rotateX(-90deg);
+    transform-origin: center bottom;
+}
+
+.text-reveal.active .word,
+.text-reveal.active .char {
+    animation: reveal-text 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes reveal-text {
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* Stagger delays (applied via JS) */
+.text-reveal.active .word:nth-child(1),
+.text-reveal.active .char:nth-child(1) { animation-delay: 0s; }
+.text-reveal.active .word:nth-child(2),
+.text-reveal.active .char:nth-child(2) { animation-delay: 0.05s; }
+.text-reveal.active .word:nth-child(3),
+.text-reveal.active .char:nth-child(3) { animation-delay: 0.1s; }
+.text-reveal.active .word:nth-child(4),
+.text-reveal.active .char:nth-child(4) { animation-delay: 0.15s; }
+.text-reveal.active .word:nth-child(5),
+.text-reveal.active .char:nth-child(5) { animation-delay: 0.2s; }
+.text-reveal.active .word:nth-child(6),
+.text-reveal.active .char:nth-child(6) { animation-delay: 0.25s; }
+.text-reveal.active .word:nth-child(7),
+.text-reveal.active .char:nth-child(7) { animation-delay: 0.3s; }
+.text-reveal.active .word:nth-child(8),
+.text-reveal.active .char:nth-child(8) { animation-delay: 0.35s; }
+.text-reveal.active .word:nth-child(9),
+.text-reveal.active .char:nth-child(9) { animation-delay: 0.4s; }
+.text-reveal.active .word:nth-child(10),
+.text-reveal.active .char:nth-child(10) { animation-delay: 0.45s; }
+
+/* ===================================
+   GRADIENT FLOW
+   =================================== */
+
+.text-gradient-flow {
+    background: linear-gradient(
+        90deg,
+        var(--primary-purple, #A855F7),
+        var(--primary-pink, #8B5CF6),
+        var(--primary-blue, #3B82F6),
+        var(--primary-purple, #A855F7)
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-flow 8s linear infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ===================================
+   TYPEWRITER EFFECT
+   =================================== */
+
+.text-typewriter {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--primary-purple, #A855F7);
+    animation: typewriter-cursor 1s step-end infinite;
+}
+
+.text-typewriter.typing {
+    animation: typewriter-cursor 1s step-end infinite;
+}
+
+.text-typewriter.complete {
+    border-right: none;
+}
+
+@keyframes typewriter-cursor {
+    0%, 100% {
+        border-color: var(--primary-purple, #A855F7);
+    }
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* ===================================
+   TEXT MORPH / FLIP
+   =================================== */
+
+.text-morph {
+    position: relative;
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.text-morph .morph-word {
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.text-morph.morphing .morph-word {
+    animation: text-flip 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes text-flip {
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+/* ===================================
+   SCROLL-TRIGGERED TEXT
+   =================================== */
+
+.text-scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.text-scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================
+   GLITCH TEXT
+   =================================== */
+
+.text-glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.text-glitch::before,
+.text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.text-glitch::before {
+    color: #ff00ff;
+    animation: glitch-1 2s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.text-glitch::after {
+    color: #00ffff;
+    animation: glitch-2 2s infinite;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(2px, -2px);
+    }
+    40% {
+        transform: translate(2px, 2px);
+    }
+    60% {
+        transform: translate(-2px, -2px);
+    }
+    80% {
+        transform: translate(-2px, 2px);
+    }
+}
+
+/* ===================================
+   TEXT SHIMMER
+   =================================== */
+
+.text-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    background-image: linear-gradient(
+        90deg,
+        currentColor 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        currentColor 100%
+    );
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ===================================
+   BOUNCE TEXT
+   =================================== */
+
+.text-bounce .char {
+    display: inline-block;
+    animation: bounce-char 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes bounce-char {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ===================================
+   FADE CASCADE
+   =================================== */
+
+.text-fade-cascade .word,
+.text-fade-cascade .char {
+    display: inline-block;
+    opacity: 0;
+    animation: fade-cascade 0.6s forwards;
+}
+
+@keyframes fade-cascade {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Cascade stagger */
+.text-fade-cascade .word:nth-child(1),
+.text-fade-cascade .char:nth-child(1) { animation-delay: 0s; }
+.text-fade-cascade .word:nth-child(2),
+.text-fade-cascade .char:nth-child(2) { animation-delay: 0.1s; }
+.text-fade-cascade .word:nth-child(3),
+.text-fade-cascade .char:nth-child(3) { animation-delay: 0.2s; }
+.text-fade-cascade .word:nth-child(4),
+.text-fade-cascade .char:nth-child(4) { animation-delay: 0.3s; }
+.text-fade-cascade .word:nth-child(5),
+.text-fade-cascade .char:nth-child(5) { animation-delay: 0.4s; }
+
+/* ===================================
+   RESPONSIVE & ACCESSIBILITY
+   =================================== */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .text-scramble .char,
+    .text-reveal .word,
+    .text-reveal .char,
+    .text-gradient-flow,
+    .text-typewriter,
+    .text-morph .morph-word,
+    .text-glitch::before,
+    .text-glitch::after,
+    .text-shimmer,
+    .text-bounce .char,
+    .text-fade-cascade .word,
+    .text-fade-cascade .char,
+    .text-scroll-reveal {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* Performance optimizations */
+.text-scramble,
+.text-reveal,
+.text-morph,
+.text-glitch,
+.text-bounce {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility classes */
+.text-animation-delay-1 { animation-delay: 0.1s !important; }
+.text-animation-delay-2 { animation-delay: 0.2s !important; }
+.text-animation-delay-3 { animation-delay: 0.3s !important; }
+.text-animation-delay-4 { animation-delay: 0.4s !important; }
+.text-animation-delay-5 { animation-delay: 0.5s !important; }

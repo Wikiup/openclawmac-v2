@@ -1,0 +1,279 @@
+/* ═══════════════════════════════════════════════════════════════
+   Animated Mesh Gradient Background (2026 SaaS Trend)
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes mesh-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(30%, -50%) scale(1.1); }
+  66% { transform: translate(-20%, 20%) scale(0.9); }
+}
+
+@keyframes mesh-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(-30%, 40%) scale(1.2); }
+  66% { transform: translate(50%, -10%) scale(0.85); }
+}
+
+@keyframes mesh-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(15%, 30%) scale(0.9); }
+  66% { transform: translate(-40%, -20%) scale(1.15); }
+}
+
+@keyframes mesh-4 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(-15%, -30%) scale(1.05); }
+  66% { transform: translate(25%, 45%) scale(0.95); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.mesh-gradient-bg {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 0.4;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(60px);
+  will-change: transform;
+}
+
+.mesh-blob--1 {
+  width: 600px;
+  height: 600px;
+  top: -10%;
+  left: 10%;
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.6) 0%, transparent 70%);
+  animation: mesh-1 20s ease-in-out infinite;
+}
+
+.mesh-blob--2 {
+  width: 500px;
+  height: 500px;
+  top: 30%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(46, 229, 157, 0.5) 0%, transparent 70%);
+  animation: mesh-2 25s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.mesh-blob--3 {
+  width: 700px;
+  height: 700px;
+  bottom: -20%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.4) 0%, transparent 70%);
+  animation: mesh-3 22s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.mesh-blob--4 {
+  width: 550px;
+  height: 550px;
+  top: 50%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(46, 229, 157, 0.35) 0%, transparent 70%);
+  animation: mesh-4 28s ease-in-out infinite;
+  animation-delay: -15s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Glassmorphic Hero Enhancement
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(124, 92, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at bottom right, rgba(46, 229, 157, 0.08) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glassmorphic Cards */
+.glass-card {
+  background: rgba(15, 22, 35, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(15, 22, 35, 0.5);
+  border-color: rgba(124, 92, 255, 0.3);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 92, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Make existing badges/specs glassmorphic */
+.hero__badges {
+  margin-top: 32px;
+}
+
+.badge {
+  background: rgba(15, 22, 35, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hero__specs {
+  margin-top: 48px;
+}
+
+.spec {
+  background: rgba(15, 22, 35, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.spec:hover {
+  border-color: rgba(124, 92, 255, 0.3);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(124, 92, 255, 0.2);
+  transform: translateX(4px);
+}
+
+/* Floating animation for hero visual */
+.hero__mock {
+  animation: float 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.hero__mock:hover {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Parallax Scroll Effects
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-parallax] {
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Enhanced Bento Cards with Glass */
+.bento-card {
+  background: rgba(15, 22, 35, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.bento-card--highlight {
+  background: rgba(124, 92, 255, 0.08);
+  border-color: rgba(124, 92, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(124, 92, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.bento-card:hover {
+  background: rgba(15, 22, 35, 0.6);
+  border-color: rgba(124, 92, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(124, 92, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Pricing cards with glass */
+.pricing-card {
+  background: rgba(15, 22, 35, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.pricing-card--highlight {
+  background: rgba(124, 92, 255, 0.12);
+  border-color: rgba(124, 92, 255, 0.3);
+  box-shadow: 
+    0 12px 40px rgba(124, 92, 255, 0.2),
+    0 0 0 1px rgba(124, 92, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.pricing-card:hover {
+  border-color: rgba(124, 92, 255, 0.4);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 92, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mesh-blob {
+    filter: blur(40px);
+  }
+  
+  .mesh-blob--1,
+  .mesh-blob--2,
+  .mesh-blob--3,
+  .mesh-blob--4 {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .mesh-gradient-bg {
+    opacity: 0.3;
+  }
+}

@@ -1,0 +1,225 @@
+/**
+ * Morphing Blobs - Organic SVG Animation Styles
+ * 2026 Premium SaaS Aesthetic (Stripe, Framer, Linear)
+ * 
+ * Animated background blobs with smooth morphing
+ * Creates living, organic visual depth
+ */
+
+.blobs-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.morphing-blobs-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  filter: blur(80px);
+}
+
+.morphing-blob {
+  will-change: transform, d;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Section-specific styling */
+.hero-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-section .blobs-wrapper {
+  opacity: 0.6;
+}
+
+.hero-section .morphing-blobs-container {
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+.pricing-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.pricing-section .blobs-wrapper {
+  opacity: 0.4;
+}
+
+.pricing-section .morphing-blobs-container {
+  filter: blur(120px);
+  opacity: 0.3;
+}
+
+/* Subtle variant for secondary sections */
+.blobs-subtle .morphing-blobs-container {
+  opacity: 0.25;
+  filter: blur(140px);
+  mix-blend-mode: soft-light;
+}
+
+/* Ensure content stays above blobs */
+.hero-section > *:not(.blobs-wrapper),
+.pricing-section > *:not(.blobs-wrapper) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .morphing-blobs-container {
+    opacity: 0.3;
+    mix-blend-mode: soft-light;
+  }
+  
+  .hero-section .morphing-blobs-container {
+    opacity: 0.35;
+  }
+  
+  .pricing-section .morphing-blobs-container {
+    opacity: 0.2;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .morphing-blobs-container {
+    width: 200%;
+    height: 200%;
+    filter: blur(60px);
+  }
+  
+  .hero-section .morphing-blobs-container {
+    filter: blur(70px);
+  }
+  
+  .pricing-section .morphing-blobs-container {
+    filter: blur(90px);
+  }
+  
+  /* Reduce blob count on mobile for performance */
+  .blobs-wrapper {
+    opacity: 0.5;
+  }
+}
+
+/* Performance optimization */
+@media (max-width: 480px) {
+  .morphing-blobs-container {
+    filter: blur(50px);
+    opacity: 0.3;
+  }
+}
+
+/* Accessibility - respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .morphing-blob {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .morphing-blobs-container {
+    filter: blur(60px);
+    opacity: 0.2;
+  }
+}
+
+/* GPU acceleration */
+.morphing-blobs-container,
+.morphing-blob {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Ambient animation fallback */
+@keyframes blob-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* Apply ambient float to entire container as fallback */
+.morphing-blobs-container {
+  animation: blob-float 20s ease-in-out infinite;
+}
+
+/* Hover effects on parent sections */
+.hero-section:hover .morphing-blobs-container,
+.pricing-section:hover .morphing-blobs-container {
+  opacity: 0.6;
+  transition: opacity 0.6s ease;
+}
+
+/* Gradient animation for visual interest */
+@keyframes gradient-shift {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.morphing-blob {
+  animation: gradient-shift 8s ease-in-out infinite;
+}
+
+.morphing-blob:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.morphing-blob:nth-child(3) {
+  animation-delay: 4s;
+}
+
+/* Premium depth layering */
+.blobs-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 30% 50%,
+    rgba(102, 126, 234, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blobs-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 70% 50%,
+    rgba(245, 87, 108, 0.08) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
