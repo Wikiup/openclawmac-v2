@@ -20,7 +20,7 @@
   --radius: 24px;
   --radius-sm: 16px;
   --radius-btn: 999px;
-  --section-py: 88px;
+  --section-py: 48px;
   --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.35);
   --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.25);
   --shadow-3d: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -92,7 +92,7 @@ img {
 /* ── Section Shared ─────────────────────────────────────────── */
 .section-header {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
 
 .section-header h2 {
