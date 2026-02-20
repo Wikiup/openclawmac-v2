@@ -193,15 +193,7 @@ select:focus {
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Navigation / Header (subtle) */
-nav,
-.navbar,
-header {
-  background: rgba(20, 20, 30, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+/* Navigation / Header — custom styles in index.css */
 
 /* Badges / Tags */
 .badge,

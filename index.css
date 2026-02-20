@@ -258,73 +258,111 @@ img {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   NAV
+   NAV — Premium Floating Pill
    ═══════════════════════════════════════════════════════════════ */
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  background: rgba(11, 15, 23, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition);
+  width: min(92%, 960px);
+  background: rgba(14, 17, 28, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(124, 92, 255, 0.15);
+  border-radius: 100px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 40px rgba(124, 92, 255, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav--scrolled {
-  background: rgba(11, 15, 23, 0.92);
+  background: rgba(10, 12, 22, 0.88);
+  border-color: rgba(124, 92, 255, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 60px rgba(124, 92, 255, 0.1);
+  top: 8px;
 }
 
 .nav__inner {
-  max-width: var(--max-w);
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 8px 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 52px;
 }
 
 .nav__logo {
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  color: #fff;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .nav__logo-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 6px rgba(124, 92, 255, 0.4));
-  transition: filter var(--transition);
+  filter: drop-shadow(0 0 8px rgba(124, 92, 255, 0.5));
+  transition: filter 0.3s ease;
 }
 
 .nav__logo:hover .nav__logo-icon {
-  filter: drop-shadow(0 0 12px rgba(124, 92, 255, 0.6));
+  filter: drop-shadow(0 0 14px rgba(124, 92, 255, 0.8));
 }
 
 .nav__links {
   display: flex;
-  gap: 32px;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .nav__links a {
-  color: var(--muted);
-  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.84rem;
   font-weight: 500;
-  transition: color var(--transition);
+  padding: 6px 16px;
+  border-radius: 100px;
+  transition: all 0.25s ease;
+  position: relative;
+  letter-spacing: 0.01em;
 }
 
 .nav__links a:hover {
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav__links a.active {
+  color: #fff;
+  background: rgba(124, 92, 255, 0.2);
+  box-shadow: 0 0 12px rgba(124, 92, 255, 0.15);
 }
 
 .nav__cta {
-  margin-left: 16px;
+  margin-left: 8px;
+}
+
+.nav__cta.btn {
+  border-radius: 100px !important;
+  padding: 8px 20px !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
 }
 
 /* Hamburger */
@@ -335,16 +373,17 @@ img {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
+  margin-right: 4px;
 }
 
 .nav__hamburger span {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
-  background: var(--text);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .nav__hamburger.active span:nth-child(1) {
@@ -362,15 +401,24 @@ img {
 .nav__mobile {
   display: none;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px 24px 24px;
-  border-top: 1px solid var(--border);
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 4px;
 }
 
 .nav__mobile a {
-  color: var(--muted);
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
   font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.nav__mobile a:hover {
+  color: #fff;
+  background: rgba(124, 92, 255, 0.12);
 }
 
 .nav__mobile.open {
@@ -378,6 +426,19 @@ img {
 }
 
 @media (max-width: 768px) {
+  .nav {
+    width: calc(100% - 24px);
+    border-radius: 20px;
+    top: 8px;
+  }
+
+  .nav--scrolled {
+    top: 6px;
+  }
+
+  .nav__inner {
+    height: 48px;
+  }
 
   .nav__links,
   .nav__cta {
