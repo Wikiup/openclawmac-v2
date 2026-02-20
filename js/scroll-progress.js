@@ -12,7 +12,7 @@
  * - Reduced motion support
  */
 
-(function() {
+(function () {
   'use strict';
 
   // Configuration
@@ -89,17 +89,8 @@
       nav.classList.toggle('scrolled', isScrolled);
     }
 
-    // Show/hide navigation based on scroll direction
-    if (scrollY > CONFIG.scrollThreshold * 2) { // Only hide after scrolling past hero
-      if (scrollDirection === 'down' && scrollY > lastScrollY) {
-        nav.classList.add('hidden');
-      } else if (scrollDirection === 'up' && scrollY < lastScrollY) {
-        nav.classList.remove('hidden');
-      }
-    } else {
-      // Always show nav near top
-      nav.classList.remove('hidden');
-    }
+    // Show/hide navigation — DISABLED for floating pill nav (always visible)
+    // Nav stays visible at all times with the premium floating design
 
     // Update scroll direction hint (optional visual indicator)
     if (directionHint && !prefersReducedMotion) {

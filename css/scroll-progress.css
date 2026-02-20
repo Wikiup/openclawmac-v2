@@ -40,38 +40,12 @@
   backface-visibility: hidden;
 }
 
-/* Default state: Transparent */
-.nav {
-  background: rgba(10, 10, 15, 0.3);
-  backdrop-filter: blur(0px);
-  padding: 1.5rem 0;
-}
-
-/* Scrolled state: Glassmorphism + Shrink */
-.nav.scrolled {
-  background: rgba(10, 10, 15, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 0.75rem 0;
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.15),
-    0 1px 0 rgba(255, 255, 255, 0.05) inset;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Hide on scroll down */
-.nav.hidden {
-  transform: translateY(-100%) translateZ(0);
-}
+/* Nav state styles handled in index.css (floating pill design) */
+/* .nav default and .nav--scrolled styles in index.css */
 
 /* Logo shrink on scroll */
-.nav__logo-icon {
-  transition: width 0.3s ease, height 0.3s ease;
-  width: 28px;
-  height: 28px;
-}
-
-.nav.scrolled .nav__logo-icon {
+.nav.scrolled .nav__logo-icon,
+.nav--scrolled .nav__logo-icon {
   width: 24px;
   height: 24px;
 }
@@ -81,7 +55,8 @@
   transition: padding 0.3s ease, font-size 0.3s ease;
 }
 
-.nav.scrolled .nav__cta {
+.nav.scrolled .nav__cta,
+.nav--scrolled .nav__cta {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
 }
