@@ -13,7 +13,7 @@
    - Full reduced-motion support
    ═══════════════════════════════════════════════════════════════════════════ */
 
-(function() {
+(function () {
   'use strict';
 
   // Check if user prefers reduced motion
@@ -36,15 +36,15 @@
 
     // Intersection Observer for step reveals
     const observerOptions = {
-      threshold: 0.2,
-      rootMargin: '0px 0px -10% 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px 200px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          
+
           // Activate progress line when first step is visible
           if (steps.indexOf(entry.target) === 0) {
             progressLine?.classList.add('active');
@@ -56,10 +56,10 @@
     // Observe all steps
     steps.forEach((step, index) => {
       observer.observe(step);
-      
+
       // Staggered reveal delay
       if (!prefersReducedMotion) {
-        step.style.transitionDelay = `${index * 0.15}s`;
+        step.style.transitionDelay = `${index * 0.05}s`;
       }
     });
 
@@ -76,7 +76,7 @@
         const scrollTop = window.scrollY + window.innerHeight * 0.5;
 
         // Calculate progress (0 to 1)
-        const progress = Math.max(0, Math.min(1, 
+        const progress = Math.max(0, Math.min(1,
           (scrollTop - timelineTop) / timelineHeight
         ));
 
@@ -93,7 +93,7 @@
 
       window.addEventListener('scroll', requestUpdate, { passive: true });
       window.addEventListener('resize', requestUpdate, { passive: true });
-      
+
       // Initial update
       requestUpdate();
     }
@@ -106,10 +106,10 @@
       // Click to activate/deactivate
       node.addEventListener('click', () => {
         const isActive = step.classList.contains('active');
-        
+
         // Remove active from all steps
         steps.forEach(s => s.classList.remove('active'));
-        
+
         // Toggle current step
         if (!isActive) {
           step.classList.add('active');
