@@ -693,17 +693,24 @@ img {
   justify-content: center;
   flex-wrap: wrap;
   gap: 32px;
-  margin-bottom: 56px;
+  margin-bottom: 80px;
 }
 
 .trust__logo-item {
   font-size: 0.9rem;
   color: var(--muted);
   font-weight: 600;
-  padding: 12px 24px;
+  padding: 12px 32px;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.trust__logo-item:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(124, 92, 255, 0.05);
 }
 
 .trust__testimonials {
@@ -776,7 +783,8 @@ img {
 .trust__gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  gap: 32px;
+  margin-top: 80px;
 }
 
 .trust__gallery-img {
