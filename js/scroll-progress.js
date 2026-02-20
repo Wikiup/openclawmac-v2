@@ -82,11 +82,11 @@
       scrollDirection = delta > 0 ? 'down' : 'up';
     }
 
-    // Add/remove "scrolled" class
+    // Add/remove "nav--scrolled" class
     const shouldBeScrolled = scrollY > CONFIG.scrollThreshold;
     if (shouldBeScrolled !== isScrolled) {
       isScrolled = shouldBeScrolled;
-      nav.classList.toggle('scrolled', isScrolled);
+      nav.classList.toggle('nav--scrolled', isScrolled);
     }
 
     // Show/hide navigation — DISABLED for floating pill nav (always visible)

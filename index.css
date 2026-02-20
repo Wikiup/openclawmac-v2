@@ -262,31 +262,22 @@ img {
    ═══════════════════════════════════════════════════════════════ */
 .nav {
   position: fixed;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  width: min(92%, 960px);
-  background: rgba(14, 17, 28, 0.65);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(124, 92, 255, 0.15);
-  border-radius: 100px;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-    0 0 40px rgba(124, 92, 255, 0.06);
+  width: 100%;
+  background: #171717;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav--scrolled {
-  background: rgba(10, 12, 22, 0.88);
-  border-color: rgba(124, 92, 255, 0.25);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-    0 0 60px rgba(124, 92, 255, 0.1);
-  top: 8px;
+  background: rgba(14, 14, 14, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 .nav__inner {
@@ -324,45 +315,75 @@ img {
 
 .nav__links {
   display: flex;
-  gap: 4px;
-  padding: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
 }
 
 .nav__links a {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.84rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+  font-size: 0.95rem;
   font-weight: 500;
-  padding: 6px 16px;
+  padding: 10px 16px;
   border-radius: 100px;
-  transition: all 0.25s ease;
-  position: relative;
+  transition: all 0.2s ease;
   letter-spacing: 0.01em;
 }
 
+.nav__links a svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  fill: currentColor;
+}
+
 .nav__links a:hover {
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav__links a:hover svg {
+  opacity: 1;
 }
 
 .nav__links a.active {
   color: #fff;
-  background: rgba(124, 92, 255, 0.2);
-  box-shadow: 0 0 12px rgba(124, 92, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav__cta {
-  margin-left: 8px;
+  margin-left: 16px;
 }
 
 .nav__cta.btn {
+  background: #F4804E !important;
+  color: #111 !important;
+  /* using dark text or white text, reference image has white text. Let's use white #fff */
+  border: none !important;
+  box-shadow: none !important;
+  padding: 10px 24px !important;
   border-radius: 100px !important;
-  padding: 8px 20px !important;
-  font-size: 0.84rem !important;
   font-weight: 600 !important;
-  letter-spacing: 0.01em;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: 0.01em !important;
+}
+
+.nav__cta.btn:hover {
+  opacity: 0.9 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.nav__cta.btn::before,
+.nav__cta.btn::after {
+  display: none !important;
 }
 
 /* Hamburger */
