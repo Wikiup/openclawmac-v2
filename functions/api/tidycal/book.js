@@ -57,8 +57,18 @@ export async function onRequestPost(context) {
         }),
     };
 
+    const SUPABASE_URL = context.env.SUPABASE_URL || 'https://scxpxhxydpxypvmlgjsg.supabase.co';
+    const SUPABASE_ANON_KEY = context.env.SUPABASE_ANON_KEY || 'sb_publishable_X56Qcm4iVz2NHqF7jIsipw_Vkht_BEk';
+
+    const supabasePayload = {
+        name,
+        email,
+        phone: body.phone || null,
+        goals: notes || body.goals || null
+    };
+
     try {
-        const res = await fetch(`https://tidycal.com/api/booking-types/${typeId}/bookings`, {
+        const tidycalPromise = fetch(`https://tidycal.com/api/booking-types/${typeId}/bookings`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${apiKey}`,
@@ -67,6 +77,22 @@ export async function onRequestPost(context) {
             },
             body: JSON.stringify(payload),
         });
+
+        const supabasePromise = fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(supabasePayload)
+        }).catch(e => {
+            console.error('Supabase insert failed natively:', e);
+            return null; // Don't crash TidyCal on DB failure
+        });
+
+        const [res, supabaseRes] = await Promise.all([tidycalPromise, supabasePromise]);
 
         const data = await res.json();
 
