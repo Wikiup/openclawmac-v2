@@ -57,7 +57,7 @@ export async function onRequestPost(context) {
         }),
     };
 
-    const SUPABASE_URL = context.env.SUPABASE_URL || 'https://scxpxhxydpxypvmlgjsg.supabase.co';
+    const SUPABASE_URL = context.env.SUPABASE_PROJECT_URL || 'https://scxpxhxydpxypvmlgjsg.supabase.co';
     const SUPABASE_ANON_KEY = context.env.SUPABASE_ANON_KEY || 'sb_publishable_X56Qcm4iVz2NHqF7jIsipw_Vkht_BEk';
 
     const supabasePayload = {
